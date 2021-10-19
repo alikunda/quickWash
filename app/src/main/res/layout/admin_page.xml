@@ -17,4 +17,11 @@
         android:text="Admin Page"
         android:textSize="40dip" />
 
+    <Button
+        android:layout_marginTop="400dp"
+        android:layout_marginLeft="150dip"
+        android:layout_marginRight="150dip"
+        android:onClick="goBack"
+        android:text="Back"></Button>
+
 </TableLayout>

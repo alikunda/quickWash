@@ -4,6 +4,7 @@ import android.content.Intent;
 import android.os.Bundle;
 import android.view.Menu;
 import android.view.MenuItem;
+import android.view.View;
 
 import androidx.appcompat.app.AppCompatActivity;
 
@@ -40,6 +41,10 @@ public class adminPage extends AppCompatActivity {
         }
 
         return super.onOptionsItemSelected(item);
+    }
+    public void goBack(View v){
+        this.finish();
+
     }
 
 }
