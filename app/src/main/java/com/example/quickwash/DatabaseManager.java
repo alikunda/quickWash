@@ -51,7 +51,7 @@ public class DatabaseManager extends SQLiteOpenHelper {
         }
     }
     public ArrayList<userRegisteration> selectAll(){
-        String sqlQuery = "select * from "+TABLE_LOGIN;
+        String sqlQuery = "select * from "+TABLE_LOGIN +" WHERE "+USER_TYPE +" <> 'admin'";
         SQLiteDatabase db = this.getWritableDatabase();
         Cursor myCursor = db.rawQuery(sqlQuery, null);
 
