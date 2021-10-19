@@ -1,0 +1,106 @@
+<?xml version="1.0" encoding="utf-8"?>
+<TableLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    tools:context=".register">
+
+    <TableRow>
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        <TextView android:text="User Name" android:padding="10dip"
+            android:layout_marginTop="55dip"/>
+
+        <EditText
+            android:id="@+id/email"
+            android:layout_width="214dp"
+            android:autoSizeTextType="uniform"
+            android:hint="use email"
+            android:inputType="textEmailAddress"
+            android:layout_marginTop="55dip"/>
+        <![CDATA[
+
+        android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="30"
+                />
+    ]]>
+    </TableRow>
+    <TableRow>
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        <TextView android:text="First Name"
+            android:padding="10dip"/>
+
+        <EditText android:id="@+id/fname"
+            android:layout_width="214dp"
+            android:autoSizeTextType="uniform"
+            android:hint="abc" />
+    </TableRow>
+    <TableRow>
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        <TextView android:text="Last Name"
+            android:padding="10dip"/>
+
+        <EditText android:id="@+id/lname"
+            android:layout_width="214dp"
+            android:autoSizeTextType="uniform"
+            android:hint="xyz" />
+    </TableRow>
+    <TableRow>
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        <TextView android:text="Password"
+            android:padding="10dip"/>
+
+        <EditText
+            android:id="@+id/reg_Password"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:ems="10"
+            android:inputType="textPassword" />
+
+
+    </TableRow>
+    <TableRow>
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        <TextView android:text="User Type"
+            android:padding="10dip"/>
+
+        <EditText android:id="@+id/userType"
+            android:layout_width="214dp"
+            android:autoSizeTextType="uniform"
+            android:hint="admin or user" />
+
+
+    </TableRow>
+
+    <TableRow
+        android:gravity="center_vertical" android:paddingTop="20dip">
+
+        <Button
+            android:id="@+id/back"
+            android:layout_width="97dp"
+
+            android:layout_height="40dp"
+            android:layout_column="1"
+            android:onClick="goBack"
+            android:text="back" />
+    </TableRow>
+    <TableRow
+        android:gravity="center_vertical" android:paddingTop="20dip">
+
+        <Button
+            android:id="@+id/submit"
+            android:layout_width="97dp"
+
+            android:layout_height="40dp"
+            android:layout_column="1"
+            android:onClick="submit"
+            android:text="Submit" />
+    </TableRow>
+
+</TableLayout>
