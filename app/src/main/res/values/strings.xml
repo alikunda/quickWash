@@ -1,3 +1,5 @@
 <resources>
     <string name="app_name">Quick Wash</string>
+    <string name="user">User</string>
+    <string name="admin">Admin</string>
 </resources>

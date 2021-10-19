@@ -6,6 +6,8 @@ import android.content.Intent;
 import android.os.Bundle;
 import android.view.View;
 import android.widget.EditText;
+import android.widget.RadioButton;
+import android.widget.RadioGroup;
 import android.widget.Toast;
 
 /**
@@ -30,23 +32,29 @@ public class MainActivity extends AppCompatActivity {
             EditText password = findViewById(R.id.password);
             String passwordString = password.getText().toString();
         //user type
-            EditText userType = findViewById(R.id.user_type);
-            String userTypeString = userType.getText().toString();
 
-            if(UserNameString.equalsIgnoreCase(" ") || passwordString.equalsIgnoreCase(" ")||
-                    userTypeString.equalsIgnoreCase(" ")){
+            RadioGroup userTypeRG = findViewById(R.id.radioUserTypeHome);
+            RadioButton rb;
+            int radioId = userTypeRG.getCheckedRadioButtonId();
+            rb = findViewById(radioId);
+
+            /*
+            EditText userType = findViewById(R.id.user_type);
+            String userTypeString = userType.getText().toString();*/
+
+            if(UserNameString.equalsIgnoreCase(" ") || passwordString.equalsIgnoreCase(" ")){
                 Toast.makeText(this, "Fields are empty",Toast.LENGTH_LONG).show();
             }else {
-            user myUser = new user(0, UserNameString, passwordString,userTypeString);
-            String uType = dbManager.checkingUser(UserNameString, passwordString, userTypeString );
+            user myUser = new user(0, UserNameString, passwordString,rb.getText().toString());
+            String uType = dbManager.checkingUser(UserNameString, passwordString, rb.getText().toString() );
 
                 if(uType.equalsIgnoreCase("success")) {
 
                     Toast.makeText(this, "Success", Toast.LENGTH_LONG).show();
-                       homePage(userTypeString);
+                       homePage(rb.getText().toString());
                        userName.setText("");
                        password.setText("");
-                       userType.setText("");
+                       userTypeRG.clearCheck();
                 }
                 else{
                     Toast.makeText(this, "Wrong credentials", Toast.LENGTH_LONG).show();

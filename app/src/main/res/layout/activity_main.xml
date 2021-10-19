@@ -59,9 +59,22 @@
         <TextView android:text="User Type"
             android:padding="10dip"
             android:layout_marginLeft="45dip"/>
-        <EditText
-            android:id="@+id/user_type"
-            android:hint="admin or user" />
+        <RadioGroup
+            android:id="@+id/radioUserTypeHome"
+            android:orientation="horizontal"
+            android:gravity="center">
+            <RadioButton
+                android:id="@+id/userButton"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="@string/user"
+                android:checked="true"/>
+            <RadioButton
+                android:id="@+id/adminButton"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="@string/admin"/>
+        </RadioGroup>
     </TableRow>
     <Button
         android:layout_column="1"

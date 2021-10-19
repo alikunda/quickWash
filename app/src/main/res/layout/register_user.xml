@@ -70,10 +70,28 @@
         <TextView android:text="User Type"
             android:padding="10dip"/>
 
+        <RadioGroup
+            android:id="@+id/radioUserTypeReg"
+            android:orientation="horizontal"
+            android:gravity="center">
+            <RadioButton
+                android:id="@+id/userButton"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="@string/user"
+                android:checked="true"/>
+            <RadioButton
+                android:id="@+id/adminButton"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="@string/admin"/>
+        </RadioGroup>
+
+<!--
         <EditText android:id="@+id/userType"
             android:layout_width="214dp"
             android:autoSizeTextType="uniform"
-            android:hint="admin or user" />
+            android:hint="admin or user" />-->
 
 
     </TableRow>

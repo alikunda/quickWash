@@ -9,14 +9,14 @@ public class user {
 
     public  user(int id, String email, String password, String UserType){
         setId(id);
-        setemail(email);
+        setEmail(email);
         setPassword(password);
         setUser(UserType);
     }
     public void setId(int newId){
         id = newId;
     }
-    public void setemail(String newEmail){
+    public void setEmail(String newEmail){
         email = newEmail;
     }
     public void setPassword(String newPass){
