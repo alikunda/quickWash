@@ -99,8 +99,9 @@
         android:layout_marginLeft="80dip"
         android:layout_marginRight="80dp"
         android:layout_column="1"
-        android:onClick="reset"
         android:text="Reset" />
+        <!--android:onClick="reset"-->
+
 
 
 
