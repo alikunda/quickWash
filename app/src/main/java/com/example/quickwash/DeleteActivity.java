@@ -78,9 +78,9 @@ public class DeleteActivity extends AppCompatActivity {
 
     private class RadioButtonHandler implements RadioGroup.OnCheckedChangeListener {
         public void onCheckedChanged(RadioGroup group, int checkedId) {
-            // delete candy from database
-          //  dbManager.deleteById(checkedId);
-            Toast.makeText(DeleteActivity.this, "A friend is deleted from friends List", Toast.LENGTH_SHORT).show();
+            //delete candy from database
+            dbManager.deleteById(checkedId);
+            Toast.makeText(DeleteActivity.this, "User Deleted", Toast.LENGTH_SHORT).show();
 
             updateView();
 

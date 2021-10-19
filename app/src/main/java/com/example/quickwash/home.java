@@ -2,7 +2,7 @@ package com.example.quickwash;
 
 import android.os.Bundle;
 /**
- User Home page after login in
+ User Home page after login in(home.xml)
  */
 import androidx.appcompat.app.AppCompatActivity;
 
