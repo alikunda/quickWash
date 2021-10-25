@@ -1,5 +1,6 @@
 package com.example.quickwash;
 
+import android.content.Intent;
 import android.os.Bundle;
 import android.view.View;
 import android.widget.EditText;
@@ -79,6 +80,8 @@ public class register extends AppCompatActivity {
                 password.setText("");
                 userTypeRG.clearCheck();
             }
+            Intent myIntent = new Intent(this,MainActivity.class);
+            startActivity(myIntent);
         } else {
             Toast.makeText(this, " Invalid user type, try again ", Toast.LENGTH_LONG).show();
         }

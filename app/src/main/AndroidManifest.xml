@@ -27,6 +27,8 @@
         <activity android:name=".register" />
         <activity android:name=".home" />
         <activity android:name=".DeleteActivity" />
+        <activity android:name=".nav_header"></activity>
+
     </application>
 
 </manifest>
