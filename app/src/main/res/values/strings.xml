@@ -15,4 +15,19 @@
     <string name="menu_gallery">Payment</string>
     <string name="menu_slideshow">Contact</string>
     <string name="menu_logout">Logout</string>
+
+    <string-array name="clothing_types">
+        <item>Pants</item>
+        <item>Shirt</item>
+        <item>Dress</item>
+        <item>Polo shirt</item>
+        <item>Suit (2pc)</item>
+        <item>Suit (3pc)</item>
+        <item>Jacket</item>
+        <item>Jeans</item>
+        <item>Skirt</item>
+        <item>T-shirt</item>
+        <item>Tie</item>
+
+    </string-array>
 </resources>
