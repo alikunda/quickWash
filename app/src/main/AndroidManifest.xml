@@ -10,6 +10,11 @@
         android:supportsRtl="true"
         android:theme="@style/Theme.QuickWash">
         <activity
+            android:name=".side_menu"
+            android:exported="true"
+            android:label="@string/title_activity_side_menu"
+            android:theme="@style/Theme.QuickWash.NoActionBar" />
+        <activity
             android:name=".MainActivity"
             android:exported="true">
             <intent-filter>
@@ -18,10 +23,11 @@
                 <category android:name="android.intent.category.LAUNCHER" />
             </intent-filter>
         </activity>
-        <activity android:name=".adminPage"></activity>
-        <activity android:name=".register"></activity>
-        <activity android:name=".home"></activity>
-        <activity android:name=".DeleteActivity"></activity>
+        <activity android:name=".adminPage" />
+        <activity android:name=".register" />
+        <activity android:name=".home" />
+        <activity android:name=".DeleteActivity" />
+        <activity android:name=".nav_header"></activity>
 
     </application>
 

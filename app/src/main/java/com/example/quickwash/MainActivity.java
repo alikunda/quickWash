@@ -48,6 +48,7 @@ public class MainActivity extends AppCompatActivity {
             user myUser = new user(0, UserNameString, passwordString,rb.getText().toString());
             String uType = dbManager.checkingUser(UserNameString, passwordString, rb.getText().toString() );
 
+
                 if(uType.equalsIgnoreCase("success")) {
 
                     Toast.makeText(this, "Success", Toast.LENGTH_LONG).show();
@@ -68,7 +69,7 @@ public class MainActivity extends AppCompatActivity {
             startActivity(myIntent);
         }
         else {
-            Intent myIntent = new Intent(this, home.class);
+            Intent myIntent = new Intent(this, side_menu.class);
             startActivity(myIntent);
         }
     }

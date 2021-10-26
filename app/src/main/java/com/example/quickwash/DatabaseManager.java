@@ -38,11 +38,13 @@ public class DatabaseManager extends SQLiteOpenHelper {
     public String checkingUser(String email, String pass, String user){
         SQLiteDatabase db = this.getWritableDatabase();
         String sqlCheck = "select * FROM "+TABLE_LOGIN+" WHERE "+EMAIL+" = '"+email +"'"+" AND "+PASSWORD+" = '"+pass+"'"+" and "+USER_TYPE+" = '"+user+"'";
+       // String userName = "select "+fNAME+" FROM "+TABLE_LOGIN+" WHERE "+EMAIL+" = '"+email +"'";
         Cursor myCursor = db.rawQuery(sqlCheck, null);
         if(myCursor.moveToNext()){
             user currentUser = new user(Integer.parseInt(myCursor.getString(0)),
                     myCursor.getString(1),myCursor.getString(2),myCursor.getString(3));
             db.close();
+           // nav_header myNav_header = new nav_header(userName,email);
         return "success";
         }
         else{
