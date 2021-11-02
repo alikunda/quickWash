@@ -46,7 +46,7 @@ public class MainActivity extends AppCompatActivity {
                 Toast.makeText(this, "Fields are empty",Toast.LENGTH_LONG).show();
             }else {
             user myUser = new user(0, UserNameString, passwordString,rb.getText().toString());
-            String uType = dbManager.checkingUser(UserNameString, passwordString, rb.getText().toString() );
+            String uType = dbManager.checkingUser(UserNameString, passwordString, rb.getText().toString() ); //check user auth
 
 
                 if(uType.equalsIgnoreCase("success")) {
@@ -62,6 +62,7 @@ public class MainActivity extends AppCompatActivity {
                 }
             }
         }
+
 
         public void homePage(String userType) {
         if(userType.equalsIgnoreCase("admin")){

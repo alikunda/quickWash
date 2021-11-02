@@ -14,11 +14,10 @@
             android:layout_height="wrap_content"
             android:layout_marginLeft="30dp"
             android:layout_marginTop="50dp"
-            android:text="Welcome to Quick wash"
-            android:textSize="40dip"
-            android:textColor="@color/design_default_color_primary_dark"
             android:fontFamily="cursive"
-            ></TextView>
+            android:text="Welcome to Quick wash"
+            android:textColor="@color/design_default_color_primary_dark"
+            android:textSize="40dip"></TextView>
     </RelativeLayout>
     <TableRow>
         android:layout_width="wrap_content"
@@ -99,7 +98,8 @@
         android:layout_marginLeft="80dip"
         android:layout_marginRight="80dp"
         android:layout_column="1"
-        android:text="Reset" />
+        android:text="Reset"
+        />
         <!--android:onClick="reset"-->
 
 

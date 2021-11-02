@@ -48,6 +48,7 @@ public class register extends AppCompatActivity {
         String passwordString = password.getText().toString();
 
 
+
         RadioGroup userTypeRG = findViewById(R.id.radioUserTypeReg);
         RadioButton rb;
 
@@ -64,27 +65,30 @@ public class register extends AppCompatActivity {
             Toast.makeText(this, "Fields are empty", Toast.LENGTH_LONG).show();
         }
         if (rb.isChecked()) {
-
-
-            userRegisteration myUserRegisteration = new userRegisteration(0, emailString,
-                    fnameString, lnameString, passwordString, rb.getText().toString());
-            boolean checkUser = dbManager.userCheck(myUserRegisteration, myUserRegisteration.getEmail(), myUserRegisteration.getUserType());
-            if (checkUser) {
-                Toast.makeText(this, emailString + " Already exists ", Toast.LENGTH_LONG).show();
+            if (passwordString.length() <= 8) {
+                Toast.makeText(this, "Password should be atleast 8 charaters", Toast.LENGTH_LONG).show();
             } else {
-                dbManager.insertUser(myUserRegisteration);
-                Toast.makeText(this, emailString + " account has created ", Toast.LENGTH_LONG).show();
-                email.setText("");
-                fname.setText("");
-                lname.setText("");
-                password.setText("");
-                userTypeRG.clearCheck();
+                userRegisteration myUserRegisteration = new userRegisteration(0, emailString,
+                        fnameString, lnameString, passwordString, rb.getText().toString());
+                boolean checkUser = dbManager.userCheck(myUserRegisteration, myUserRegisteration.getEmail(), myUserRegisteration.getUserType());
+                if (checkUser) {
+                    Toast.makeText(this, emailString + " Already exists ", Toast.LENGTH_LONG).show();
+                } else {
+                    dbManager.insertUser(myUserRegisteration);
+                    Toast.makeText(this, emailString + " account has created ", Toast.LENGTH_LONG).show();
+                    email.setText("");
+                    fname.setText("");
+                    lname.setText("");
+                    password.setText("");
+                    userTypeRG.clearCheck();
+                }
+                Intent myIntent = new Intent(this, MainActivity.class);
+                startActivity(myIntent);
             }
-            Intent myIntent = new Intent(this,MainActivity.class);
-            startActivity(myIntent);
-        } else {
-            Toast.makeText(this, " Invalid user type, try again ", Toast.LENGTH_LONG).show();
-        }
+            } else{
+                Toast.makeText(this, " Invalid user type, try again ", Toast.LENGTH_LONG).show();
+            }
+
     }
 
     public void goBack(View v) {

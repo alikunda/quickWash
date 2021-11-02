@@ -27,4 +27,14 @@
         android:name="com.example.quickwash.ui.order.orderFragment"
         android:label="Order"
         tools:layout="@layout/fragment_order" />
+    <fragment
+        android:id="@+id/nav_status"
+        android:name="com.example.quickwash.ui.checkOrder.checkOrderFragment"
+        android:label="Status"
+        tools:layout="@layout/fragment_check_order" />
+    <fragment
+        android:id="@+id/nav_check_history"
+        android:name="com.example.quickwash.ui.history.historyFragment"
+        android:label="History"
+        tools:layout="@layout/fragment_history" />
 </navigation>

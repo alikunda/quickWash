@@ -3,19 +3,40 @@
     xmlns:tools="http://schemas.android.com/tools"
     tools:showIn="navigation_view">
 
+
     <group android:checkableBehavior="single">
         <item
             android:id="@+id/nav_home"
             android:icon="@drawable/ic_home_foreground"
             android:title="@string/menu_home" />
-        <item
-            android:id="@+id/nav_order"
-            android:icon="@drawable/ic_order_foreground"
-            android:title="@string/menu_order" />
-        <item
-            android:id="@+id/nav_gallery"
-            android:icon="@drawable/ic_payement_foreground"
-            android:title="@string/menu_gallery" />
+    </group>
+
+        <item android:title="@string/menu_order">
+          <menu>
+            <item
+                android:id="@+id/nav_order"
+                android:icon="@drawable/ic_order_foreground"
+                android:title="Start Order" />
+            <item
+                android:id="@+id/nav_status"
+                android:icon="@drawable/ic_track_foreground"
+                android:title="Check Status" />
+          </menu>
+        </item>
+        <item android:title="Order history and payements">
+            <menu>
+                <item
+                    android:id="@+id/nav_gallery"
+                    android:icon="@drawable/ic_payement_foreground"
+                    android:title="@string/menu_gallery"/>
+                <item
+                    android:id="@+id/nav_check_history"
+                    android:icon="@drawable/ic_status_foreground"
+                    android:title="Check Order History"/>
+            </menu>
+        </item>
+<item android:title="Others">
+    <menu>
         <item
             android:id="@+id/nav_slideshow"
             android:icon="@drawable/ic_contact_foreground"
@@ -24,5 +45,8 @@
             android:id="@+id/nav_logout"
             android:icon="@drawable/ic_logout_foreground"
             android:title="@string/menu_logout" />
-    </group>
+    </menu>
+</item>
+
+
 </menu>

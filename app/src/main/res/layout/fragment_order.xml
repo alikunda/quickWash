@@ -1,78 +1,109 @@
 <?xml version="1.0" encoding="utf-8"?>
-<androidx.constraintlayout.widget.ConstraintLayout
-    xmlns:android="http://schemas.android.com/apk/res/android"
+<TableLayout xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     tools:context=".ui.order.orderFragment">
 
-    <com.google.android.material.tabs.TabLayout
-        android:id="@+id/tabLayout2"
-        android:layout_width="0dp"
-        android:layout_height="wrap_content"
-        android:layout_marginStart="1dp"
-        android:layout_marginTop="3dp"
-        android:layout_marginEnd="1dp"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toTopOf="parent">
-
-        <com.google.android.material.tabs.TabItem
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:text="Start Order" />
-
-
-        <com.google.android.material.tabs.TabItem
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:text="Check Order" />
-    </com.google.android.material.tabs.TabLayout>
-
-    <ScrollView
+    <RelativeLayout
         android:layout_width="match_parent"
-        android:layout_height="match_parent"
-        android:layout_marginTop="@dimen/nav_header_height">
-        <TableRow
-            android:layout_width="wrap_content"
+        android:layout_height="70dp">
+
+        <TextView
+            android:id="@+id/order"
+            android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:layout_marginStart="@dimen/fab_margin"
-            android:gravity="center">
-            <TextView
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:text="TYPE:"></TextView>
+            android:layout_alignParentStart="true"
+            android:layout_alignParentLeft="true"
+            android:layout_alignParentTop="true"
+            android:text="Start a new order"
+            android:textSize="50dp"></TextView>
+    </RelativeLayout>
+    <TableRow
+        android:id="@+id/type" android:layout_width="wrap_content"
+        android:layout_height="wrap_content">
+        <TextView android:layout_width="80dp"
+            android:layout_height="60dp"
+            android:layout_marginRight="10dp"
+            android:textSize="40dp"
+            android:text="Type"/>
 
-            <com.google.android.material.textfield.TextInputLayout
-                style="@style/Widget.MaterialComponents.TextInputLayout.OutlinedBox.ExposedDropdownMenu"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content">
+    </TableRow>
+    <TableRow android:layout_width="wrap_content"
+        android:layout_height="wrap_content">
+
+        <TextView
+            android:id="@+id/tshirt"
+            android:layout_width="120dp"
+            android:layout_height="60dp"
+            android:layout_marginRight="60dp"
+            android:layout_marginLeft="10dp"
+            android:text="Tshirt"
+            android:textSize="40dp" />
+
+        <EditText
+            android:id="@+id/tQty"
+            android:layout_width="120dp"
+            android:layout_height="60dp"
+            android:inputType="number"
+            android:layout_marginRight="10dp"
+            android:layout_marginTop="9dp"
+            android:hint="Qty"
+
+            android:textSize="40dp" />
+
+        <TextView
+            android:id="@+id/tPrice"
+            android:layout_width="59dp"
+            android:layout_height="60dp"
+            android:layout_marginLeft="10dp"
+            android:text="$4"
+            android:textSize="40dp" />
+
+    </TableRow>
+    <TableRow android:layout_width="wrap_content"
+        android:layout_height="wrap_content">
+
+        <TextView
+            android:id="@+id/pant"
+            android:layout_width="120dp"
+            android:layout_height="60dp"
+            android:layout_marginRight="60dp"
+            android:layout_marginLeft="10dp"
+            android:text="Pant"
+            android:textSize="40dp" />
+
+        <EditText
+            android:id="@+id/pQty"
+            android:layout_width="120dp"
+            android:layout_height="60dp"
+            android:inputType="number"
+            android:layout_marginRight="10dp"
+            android:layout_marginTop="9dp"
+            android:hint="Qty"
+
+            android:textSize="40dp" />
+
+        <TextView
+            android:id="@+id/pPrice"
+            android:layout_width="59dp"
+            android:layout_height="60dp"
+            android:layout_marginLeft="10dp"
+            android:text="$5"
+            android:textSize="40dp" />
+
+    </TableRow>
+    <Button
+        android:id="@+id/procced"
+        android:layout_width="200dp"
+        android:layout_height="70dp"
+        android:layout_marginTop="30dp"
+        android:layout_marginRight="70dp"
+        android:layout_marginLeft="80dp"
+        android:textSize="20dp"
+        android:text="Proceed to pay"></Button>
 
 
-                <AutoCompleteTextView
-                    android:id="@+id/autoCompleteTextView"
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                    android:layout_weight="1"
-                    android:text="Pants"
-                    android:maxLines="1"/>
+</TableLayout>
 
-
-            </com.google.android.material.textfield.TextInputLayout>
-            <TextView
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:text="QUANTITY:"></TextView>
-
-            <EditText
-                android:layout_width="match_parent"
-                android:layout_height="match_parent"
-                android:hint="How many?"/>
-        </TableRow>
-
-
-
-    </ScrollView>
-
-</androidx.constraintlayout.widget.ConstraintLayout>
