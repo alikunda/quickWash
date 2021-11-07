@@ -22,11 +22,11 @@
         android:name="com.example.quickwash.ui.slideshow.SlideshowFragment"
         android:label="@string/menu_slideshow"
         tools:layout="@layout/fragment_slideshow" />
-    <fragment
+    <activity
         android:id="@+id/nav_order"
-        android:name="com.example.quickwash.ui.order.orderFragment"
+        android:name="com.example.quickwash.ui.order.StartOrderActivity"
         android:label="Order"
-        tools:layout="@layout/fragment_order" />
+        tools:layout="@layout/activity_start_order" />
     <fragment
         android:id="@+id/nav_status"
         android:name="com.example.quickwash.ui.checkOrder.checkOrderFragment"

@@ -15,6 +15,18 @@
     <string name="menu_gallery">Payment</string>
     <string name="menu_slideshow">Contact</string>
     <string name="menu_logout">Logout</string>
+
+    <string-array name="garment_type">
+        <item>Shirt</item>
+        <item>Trouser</item>
+        <item>Short</item>
+        <item>Skirt</item>
+        <item>Jean</item>
+        <item>Sweater</item>
+        <item>Suit 2pc</item>
+        <item>Suit 3pc</item>
+    </string-array>
+
     <!-- TODO: Remove or change this placeholder text -->
     <string name="hello_blank_fragment">Hello blank fragment</string>
 </resources>

@@ -1,14 +1,15 @@
 package com.example.quickwash;
 
-import androidx.appcompat.app.AppCompatActivity;
-
 import android.content.Intent;
 import android.os.Bundle;
+import android.util.Log;
 import android.view.View;
 import android.widget.EditText;
 import android.widget.RadioButton;
 import android.widget.RadioGroup;
 import android.widget.Toast;
+
+import androidx.appcompat.app.AppCompatActivity;
 
 /**
  * Login and register user page - class: user.java, userRegistration.java,
@@ -23,6 +24,7 @@ public class MainActivity extends AppCompatActivity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
         dbManager = new DatabaseManager(this);
+        Log.w("Main Activity", "hello");
     }
         public void checkUser(View v){
         //username
@@ -45,7 +47,7 @@ public class MainActivity extends AppCompatActivity {
             if(UserNameString.equalsIgnoreCase(" ") || passwordString.equalsIgnoreCase(" ")){
                 Toast.makeText(this, "Fields are empty",Toast.LENGTH_LONG).show();
             }else {
-            user myUser = new user(0, UserNameString, passwordString,rb.getText().toString());
+            User myUser = new User(0, UserNameString, passwordString,rb.getText().toString());
             String uType = dbManager.checkingUser(UserNameString, passwordString, rb.getText().toString() ); //check user auth
 
 

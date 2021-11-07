@@ -1,57 +1,43 @@
 package com.example.quickwash;
 
 import android.content.Context;
-import android.database.Cursor;
 import android.database.sqlite.SQLiteDatabase;
 import android.database.sqlite.SQLiteOpenHelper;
-
-import java.util.ArrayList;
 
 /**
  * Database manage for user info used in login and register procces
  */
 
-public class DatabaseManager extends SQLiteOpenHelper {
-    private static final String DATABASE_NAME = "users";
+public class DatabaseManager2 extends SQLiteOpenHelper {
+    private static final String DATABASE_NAME = "orders";
     private static final int DATABASE_VERSION = 1;
-    private static final String TABLE_LOGIN= "login";
+    private static final String TABLE_GARMENT= "garment";
     private static final String ID = "id";
-    private static final String EMAIL = "email";
-    private static final String fNAME = "fname";
-    private static final String lNAME = "lname";
-    private static final String PASSWORD = "password";
-    private static final String USER_TYPE = "user_type";
+    private static final String GARMENT_TYPE = "garment";
+    private static final String QUANTITY = "quantity";
+    private static final String PRICE = "price";
+    private static final String OWNER = "owner";
 
-    public DatabaseManager(Context context) {
+    public DatabaseManager2(Context context) {
         super(context, DATABASE_NAME, null, DATABASE_VERSION);
     }
 
     @Override
     public void onCreate(SQLiteDatabase db) {
-        String sqlCreate = "create table "+ TABLE_LOGIN+" ("+ID;
-        sqlCreate +=  " integer primary key autoincrement, " +EMAIL+" text, " +fNAME;
-        sqlCreate += " text, " + lNAME + " text, "+PASSWORD+ " text, "+USER_TYPE +" text ) ";
+        String sqlCreate = "create table "+ TABLE_GARMENT+" ("+ID;
+        sqlCreate +=  " integer primary key autoincrement, " +GARMENT_TYPE+" text, " +QUANTITY;
+        sqlCreate += " integer, " + PRICE + " real ) ";
 
         db.execSQL(sqlCreate);
     }
-
-    public String checkingUser(String email, String pass, String user){
+/*
+    public void insertGarment(Garment garment){
         SQLiteDatabase db = this.getWritableDatabase();
-        String sqlCheck = "select * FROM "+TABLE_LOGIN+" WHERE "+EMAIL+" = '"+email +"'"+" AND "+PASSWORD+" = '"+pass+"'"+" and "+USER_TYPE+" = '"+user+"'";
-       // String userName = "select "+fNAME+" FROM "+TABLE_LOGIN+" WHERE "+EMAIL+" = '"+email +"'";
-        Cursor myCursor = db.rawQuery(sqlCheck, null);
-        if(myCursor.moveToNext()){
-            User currentUser = new User(Integer.parseInt(myCursor.getString(0)),
-                    myCursor.getString(1),myCursor.getString(2),myCursor.getString(3));
-            db.close();
-           // nav_header myNav_header = new nav_header(userName,email);
-        return "success";
-        }
-        else{
-            db.close();
-            return "fail";
-        }
+        String sqlInsert = "insert into " + TABLE_GARMENT + " values (
+
     }
+
+
     public ArrayList<userRegisteration> selectAll(){
         String sqlQuery = "select * from "+TABLE_LOGIN +" WHERE "+USER_TYPE +" <> 'admin'";
         SQLiteDatabase db = this.getWritableDatabase();
@@ -95,11 +81,11 @@ public class DatabaseManager extends SQLiteOpenHelper {
                 + myUserRegisteration.getUserType()   + "' )";
         db.execSQL(sqlInsert);
         db.close();
-    }
+    }*/
     @Override
     public void onUpgrade(SQLiteDatabase db, int oldVersion, int newVersion) {
         // Drop old table if it exists
-        db.execSQL( "drop table if exists " + TABLE_LOGIN );
+        db.execSQL( "drop table if exists " + TABLE_GARMENT );
         // Re-create tables
         onCreate( db );
     }

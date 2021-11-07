@@ -1,13 +1,13 @@
 package com.example.quickwash;
 
-public class user {
+public class User {
     private int id;
     private String email;
     private String password;
     private String User_Type;
 
 
-    public  user(int id, String email, String password, String UserType){
+    public User(int id, String email, String password, String UserType){
         setId(id);
         setEmail(email);
         setPassword(password);
