@@ -9,7 +9,6 @@ import androidx.appcompat.app.AppCompatActivity;
  * User Home page after login in(home.xml)
  */
 public class home extends AppCompatActivity {
-
     private DatabaseManager dbManager;
 
     @Override
