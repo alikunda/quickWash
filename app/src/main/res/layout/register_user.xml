@@ -16,16 +16,10 @@
             android:id="@+id/email"
             android:layout_width="214dp"
             android:autoSizeTextType="uniform"
-            android:hint="use email"
+            android:hint="example@gmail.com"
             android:inputType="textEmailAddress"
             android:layout_marginTop="55dip"/>
-        <![CDATA[
 
-        android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:text="30"
-                />
-    ]]>
     </TableRow>
     <TableRow>
         android:layout_width="wrap_content"
@@ -36,18 +30,17 @@
         <EditText android:id="@+id/fname"
             android:layout_width="214dp"
             android:autoSizeTextType="uniform"
-            android:hint="abc" />
+            android:hint="John" />
     </TableRow>
     <TableRow>
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         <TextView android:text="Last Name"
             android:padding="10dip"/>
-
         <EditText android:id="@+id/lname"
             android:layout_width="214dp"
             android:autoSizeTextType="uniform"
-            android:hint="xyz" />
+            android:hint="Smith" />
     </TableRow>
     <TableRow>
         android:layout_width="wrap_content"
@@ -60,6 +53,7 @@
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:ems="10"
+            android:hint="Atleast 8 characters"
             android:inputType="textPassword" />
 
 
@@ -95,31 +89,39 @@
 
 
     </TableRow>
-    <TableRow
-        android:gravity="center_vertical" android:paddingTop="20dip">
+    <TableLayout >
 
         <Button
             android:id="@+id/submit"
-            android:layout_width="97dp"
-
+            android:layout_width="10dp"
+            android:layout_marginRight="120dp"
+            android:layout_marginLeft="90dp"
             android:layout_height="40dp"
             android:layout_column="1"
             android:onClick="submit"
             android:text="Submit" />
-    </TableRow>
-
-    <TableRow
-        android:gravity="center_vertical" android:paddingTop="20dip">
 
         <Button
             android:id="@+id/back"
-            android:layout_width="97dp"
-
+            android:layout_width="100dp"
             android:layout_height="40dp"
-            android:layout_column="1"
+            android:layout_marginRight="120dp"
+            android:layout_marginLeft="90dp"
+            android:layout_column="2"
             android:onClick="goBack"
             android:text="back" />
-    </TableRow>
+
+        <Button
+            android:id="@+id/reset"
+            android:layout_height="40dp"
+            android:layout_width="100dp"
+            android:layout_marginRight="120dp"
+            android:layout_marginLeft="90dp"
+            android:layout_column="3"
+            android:text="Reset"
+            />
+
+    </TableLayout>
 
 
 </TableLayout>

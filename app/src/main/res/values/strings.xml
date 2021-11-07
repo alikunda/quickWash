@@ -12,7 +12,7 @@
 
     <string name="menu_order">Orders</string>
     <string name="menu_home">Home</string>
-    <string name="menu_gallery">Payment</string>
+    <string name="menu_gallery">Add a Payement Info</string>
     <string name="menu_slideshow">Contact</string>
     <string name="menu_logout">Logout</string>
 

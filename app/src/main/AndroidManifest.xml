@@ -16,6 +16,7 @@
             android:theme="@style/Theme.QuickWash.NoActionBar" />
         <activity
             android:name=".MainActivity"
+
             android:exported="true">
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />
@@ -28,7 +29,7 @@
         <activity android:name=".home" />
         <activity android:name=".DeleteActivity" />
         <activity android:name=".ui.order.StartOrderActivity" />
-        <activity android:name=".nav_header"></activity>
+
 
     </application>
 

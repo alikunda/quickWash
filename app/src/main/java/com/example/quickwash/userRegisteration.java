@@ -19,6 +19,7 @@ public class userRegisteration extends AppCompatActivity {
         setUserType(Type);
     }
 
+
     public void setId(int newId){
         id = newId;
     }

@@ -43,8 +43,8 @@ public class adminPage extends AppCompatActivity {
         return super.onOptionsItemSelected(item);
     }
     public void goBack(View v){
-        this.finish();
-
+        Intent myIntent = new Intent(this, MainActivity.class);
+        startActivity(myIntent);
     }
 
 }

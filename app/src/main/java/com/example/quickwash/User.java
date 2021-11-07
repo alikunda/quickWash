@@ -1,17 +1,28 @@
 package com.example.quickwash;
 
 public class User {
+    private DatabaseManager dbManager;
+
     private int id;
+    private String fname, lname;
+
     private String email;
     private String password;
     private String User_Type;
 
 
-    public User(int id, String email, String password, String UserType){
+    public  User(int id, String email, String password, String UserType){
         setId(id);
         setEmail(email);
         setPassword(password);
         setUser(UserType);
+    }
+
+    public void setFname(String first){
+        fname = first;
+    }
+    public void setLname(String last){
+        lname = last;
     }
     public void setId(int newId){
         id = newId;
@@ -29,6 +40,9 @@ public class User {
         return id;
     }
 
+    public String getName(){
+        return fname+" "+lname;
+    }
     public String getEmail( ) {
         return email;
     }
@@ -41,6 +55,7 @@ public class User {
     public String toString(){
         return ("User Name: "+email+" User Type: "+User_Type );
     }
+
 
 
 }

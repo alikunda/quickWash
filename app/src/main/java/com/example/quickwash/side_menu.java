@@ -1,16 +1,23 @@
 package com.example.quickwash;
 
+import android.annotation.SuppressLint;
 import android.content.Intent;
 import android.os.Bundle;
 
 import android.view.Menu;
 import android.view.MenuItem;
+import android.view.View;
+import android.widget.Button;
+import android.widget.TextView;
+import android.widget.Toast;
 
+import com.example.quickwash.ui.gallery.GalleryFragment;
 import com.google.android.material.snackbar.Snackbar;
 import com.google.android.material.navigation.NavigationView;
 
 import androidx.annotation.NonNull;
 import androidx.core.view.GravityCompat;
+import androidx.fragment.app.FragmentTransaction;
 import androidx.navigation.NavController;
 import androidx.navigation.Navigation;
 import androidx.navigation.ui.AppBarConfiguration;
@@ -21,19 +28,22 @@ import androidx.appcompat.app.AppCompatActivity;
 import com.example.quickwash.databinding.ActivitySideMenuBinding;
 
 public class side_menu extends AppCompatActivity {
-
+    private DatabaseManager dbManager;
     private AppBarConfiguration mAppBarConfiguration;
     private ActivitySideMenuBinding binding;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
+        dbManager = new DatabaseManager(this);
 
         binding = ActivitySideMenuBinding.inflate(getLayoutInflater());
         setContentView(binding.getRoot());
 
-
-       setSupportActionBar(binding.appBarSideMenu.toolbar);
+        Intent intent = getIntent();
+        String f_name = intent.getStringExtra("Name");
+        String l_name = intent.getStringExtra("Email");
+        setSupportActionBar(binding.appBarSideMenu.toolbar);
 
         DrawerLayout drawer = binding.drawerLayout;
         NavigationView navigationView = binding.navView;
@@ -48,20 +58,31 @@ public class side_menu extends AppCompatActivity {
         NavigationUI.setupActionBarWithNavController(this, navController, mAppBarConfiguration);
         NavigationUI.setupWithNavController(navigationView, navController);
 
+
+
+
+        @SuppressLint("ResourceType") NavigationView  navigationView1 = (NavigationView) findViewById(R.layout.nav_header_side_menu);
+        View header = navigationView.getHeaderView(0);
+        TextView text = (TextView) header.findViewById(R.id.name);
+        text.setText("Welcome, "+f_name);
+        TextView text2 = (TextView) header.findViewById(R.id.textView);
+        text2.setText(l_name);
+
+        // logout action
+        NavigationView navigationView2 = findViewById(R.id.nav_view);
+        navigationView.getMenu().findItem(R.id.nav_logout).setOnMenuItemClickListener(menuItem -> {
+            Toast.makeText(side_menu.this,"Logout out",Toast.LENGTH_SHORT).show();
+            logout();
+            return true;
+        });
+    }
+    public void logout(){
+        Intent myIntent = new Intent(side_menu.this,MainActivity.class);
+        startActivity(myIntent);
+        finish();
     }
 
-    public boolean onNavigationItemSelected(MenuItem item) {
-        // Handle navigation view item clicks here.
-        int id = item.getItemId();
 
-        if (id == R.id.nav_logout) {
-            Intent logoutIntent = new Intent(this, MainActivity.class);
-            startActivity(logoutIntent);
-        }
-        DrawerLayout drawer = (DrawerLayout) findViewById(R.id.drawer_layout);
-        drawer.closeDrawer(GravityCompat.START);
-        return true;
-    }
     @Override
     public boolean onCreateOptionsMenu(Menu menu) {
         // Inflate the menu; this adds items to the action bar if it is present.
