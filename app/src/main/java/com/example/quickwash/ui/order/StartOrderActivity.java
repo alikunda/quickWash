@@ -48,6 +48,15 @@ public class StartOrderActivity extends AppCompatActivity  {
 
     }
 
+    public void pay(View v ) {
+
+        Toast.makeText(this, "payment button is clicked", Toast.LENGTH_LONG).show();
+
+        //Intent payIntent = new Intent(this, payment.class);
+        //startActivity(payIntent);
+
+    }
+
 
 
 
