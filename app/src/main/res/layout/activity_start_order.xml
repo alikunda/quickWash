@@ -21,34 +21,34 @@
             android:textSize="50dip" />
     </RelativeLayout>
 
-    <TableRow
-        android:layout_width="wrap_content"
-        android:layout_height="match_parent">
+ <TableLayout android:layout_marginBottom="10dp">
+     <TableRow
+         android:layout_width="wrap_content"
+         android:layout_height="match_parent">
 
-        <TextView
-            android:id="@+id/garment_select_TV"
-            android:textSize="30sp"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:text="Select\nGarment"/>
+         <TextView
+             android:id="@+id/garment_select_TV"
+             android:textSize="30dp"
+             android:layout_width="wrap_content"
+             android:layout_height="wrap_content"
+             android:text="Select Garment"/>
 
+         <com.google.android.material.textfield.TextInputLayout
+             android:id="@+id/garment_type_dropdown"
+             android:layout_width="wrap_content"
+             android:layout_height="wrap_content"
+             android:layout_marginLeft="70dp"
+             style="@style/Widget.MaterialComponents.TextInputLayout.OutlinedBox.ExposedDropdownMenu">
+             <AutoCompleteTextView
+                 android:id="@+id/garment_type_items"
+                 android:layout_width="match_parent"
+                 android:layout_height="match_parent"
+                 android:text="Shirt"
+                 android:inputType="none"/>
+         </com.google.android.material.textfield.TextInputLayout>
 
-
-        <com.google.android.material.textfield.TextInputLayout
-            android:id="@+id/garment_type_dropdown"
-            android:layout_width="match_parent"
-            android:layout_height="match_parent"
-            android:layout_gravity="left"
-            style="@style/Widget.MaterialComponents.TextInputLayout.OutlinedBox.ExposedDropdownMenu">
-            <AutoCompleteTextView
-                android:id="@+id/garment_type_items"
-                android:layout_width="match_parent"
-                android:layout_height="match_parent"
-                android:text="Shirt"
-                android:inputType="none"/>
-        </com.google.android.material.textfield.TextInputLayout>
-
-    </TableRow>
+     </TableRow>
+ </TableLayout>
 
     <TableRow>
         <TextView
@@ -59,17 +59,17 @@
             android:textAlignment="center"
             android:textSize="20sp" />
     </TableRow>
+<TableLayout>
 
+    <TableRow
+        android:layout_width="match_parent"
+        android:layout_height="match_parent">
     <RadioGroup
         android:id="@+id/radioStarch"
         android:orientation="horizontal"
         android:gravity="top|center"
         android:layout_height="wrap_content"
         android:paddingTop="10dip">
-        <TableRow
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content">
-
             <RadioButton
                 android:id="@+id/DC"
                 android:layout_width="wrap_content"
@@ -101,9 +101,9 @@
                 android:layout_height="wrap_content"
                 android:text="Heavy"
                 android:textSize="25dip"/>
+              </RadioGroup>
         </TableRow>
-
-    </RadioGroup>
+</TableLayout>
 
 
     <Button
