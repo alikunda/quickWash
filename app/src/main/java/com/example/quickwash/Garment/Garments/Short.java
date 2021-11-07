@@ -1,4 +1,6 @@
 package com.example.quickwash.Garment.Garments;
 
-public class Short {
+import com.example.quickwash.Garment.GarmentType;
+
+public class Short extends GarmentType {
 }
