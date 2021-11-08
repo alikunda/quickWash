@@ -4,18 +4,24 @@ import android.os.Bundle;
 import android.view.View;
 import android.widget.ArrayAdapter;
 import android.widget.AutoCompleteTextView;
+import android.widget.EditText;
+import android.widget.RadioButton;
 import android.widget.Toast;
 
 import androidx.appcompat.app.AppCompatActivity;
 
-import com.example.quickwash.DatabaseManager;
+import com.example.quickwash.DatabaseManager2;
+import com.example.quickwash.Garment.Garment;
+import com.example.quickwash.Garment.GarmentFactory;
 import com.example.quickwash.R;
 import com.google.android.material.textfield.TextInputLayout;
 
 public class StartOrderActivity extends AppCompatActivity  {
 
     private orderViewModel myorderViewModel;
-    private DatabaseManager dbManager2;
+    private DatabaseManager2 dbManager2;
+    private Garment garment;
+    private GarmentFactory gf;
     //private ScriptGroup.Binding binding = new ScriptGroup.Binding()
 
 
@@ -23,6 +29,10 @@ public class StartOrderActivity extends AppCompatActivity  {
     public void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_start_order);
+
+        dbManager2 = new DatabaseManager2(this);
+
+
 
         TextInputLayout textInputLayout = findViewById(R.id.garment_type_dropdown);
         AutoCompleteTextView autoCompleteTextView = findViewById(R.id.garment_type_items);
@@ -44,7 +54,26 @@ public class StartOrderActivity extends AppCompatActivity  {
         AutoCompleteTextView garmentTV = findViewById(R.id.garment_type_items);
         String garmentTypeString = garmentTV.getText().toString();
 
-        Toast.makeText(this, garmentTypeString+ ":  " + " added to order", Toast.LENGTH_LONG).show();
+        EditText quantityET = findViewById(R.id.garment_quantity_ET);
+        int quantity = Integer.parseInt(quantityET.getText().toString());
+
+        RadioButton dc = findViewById(R.id.DC);
+        RadioButton ns = findViewById(R.id.no_starch);
+        RadioButton ls = findViewById(R.id.l_starch);
+        RadioButton ms = findViewById(R.id.m_starch);
+        RadioButton hs = findViewById(R.id.h_starch);
+
+        gf = new GarmentFactory();
+
+        Garment newGarment = gf.getGarment(garmentTypeString);
+
+
+        dbManager2.insertGarment(newGarment, quantity);
+
+
+
+        Toast.makeText(this, newGarment.getGarmentName() + ":  " +
+                newGarment.getCleaningMethod() + " added to order", Toast.LENGTH_LONG).show();
 
     }
 
