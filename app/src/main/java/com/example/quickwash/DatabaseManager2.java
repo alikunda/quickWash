@@ -17,7 +17,7 @@ public class DatabaseManager2 extends SQLiteOpenHelper {
 
     private static final String ID = "id";
     private static final String GARMENT_TYPE = "garment";
-    private static final String CLEANING_METHOD = "Cleaning Method";
+    private static final String CLEANING_METHOD = "cleaningMethod";
     private static final String QUANTITY = "quantity";
     private static final String PRICE = "price";
     private static final String SUBTOTAL = "price";
@@ -93,7 +93,8 @@ public class DatabaseManager2 extends SQLiteOpenHelper {
             db.execSQL(sqlInsert);
             db.close();
         }*/
-    @Override
+
+
     public void onUpgrade(SQLiteDatabase db, int oldVersion, int newVersion) {
         // Drop old table if it exists
         db.execSQL(" drop table if exists " + TABLE_ORDER);

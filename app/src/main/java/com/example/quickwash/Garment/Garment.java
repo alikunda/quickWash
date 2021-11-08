@@ -10,6 +10,7 @@ public class Garment implements CleaningMethod {
 
     private boolean Laundry;
     private boolean dryClean;
+    private boolean pressOnly;
 
     private boolean ready;
 
@@ -43,6 +44,8 @@ public class Garment implements CleaningMethod {
     public void setGarmentName(String garmentName) {
         this.garmentName = this.garmentType.toString();
     }
+
+
 
 
     @Override
