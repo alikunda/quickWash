@@ -1,0 +1,92 @@
+<?xml version="1.0" encoding="utf-8"?>
+<TableLayout
+    xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    tools:context=".userProfileActivity">
+
+    <TextView android:layout_width="match_parent"
+        android:layout_height="50dp"
+        android:text="Update your information"
+        android:textSize="30dp"
+        android:textAlignment="center"
+        android:background="@color/green"/>
+
+    <TableRow android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:layout_marginLeft="20dp"
+        android:layout_marginRight="20dp">
+
+
+        <TextView android:layout_width="150dp"
+            android:layout_marginTop="50dp"
+            android:layout_height="40dp"
+            android:text="Email/Username"/>
+
+        <TextView android:id="@+id/editEmail"
+            android:layout_marginTop="50dp"
+            android:layout_width="250dp"
+            android:layout_height="40dp"/>
+    </TableRow>
+
+    <TableLayout android:layout_marginLeft="20dp"
+        android:layout_marginRight="20dp">
+        <TableRow android:layout_width="match_parent"
+            android:layout_height="match_parent">
+
+            <TextView android:layout_width="150dp"
+                android:layout_height="40dp"
+                android:text="First Name"/>
+
+            <EditText android:id="@+id/Editfname"
+                android:layout_width="250dp"/>
+        </TableRow>
+    </TableLayout>
+
+    <TableLayout android:layout_marginLeft="20dp"
+        android:layout_marginRight="20dp">
+        <TableRow android:layout_width="match_parent"
+            android:layout_height="match_parent">
+
+            <TextView android:layout_width="150dp"
+                android:layout_height="40dp"
+                android:text="Last Name"/>
+
+            <EditText android:id="@+id/Editlname"
+                android:layout_width="250dp" />
+        </TableRow>
+    </TableLayout>
+    <TableLayout android:layout_marginLeft="20dp"
+        android:layout_marginRight="20dp">
+        <TableRow android:layout_width="match_parent"
+            android:layout_height="match_parent">
+
+            <TextView android:layout_width="150dp"
+                android:layout_height="40dp"
+                android:text="Password"/>
+
+            <EditText android:id="@+id/Editpass"
+                android:layout_width="250dp" />
+        </TableRow>
+    </TableLayout>
+
+    <TableLayout android:layout_marginLeft="30dp"
+        android:layout_marginTop="10dp"
+        android:layout_marginRight="20dp">
+        <TableRow android:layout_width="match_parent"
+            android:layout_height="match_parent">
+            <Button
+                android:id="@+id/update"
+                android:layout_width="150dp"
+                android:text="Update"/>
+
+            <Button
+                android:id="@+id/back"
+                android:layout_width="150dp"
+                android:layout_marginLeft="10dp"
+                android:text="Back"/>
+        </TableRow>
+    </TableLayout>
+</TableLayout>

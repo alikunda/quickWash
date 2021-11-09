@@ -64,9 +64,9 @@ public class side_menu extends AppCompatActivity {
         @SuppressLint("ResourceType") NavigationView  navigationView1 = (NavigationView) findViewById(R.layout.nav_header_side_menu);
         View header = navigationView.getHeaderView(0);
         TextView text = (TextView) header.findViewById(R.id.name);
-        text.setText("Welcome, "+f_name);
+        text.setText("Welcome, "+MainActivity.myUser.getName());
         TextView text2 = (TextView) header.findViewById(R.id.textView);
-        text2.setText(l_name);
+        text2.setText(MainActivity.myUser.getEmail());
 
         // logout action
         NavigationView navigationView2 = findViewById(R.id.nav_view);
@@ -88,6 +88,17 @@ public class side_menu extends AppCompatActivity {
         // Inflate the menu; this adds items to the action bar if it is present.
         getMenuInflater().inflate(R.menu.side_menu, menu);
         return true;
+    }
+    public boolean onOptionsItemSelected(MenuItem item) {
+        int id = item.getItemId();
+
+        //noinspection SimplifiableIfStatement
+        if (id == R.id.action_userProfile) {
+            Intent deleteIntent = new Intent(this,userProfileActivity.class);
+            this.startActivity(deleteIntent);
+            return true;
+        }
+        return super.onOptionsItemSelected(item);
     }
 
 
