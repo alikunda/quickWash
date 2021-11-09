@@ -6,6 +6,7 @@ import android.widget.ArrayAdapter;
 import android.widget.AutoCompleteTextView;
 import android.widget.EditText;
 import android.widget.RadioButton;
+import android.widget.RadioGroup;
 import android.widget.Toast;
 
 import androidx.appcompat.app.AppCompatActivity;
@@ -57,23 +58,25 @@ public class StartOrderActivity extends AppCompatActivity  {
         EditText quantityET = findViewById(R.id.garment_quantity_ET);
         int quantity = Integer.parseInt(quantityET.getText().toString());
 
-        RadioButton dc = findViewById(R.id.DC);
-        RadioButton ns = findViewById(R.id.no_starch);
-        RadioButton ls = findViewById(R.id.l_starch);
-        RadioButton ms = findViewById(R.id.m_starch);
-        RadioButton hs = findViewById(R.id.h_starch);
+        //radio group
+        RadioGroup cleaningMethodRG = findViewById(R.id.radio_cleaning_method);
+        int radioID = cleaningMethodRG.getCheckedRadioButtonId();
 
-        gf = new GarmentFactory();
-
-        Garment newGarment = gf.getGarment(garmentTypeString);
+        RadioButton cleaningMethodRB = findViewById(radioID);
+        String cleaningMethodString = cleaningMethodRB.getText().toString();
 
 
-        dbManager2.insertGarment(newGarment, quantity);
+        //gf = new GarmentFactory();
+
+        //Garment newGarment = gf.getGarment(garmentTypeString);//cleaning method
+
+
+        //dbManager2.insertGarment(newGarment, quantity);//cleaning method
 
 
 
-        Toast.makeText(this, newGarment.getGarmentName() + ":  " +
-                newGarment.getCleaningMethod() + " added to order", Toast.LENGTH_LONG).show();
+        Toast.makeText(this,  quantity + " " + garmentTypeString + ":  " +
+                cleaningMethodString + " added to order", Toast.LENGTH_LONG).show();
 
     }
 
