@@ -51,7 +51,8 @@
             android:layout_height="wrap_content"
             android:hint="Atleast 8 characters"
             android:ems="10"
-            android:inputType="textPassword" />
+            android:inputType="textPassword"
+            />
     </TableRow>
     <TableRow>
         android:layout_width="wrap_content"

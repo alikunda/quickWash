@@ -35,18 +35,9 @@ public class DatabaseManager extends SQLiteOpenHelper {
     private static final String user_email = "email";
 
 
-
     public DatabaseManager(Context context) {
         super(context, DATABASE_NAME, null, DATABASE_VERSION);
     }
-    public void updateByIdAdmin(String f, String l, String email, String pass){
-        SQLiteDatabase db = this.getWritableDatabase();
-        String sqlUpdate = "update " + TABLE_LOGIN + " set " + fNAME + " = '" + f + "', "
-                + lNAME + " = '" + l + "', "+PASSWORD+ " = '" + pass + "' where " + EMAIL + " = '" + email+"'";
-        db.execSQL(sqlUpdate);
-        db.close();
-    }
-
 
     @Override
     public void onCreate(SQLiteDatabase db) {
@@ -63,7 +54,6 @@ public class DatabaseManager extends SQLiteOpenHelper {
         db.execSQL(sqlCreate);
         db.execSQL(sqlCreatePayement);
     }
-
 
     /**
      * users
@@ -116,19 +106,6 @@ public class DatabaseManager extends SQLiteOpenHelper {
        // db.execSQL(sqlQuery);
         while(myCursor.moveToNext()){
            fnamee =  myCursor.getString(0);
-        }
-        Log.w("DatabaseManager", "***** First Name: "+fnamee);
-        return fnamee;
-    }
-    //return first name
-    public String password(String email){
-        String sqlQuery = "select "+PASSWORD+" "+" from "+TABLE_LOGIN +" WHERE "+EMAIL +" = '"+email+"'";
-        SQLiteDatabase db = this.getWritableDatabase();
-        Cursor myCursor = db.rawQuery(sqlQuery, null);
-        String fnamee = null;
-        // db.execSQL(sqlQuery);
-        while(myCursor.moveToNext()){
-            fnamee =  myCursor.getString(0);
         }
         Log.w("DatabaseManager", "***** First Name: "+fnamee);
         return fnamee;
