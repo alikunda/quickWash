@@ -14,11 +14,22 @@
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_marginLeft="30dp"
-            android:layout_marginTop="50dp"
+            android:layout_marginTop="20dp"
             android:fontFamily="cursive"
             android:text="Welcome to Quick wash"
             android:textColor="@color/design_default_color_primary_dark"
             android:textSize="40dip"></TextView>
+
+        <pl.droidsonroids.gif.GifImageView
+            android:id="@+id/gifImageView"
+            android:layout_width="241dp"
+            android:layout_height="223dp"
+            android:layout_marginStart="85dp"
+            android:layout_marginLeft="60dp"
+            android:layout_marginTop="76dp"
+            android:background="#fff"
+            android:foregroundGravity="center"
+            android:src="@drawable/quickwash_logo_gif_for_use" />
     </RelativeLayout>
     <TableRow>
         android:layout_width="wrap_content"
@@ -26,12 +37,12 @@
 
         <TextView android:text="User name"
             android:padding="10dip"
-            android:layout_marginTop="70dp"
+            android:layout_marginTop="15dp"
             android:layout_marginLeft="45dip"/>
 
         <EditText
             android:id="@+id/user_name"
-            android:layout_marginTop="70dp"
+            android:layout_marginTop="15dp"
             android:autoSizeTextType="uniform"
             android:hint="example@gmail.com"
             />
