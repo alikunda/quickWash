@@ -29,6 +29,9 @@
         <activity android:name=".home" />
         <activity android:name=".DeleteActivity" />
         <activity android:name=".ui.order.StartOrderActivity" />
+        <activity android:name=".ProfileActivity"></activity>
+        <activity android:name=".userProfileActivity"></activity>
+        <activity android:name=".display_customers"></activity>
 
 
     </application>

@@ -21,10 +21,12 @@
         <entry key="..\:/Users/Aliam/AndroidStudioProjects/quickWash/app/src/main/res/layout/Register.xml" value="0.536" />
         <entry key="..\:/Users/Aliam/AndroidStudioProjects/quickWash/app/src/main/res/layout/activity_main.xml" value="0.264" />
         <entry key="..\:/Users/Aliam/AndroidStudioProjects/quickWash/app/src/main/res/layout/activity_orderhistory.xml" value="0.25416666666666665" />
+        <entry key="..\:/Users/Aliam/AndroidStudioProjects/quickWash/app/src/main/res/layout/activity_profile.xml" value="0.46584699453551914" />
         <entry key="..\:/Users/Aliam/AndroidStudioProjects/quickWash/app/src/main/res/layout/activity_side_menu.xml" value="0.1" />
         <entry key="..\:/Users/Aliam/AndroidStudioProjects/quickWash/app/src/main/res/layout/activity_start_order.xml" value="0.25416666666666665" />
         <entry key="..\:/Users/Aliam/AndroidStudioProjects/quickWash/app/src/main/res/layout/add.xml" value="0.21145833333333333" />
         <entry key="..\:/Users/Aliam/AndroidStudioProjects/quickWash/app/src/main/res/layout/admin_page.xml" value="0.25052083333333336" />
+        <entry key="..\:/Users/Aliam/AndroidStudioProjects/quickWash/app/src/main/res/layout/admin_profile.xml" value="0.2" />
         <entry key="..\:/Users/Aliam/AndroidStudioProjects/quickWash/app/src/main/res/layout/app_bar_side_menu.xml" value="0.176" />
         <entry key="..\:/Users/Aliam/AndroidStudioProjects/quickWash/app/src/main/res/layout/content_home.xml" value="0.25416666666666665" />
         <entry key="..\:/Users/Aliam/AndroidStudioProjects/quickWash/app/src/main/res/layout/content_side_menu.xml" value="0.25416666666666665" />
@@ -42,6 +44,7 @@
         <entry key="..\:/Users/Aliam/AndroidStudioProjects/quickWash/app/src/main/res/layout/nav_header_side_menu.xml" value="0.25416666666666665" />
         <entry key="..\:/Users/Aliam/AndroidStudioProjects/quickWash/app/src/main/res/layout/register.xml" value="0.4" />
         <entry key="..\:/Users/Aliam/AndroidStudioProjects/quickWash/app/src/main/res/layout/register_user.xml" value="0.2" />
+        <entry key="..\:/Users/Aliam/AndroidStudioProjects/quickWash/app/src/main/res/layout/user_profile.xml" value="0.25416666666666665" />
         <entry key="..\:/Users/Aliam/AndroidStudioProjects/quickWash/app/src/main/res/menu/activity_main_drawer.xml" value="0.6" />
         <entry key="..\:/Users/Aliam/AndroidStudioProjects/quickWash/app/src/main/res/menu/main_menu.xml" value="0.25416666666666665" />
         <entry key="..\:/Users/Aliam/AndroidStudioProjects/quickWash/app/src/main/res/menu/menu_admin.xml" value="0.25416666666666665" />

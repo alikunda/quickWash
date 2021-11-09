@@ -29,6 +29,7 @@ public class adminPage extends AppCompatActivity {
         getMenuInflater().inflate(R.menu.menu_admin, menu);
         return true;
     }
+
     @Override
     public boolean onOptionsItemSelected(MenuItem item) {
         int id = item.getItemId();
@@ -39,6 +40,16 @@ public class adminPage extends AppCompatActivity {
             this.startActivity(deleteIntent);
             return true;
         }
+        else if(id ==R.id.action_Profile){
+            Intent profile = new Intent(this,ProfileActivity.class);
+            this.startActivity(profile);
+            return true;
+        }
+        else if(id ==R.id.action_customer){
+            Intent profile = new Intent(this,display_customers.class);
+            this.startActivity(profile);
+            return true;
+        }
 
         return super.onOptionsItemSelected(item);
     }
@@ -46,5 +57,6 @@ public class adminPage extends AppCompatActivity {
         Intent myIntent = new Intent(this, MainActivity.class);
         startActivity(myIntent);
     }
+
 
 }

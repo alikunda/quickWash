@@ -40,6 +40,12 @@ public class User {
         return id;
     }
 
+    public String getFname(){
+        return fname;
+    }
+    public String getLname(){
+        return lname;
+    }
     public String getName(){
         return fname+" "+lname;
     }
