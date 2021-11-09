@@ -14,20 +14,16 @@
         android:textSize="40dp"
         android:paddingLeft="25dp"
         android:fontFamily="cursive"
-        android:layout_alignParentTop="true"></TextView>
+        android:layout_alignParentTop="true" />
 
-
-    <TextView
-        android:id="@+id/text_home"
-        android:layout_width="match_parent"
+    <pl.droidsonroids.gif.GifImageView
+        android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:layout_marginStart="8dp"
-        android:layout_marginTop="8dp"
-        android:layout_marginEnd="8dp"
-        android:textAlignment="center"
-        android:textSize="20sp"
-        app:layout_constraintBottom_toBottomOf="parent"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toTopOf="parent" />
+        android:background="#fff"
+        android:foregroundGravity="center"
+        android:src="@drawable/quickwash_logo_gif_for_use"
+        tools:ignore="MissingConstraints"
+        android:layout_marginTop="@dimen/fab_margin"/>
+
+
 </androidx.constraintlayout.widget.ConstraintLayout>

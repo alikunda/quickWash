@@ -2,25 +2,24 @@ package com.example.quickwash.Garment;
 
 import java.text.DecimalFormat;
 
-public class Garment extends GarmentType {
-    private int id;
+public class Garment implements CleaningMethod {
+    //private int id;
+    private String garmentName;
     private double price;
     private GarmentType garmentType;
-    private String owner;
+
+    private boolean Laundry;
+    private boolean dryClean;
+    private boolean pressOnly;
+
+    private boolean ready;
+
+    //private String owner;
 
     public final DecimalFormat MONEY = new DecimalFormat("$#,##0.00");
 
-    public Garment(int newId, GarmentType garmentType, int newPrice, String newOwner) {
-        setId(newId);
-        setGarmentType(garmentType);
-        setPrice(newPrice);
-        setOwner(newOwner);
-    }
-
-    //public Garment()
-
-    public void setId(int newId) {
-        id = newId;
+    public Garment() {
+        price = this.getPrice();
     }
 
     public void setPrice(double newPrice) {
@@ -28,32 +27,59 @@ public class Garment extends GarmentType {
             price = newPrice;
     }
 
-    public void setOwner(String newOwner) {
-        owner = newOwner;
-    }
-
-    public int getId() {
-        return id;
-    }
-
     public double getPrice() {
         return price;
     }
 
-    public String getOwner() {
-        return owner;
-    }
-
-    public void setGarmentType(GarmentType garmentType) {
-        this.garmentType = garmentType;
-    }
 
     public GarmentType getGarmentType() {
         return garmentType;
     }
 
-    public String toString() {
-        return (owner + "'s " + garmentType + ": " + MONEY.format(price));
+
+    public String getGarmentName() {
+        return garmentName;
+    }
+
+    public void setGarmentName(String garmentName) {
+        this.garmentName = this.garmentType.toString();
+    }
+
+
+
+
+    @Override
+    public void noStarch() {
+    }
+
+    @Override
+    public void lightStarch() {
+
+    }
+
+    @Override
+    public void mediumStarch() {
+
+    }
+
+    @Override
+    public void heavyStarch() {
+
+    }
+
+    @Override
+    public void DC() {
+
+    }
+
+    @Override
+    public void pressOnly() {
+
+    }
+
+    @Override
+    public String getCleaningMethod() {
+        return null;
     }
 }
 
