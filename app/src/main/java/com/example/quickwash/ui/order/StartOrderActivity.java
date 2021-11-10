@@ -36,17 +36,40 @@ public class StartOrderActivity extends AppCompatActivity  {
 
 
         TextInputLayout textInputLayout = findViewById(R.id.garment_type_dropdown);
-        AutoCompleteTextView autoCompleteTextView = findViewById(R.id.garment_type_items);
+        AutoCompleteTextView garmentTV = findViewById(R.id.garment_type_items);
 
         String [] garmentTypes = getResources().getStringArray(R.array.garment_type);
         ArrayAdapter<String> arrayAdapter = new ArrayAdapter<>(StartOrderActivity.this,
                 R.layout.dropdown_item, garmentTypes);
-        autoCompleteTextView.setAdapter(arrayAdapter);
+        garmentTV.setAdapter(arrayAdapter);
         /*
         List<String> garmentTypes = Arrays.asList(getResources().getStringArray(R.array.garment_type));
         ArrayAdapter<String> arrayAdapter = new ArrayAdapter<String>(StartOrderActivity.this,
                 R.layout.dropdown_item, garmentTypes);
         arrayAdapter.setDropDownViewResource(R.layout);*/
+
+        //radio buttons dynamically rendered
+
+        //String garmentTypeString = garmentTV.getText().toString();
+
+
+    }
+
+
+    public void updateView() {
+
+        AutoCompleteTextView garmentTV = findViewById(R.id.garment_type_items);
+        garmentTV.clearListSelection();
+
+        EditText quantityET = findViewById(R.id.garment_quantity_ET);
+        quantityET.setText("1");
+
+        //radio group
+        RadioGroup cleaningMethodRG = findViewById(R.id.radio_cleaning_method);
+        cleaningMethodRG.clearCheck();
+
+
+
 
     }
 
@@ -77,6 +100,8 @@ public class StartOrderActivity extends AppCompatActivity  {
 
         Toast.makeText(this,  quantity + " " + garmentTypeString + ":  " +
                 cleaningMethodString + " added to order", Toast.LENGTH_LONG).show();
+
+        updateView();
 
     }
 
