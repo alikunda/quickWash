@@ -2,9 +2,12 @@ package com.example.quickwash;
 
 import androidx.appcompat.app.AppCompatActivity;
 
+import android.app.AlertDialog;
+import android.content.DialogInterface;
 import android.content.Intent;
 import android.content.SharedPreferences;
 import android.os.Bundle;
+import android.util.Log;
 import android.view.View;
 import android.widget.EditText;
 import android.widget.RadioButton;
@@ -25,59 +28,114 @@ public class MainActivity extends AppCompatActivity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
         dbManager = new DatabaseManager(this);
-    }
-        public void checkUser(View v){
-        //username
-            EditText userName = findViewById(R.id.user_name);
-            String UserNameString = userName.getText().toString();
+        boolean adminCheck = dbManager.checkIfAdminExist();  //*******//
+        if(!adminCheck){ //*******//
+            dbManager.insertUserManually("admin@admin.com","admin","owner","admin","admin","owner");
 
+            Toast.makeText(this, "admin created",Toast.LENGTH_LONG).show();  //*******//
+            Log.w("testing main activity","****Created"); //*******//
+        }
+    }
+    public void checkUser(View v){
+        //username
+        EditText userName = findViewById(R.id.user_name);
+        String UserNameString = userName.getText().toString();
 
         //password
-            EditText password = findViewById(R.id.password);
-            String passwordString = password.getText().toString();
+        EditText password = findViewById(R.id.password);
+        String passwordString = password.getText().toString();
         //user type
 
-            RadioGroup userTypeRG = findViewById(R.id.radioUserTypeHome);
-            RadioButton rb;
-            int radioId = userTypeRG.getCheckedRadioButtonId();
-            rb = findViewById(radioId);
+        RadioGroup userTypeRG = findViewById(R.id.radioUserTypeHome);
+        RadioButton rb;
+        int radioId = userTypeRG.getCheckedRadioButtonId();
+        rb = findViewById(radioId);
 
+        Log.w("MainActivity.java","*****:"+UserNameString+"  "+passwordString);
+        String adminStatus = dbManager.checkStat(UserNameString);
             /*
             EditText userType = findViewById(R.id.user_type);
             String userTypeString = userType.getText().toString();*/
-
-            if(UserNameString.equalsIgnoreCase(" ") || passwordString.equalsIgnoreCase(" ")){
-                Toast.makeText(this, "Fields are empty",Toast.LENGTH_LONG).show();
-            }else {
-             myUser = new User(0, UserNameString, passwordString,rb.getText().toString());
+        if(UserNameString.isEmpty()|| passwordString.isEmpty()){
+            Toast.makeText(this, "Fields are empty",Toast.LENGTH_LONG).show();
+        }
+//            else if(UserNameString !="admin@admin.com" && rb.getText().toString().equals("Admin")){ //*******//
+//                Toast.makeText(this, "Access denied!\nApproval pending.",Toast.LENGTH_LONG).show(); //*******//
+//                Log.w("admin caps","*****"+rb.getText().toString()); //*******//
+//            }
+        else{
+            boolean isDenied = dbManager.deniedEmail(UserNameString);
+            myUser = new User(0, UserNameString, passwordString,rb.getText().toString());
             String uType = dbManager.checkingUser(UserNameString, passwordString, rb.getText().toString() ); //check user auth
+            if(uType.equalsIgnoreCase("success")) {
+                String fname = dbManager.fName(UserNameString);
+                myUser.setFname(fname);
+                String lname = dbManager.lName(UserNameString);
+                myUser.setLname(lname);
+                if(isDenied){
 
-
-
-                if(uType.equalsIgnoreCase("success")) {
-                    String fname = dbManager.fName(UserNameString);
-                    myUser.setFname(fname);
-                    String lname = dbManager.lName(UserNameString);
-                    myUser.setLname(lname);
-                    Toast.makeText(this, "Success", Toast.LENGTH_LONG).show();
-                       homePage(rb.getText().toString(),myUser);
-                       userName.setText("");
-                       password.setText("");
-                       userTypeRG.clearCheck();
+                }else {
 
                 }
-                else{
+                homePage(rb.getText().toString(),myUser);
+                userName.setText("");
+                password.setText("");
+            }
+            else{
+                boolean checkTemp = dbManager.doesexist(myUser.getEmail());
+                if(checkTemp == false){
+                    AlertDialog.Builder builder1 = new AlertDialog.Builder(this);
+                    builder1.setMessage("Account does not exists!\nDo you want to register?");
+                    builder1.setCancelable(true);
+
+                    builder1.setPositiveButton(
+                            "Yes",
+                            new DialogInterface.OnClickListener() {
+                                public void onClick(DialogInterface dialog, int id) {
+                                    Intent myIntent = new Intent(MainActivity.this, register.class);
+                                    startActivity(myIntent);
+                                    finish();
+                                }
+                            });
+
+                    builder1.setNegativeButton(
+                            "No",
+                            new DialogInterface.OnClickListener() {
+                                public void onClick(DialogInterface dialog, int id) {
+                                    dialog.cancel();
+                                }
+                            });
+
+                    AlertDialog alert11 = builder1.create();
+                    alert11.show();
+                }
+                else {
                     Toast.makeText(this, "Wrong credentials", Toast.LENGTH_LONG).show();
                 }
             }
         }
+    }
 
 
-        public void homePage(String userType, User myUser) {
+    public void homePage(String userType, User myUser) {
         if(userType.equalsIgnoreCase("admin")){
-            Intent myIntent = new Intent(this, adminPage.class);
-            startActivity(myIntent);
-           // this.finish();
+
+            if(myUser.getEmail().equals("admin@admin.com")){
+                Intent myIntent = new Intent(this, adminPage.class);
+                startActivity(myIntent);
+                this.finish();
+            }
+            else {
+                boolean temp = dbManager.deniedEmail(myUser.getEmail());
+                Log.w("this", "^^^^^^^" + temp + " d");
+                if (temp) {
+                    Toast.makeText(this, "Approval Pending!", Toast.LENGTH_LONG).show();
+                } else {
+                    Intent myIntent = new Intent(this, adminPage.class);
+                    startActivity(myIntent);
+                    this.finish();
+                }
+            }
         }
         else {
             Intent myIntent = new Intent(this, side_menu.class);
@@ -87,24 +145,24 @@ public class MainActivity extends AppCompatActivity {
             //this.finish();
         }
     }
-        public void registerPage(View view){
+    public void registerPage(View view){
 
         startActivity(new Intent(this, register.class));
 
-        }
+    }
 
-        public void reset(View view){
-            //username
-            EditText userName = findViewById(R.id.user_name);
-            userName.setText("");
+    public void reset(View view){
+        //username
+        EditText userName = findViewById(R.id.user_name);
+        userName.setText("");
 
-            //password
-            EditText password = findViewById(R.id.password);
-            password.setText("");
-            RadioButton userTypeRG = findViewById(R.id.userButton);
-            userTypeRG.setChecked(true);
+        //password
+        EditText password = findViewById(R.id.password);
+        password.setText("");
+        RadioButton userTypeRG = findViewById(R.id.userButton);
+        userTypeRG.setChecked(true);
 
-            Toast.makeText(this, "Fields are cleared",Toast.LENGTH_SHORT).show(); //show toast message when fields are clears
-        }
+        Toast.makeText(this, "Fields are cleared",Toast.LENGTH_SHORT).show(); //show toast message when fields are clears
+    }
 
 }

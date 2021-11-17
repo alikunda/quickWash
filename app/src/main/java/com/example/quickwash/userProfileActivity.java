@@ -1,6 +1,7 @@
 package com.example.quickwash;
 
 
+import android.content.DialogInterface;
 import android.content.Intent;
 import android.database.sqlite.SQLiteDatabase;
 import android.graphics.Color;
@@ -16,6 +17,8 @@ import android.widget.GridLayout;
 import android.widget.ScrollView;
 import android.widget.TextView;
 import android.widget.Toast;
+
+import androidx.appcompat.app.AlertDialog;
 import androidx.appcompat.app.AppCompatActivity;
 import java.util.ArrayList;
 
@@ -81,21 +84,42 @@ public class userProfileActivity extends AppCompatActivity {
                 if(passwordET.length()<8){
                     Toast.makeText(userProfileActivity.this,"Password must be atleast 8 characters",Toast.LENGTH_LONG).show();
                 }else {
+                    AlertDialog.Builder builder1 = new AlertDialog.Builder(userProfileActivity.this);
+                    builder1.setMessage("Are you sure you want to change the information?");
+                    builder1.setCancelable(true);
 
-                    // update candy in database
-                    try {
-                        dbManager.updateByIdAdmin(fname, lname, MainActivity.myUser.getEmail(), password);
-                        MainActivity.myUser.setFname(fname);
-                        MainActivity.myUser.setLname(lname);
-                        MainActivity.myUser.setPassword(password);
+                    builder1.setPositiveButton(
+                            "Yes",
+                            new DialogInterface.OnClickListener() {
+                                public void onClick(DialogInterface dialog, int id) {
+                                    try {
+                                        dbManager.updateByIdAdmin(fname, lname, MainActivity.myUser.getEmail(), password);
+                                        MainActivity.myUser.setFname(fname);
+                                        MainActivity.myUser.setLname(lname);
+                                        MainActivity.myUser.setPassword(password);
 
-                        Toast.makeText(userProfileActivity.this, "Credentials updated", Toast.LENGTH_LONG).show();
-                        updateView();
-                        // update screen
+                                        Toast.makeText(userProfileActivity.this, "Credentials updated", Toast.LENGTH_LONG).show();
+                                        updateView();
+                                        // update screen
 
-                    } catch (NumberFormatException nfe) {
-                        Toast.makeText(userProfileActivity.this, " Error! Something went wrong", Toast.LENGTH_LONG).show();
-                    }
+                                    } catch (NumberFormatException nfe) {
+                                        Toast.makeText(userProfileActivity.this, " Error! Something went wrong", Toast.LENGTH_LONG).show();
+                                    }
+                                }
+                            });
+
+                    builder1.setNegativeButton(
+                            "No",
+                            new DialogInterface.OnClickListener() {
+                                public void onClick(DialogInterface dialog, int id) {
+                                    dialog.cancel();
+                                }
+                            });
+
+                    AlertDialog alert11 = builder1.create();
+                    alert11.show();
+
+
                 }
 
             }

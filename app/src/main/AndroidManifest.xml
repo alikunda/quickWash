@@ -24,16 +24,28 @@
                 <category android:name="android.intent.category.LAUNCHER" />
             </intent-filter>
         </activity>
-        <activity android:name=".adminPage" />
-        <activity android:name=".register" />
+        <activity android:name=".adminPage"
+            android:label="Admin "/>
+        <activity android:name=".register"
+            android:label="User registration"/>
         <activity android:name=".home" />
-        <activity android:name=".DeleteActivity" />
-        <activity android:name=".ui.order.StartOrderActivity" />
-        <activity android:name=".ProfileActivity"></activity>
-        <activity android:name=".userProfileActivity"></activity>
-        <activity android:name=".display_customers"></activity>
-
-
+        <activity android:name=".DeleteActivity"
+            android:label="Delete users"/>
+        <activity android:name=".ui.order.StartOrderActivity"
+            android:parentActivityName=".side_menu"/>
+        <activity android:name=".ProfileActivity"
+            android:label="Profile"
+            android:parentActivityName=".adminPage"></activity>
+        <activity android:name=".userProfileActivity"
+            android:label="Profile"></activity>
+        <activity android:name=".display_customers"
+            android:label="Display customer"
+            android:parentActivityName=".adminPage"></activity>
+        <activity android:name=".OwnerAdmin"
+            android:label="Admins"
+            android:parentActivityName=".adminPage"></activity>
+        <activity android:name=".displayAllAdmins"
+            android:label="Admins" android:parentActivityName=".adminPage"></activity>
     </application>
 
 </manifest>

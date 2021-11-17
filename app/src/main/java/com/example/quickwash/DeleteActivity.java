@@ -1,5 +1,8 @@
 package com.example.quickwash;
 
+import android.app.AlertDialog;
+import android.content.DialogInterface;
+import android.content.Intent;
 import android.os.Bundle;
 import android.view.View;
 import android.widget.Button;
@@ -77,11 +80,33 @@ public class DeleteActivity extends AppCompatActivity {
 
     private class RadioButtonHandler implements RadioGroup.OnCheckedChangeListener {
         public void onCheckedChanged(RadioGroup group, int checkedId) {
-            //delete candy from database
-            dbManager.deleteById(checkedId);
-            Toast.makeText(DeleteActivity.this, "User Deleted", Toast.LENGTH_SHORT).show();
+            AlertDialog.Builder builder1 = new AlertDialog.Builder(DeleteActivity.this);
+            builder1.setMessage("Are you Sure you want to delete user?");
+            builder1.setCancelable(true);
 
-            updateView();
+            builder1.setPositiveButton(
+                    "Yes",
+                    new DialogInterface.OnClickListener() {
+                        public void onClick(DialogInterface dialog, int id) {
+                            //delete candy from database
+                            dbManager.deleteById(checkedId);
+                            Toast.makeText(DeleteActivity.this, "User Deleted", Toast.LENGTH_SHORT).show();
+
+                            updateView();
+                        }
+                    });
+
+            builder1.setNegativeButton(
+                    "No",
+                    new DialogInterface.OnClickListener() {
+                        public void onClick(DialogInterface dialog, int id) {
+                            dialog.cancel();
+                        }
+                    });
+
+            AlertDialog alert11 = builder1.create();
+            alert11.show();
+
 
 
         }

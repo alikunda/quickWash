@@ -15,7 +15,7 @@
         <EditText
             android:id="@+id/name_holder"
             android:layout_width="390dp"
-            android:layout_height="50dp"
+            android:layout_height="55dp"
             android:layout_marginLeft="9dp"
             android:layout_marginTop="40dp"
             android:layout_marginRight="12dp"
@@ -31,10 +31,10 @@
         <EditText
             android:id="@+id/account_number"
             android:layout_width="390dp"
-            android:layout_height="50dp"
+            android:layout_height="55dp"
             android:layout_marginLeft="9dp"
             android:layout_marginTop="20dp"
-            android:layout_marginRight="9dp"
+            android:layout_marginRight="13dp"
             android:backgroundTint="@color/red"
             android:hint="XXXX XXXX XXXX XXXX"
             android:drawableRight="@drawable/ic_creditcard_foreground"

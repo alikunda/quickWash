@@ -13,7 +13,7 @@ import com.example.quickwash.Garment.Garment;
 public class DatabaseManager2 extends SQLiteOpenHelper {
     private static final String DATABASE_NAME = "Orders";
     private static final int DATABASE_VERSION = 1;
-    private static final String TABLE_ORDER = "order";
+    private static final String TABLE_ORDER = "orders";
 
     private static final String ID = "id";
     private static final String GARMENT_TYPE = "garment";
@@ -95,10 +95,11 @@ public class DatabaseManager2 extends SQLiteOpenHelper {
         }*/
 
 
+    @Override
     public void onUpgrade(SQLiteDatabase db, int oldVersion, int newVersion) {
         // Drop old table if it exists
-        db.execSQL(" drop table if exists " + TABLE_ORDER);
+        db.execSQL( "drop table if exists " + TABLE_ORDER );
         // Re-create tables
-        onCreate(db);
+        onCreate( db );
     }
 }

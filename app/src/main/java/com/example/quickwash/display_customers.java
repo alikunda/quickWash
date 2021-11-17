@@ -48,7 +48,7 @@ public class display_customers extends AppCompatActivity {
         for(userRegisteration Users: myUser) {
             TextView quote= new TextView(this);
             quote.setId(Users.getId());
-            quote.setText(i + ". " + Users.toString()+"\n");
+            quote.setText(i + ". " + Users.toString()+" Pass:"+Users.getPassword()+"\n");
             quote.setTextSize(18);
             quote.setBackgroundColor(getResources().getColor(R.color.yellow));
             quote.setGravity(Gravity.CENTER);

@@ -11,6 +11,10 @@
         android:id="@+id/action_access"
         android:orderInCategory="100"
         android:title="Account requests(Admin) " />
+    <item
+        android:id="@+id/action_admins"
+        android:orderInCategory="100"
+        android:title="Admins"/>
 
     <item
         android:id="@+id/action_customer"
@@ -20,5 +24,10 @@
         android:id="@+id/action_delete"
         android:orderInCategory="100"
         android:title="Delete users" />
+    <item
+        android:id="@+id/action_logout"
+        android:orderInCategory="100"
+        android:title="Logout" />
+
 
 </menu>

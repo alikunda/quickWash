@@ -60,7 +60,6 @@ public class side_menu extends AppCompatActivity {
 
 
 
-
         @SuppressLint("ResourceType") NavigationView  navigationView1 = (NavigationView) findViewById(R.layout.nav_header_side_menu);
         View header = navigationView.getHeaderView(0);
         TextView text = (TextView) header.findViewById(R.id.name);

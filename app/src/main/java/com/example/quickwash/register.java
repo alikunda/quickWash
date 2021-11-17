@@ -30,31 +30,31 @@ public class register extends AppCompatActivity {
             @Override
             public void onClick(View view) {
                 //username
-        EditText email = findViewById(R.id.email);
-        email.setText("");
-        //first name
-        EditText fname = findViewById(R.id.fname);
-        fname.setText("");
-        //last name
-        EditText lname = findViewById(R.id.lname);
-        lname.setText("");
-        //password
-        EditText password = findViewById(R.id.reg_Password);
-        password.setText("");
-        RadioButton userTypeRG = findViewById(R.id.userButton);
-        userTypeRG.setChecked(true);
-        Toast.makeText(register.this, "Fields are cleared",Toast.LENGTH_SHORT).show(); //show toast message when fields are clears
+                EditText email = findViewById(R.id.email);
+                email.setText("");
+                //first name
+                EditText fname = findViewById(R.id.fname);
+                fname.setText("");
+                //last name
+                EditText lname = findViewById(R.id.lname);
+                lname.setText("");
+                //password
+                EditText password = findViewById(R.id.reg_Password);
+                password.setText("");
+                RadioButton userTypeRG = findViewById(R.id.userButton);
+                userTypeRG.setChecked(true);
+                Toast.makeText(register.this, "Fields are cleared",Toast.LENGTH_SHORT).show(); //show toast message when fields are clears
             }
         });
     }
-/**
-    public void checkUserType(View v){
-        int radioId = userTypeRG.getCheckedRadioButtonId();
-        rb = findViewById(radioId);
+    /**
+     public void checkUserType(View v){
+     int radioId = userTypeRG.getCheckedRadioButtonId();
+     rb = findViewById(radioId);
 
-        Toast.makeText(this, "Selected: " + rb.getText(), Toast.LENGTH_LONG).show();
+     Toast.makeText(this, "Selected: " + rb.getText(), Toast.LENGTH_LONG).show();
 
-    }*/
+     }*/
 
     public void submit(View v) {
 
@@ -74,14 +74,10 @@ public class register extends AppCompatActivity {
         EditText password = findViewById(R.id.reg_Password);
         String passwordString = password.getText().toString();
 
-
-
         RadioGroup userTypeRG = findViewById(R.id.radioUserTypeReg);
         RadioButton rb;
-
         int radioId = userTypeRG.getCheckedRadioButtonId();
         rb = findViewById(radioId);
-
 
         //EditText user = findViewById(R.id.userType);
         //String UserString  = user.getText().toString();
@@ -102,8 +98,15 @@ public class register extends AppCompatActivity {
                     if (checkUser) {
                         Toast.makeText(this, emailString + " Already exists ", Toast.LENGTH_LONG).show();
                     } else {
-                        dbManager.insertUser(myUserRegisteration);
-                        Toast.makeText(this, "Selected: " + rb.getText() + " & " + emailString + " has been registered ", Toast.LENGTH_LONG).show();
+
+                        if(myUserRegisteration.getUserType().equals("admin")||myUserRegisteration.getUserType().equals("Admin")){ //*******//
+                            dbManager.insertUserv2(myUserRegisteration, "denied"); //*******//
+                            Toast.makeText(this, "Account requested!", Toast.LENGTH_LONG).show(); //*******//
+                        }
+                        else {
+                            dbManager.insertUser(myUserRegisteration); //*******//
+                            Toast.makeText(this, "Account has been registered!", Toast.LENGTH_LONG).show();
+                        }
                         email.setText("");
                         fname.setText("");
                         lname.setText("");
@@ -117,11 +120,9 @@ public class register extends AppCompatActivity {
                     Toast.makeText(this, " Invalid Email! ", Toast.LENGTH_LONG).show();
                 }
             }
-            } else{
-                Toast.makeText(this, " Invalid user type, try again ", Toast.LENGTH_LONG).show();
-            }
-
-
+        } else{
+            Toast.makeText(this, " Invalid user type, try again ", Toast.LENGTH_LONG).show();
+        }
     }
     private boolean isValidEmailId(String email){
 
