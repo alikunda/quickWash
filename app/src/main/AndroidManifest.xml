@@ -32,7 +32,8 @@
         <activity android:name=".DeleteActivity"
             android:label="Delete users"/>
         <activity android:name=".ui.order.StartOrderActivity"
-            android:parentActivityName=".side_menu"/>
+            android:parentActivityName=".side_menu"
+            android:label="Start new order"/>
         <activity android:name=".ProfileActivity"
             android:label="Profile"
             android:parentActivityName=".adminPage"></activity>
@@ -41,11 +42,13 @@
         <activity android:name=".display_customers"
             android:label="Display customer"
             android:parentActivityName=".adminPage"></activity>
-        <activity android:name=".OwnerAdmin"
+        <activity android:name=".adminAcPermission"
             android:label="Admins"
             android:parentActivityName=".adminPage"></activity>
         <activity android:name=".displayAllAdmins"
             android:label="Admins" android:parentActivityName=".adminPage"></activity>
+        <activity android:name=".Owner_admin"
+            android:label="Complete access accounts list" android:parentActivityName=".adminPage"></activity>
     </application>
 
 </manifest>

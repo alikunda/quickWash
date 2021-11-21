@@ -10,9 +10,10 @@
         android:textAlignment="center"
         android:textSize="40dp"
         android:fontFamily="monospace"></TextView>
-    <TableRow>
-        android:layout_width="wrap_content"
+    <TableRow   android:layout_width="wrap_content"
         android:layout_height="wrap_content"
+        android:layout_gravity="center">
+
         <TextView android:text="User Name" android:padding="10dip"
             android:layout_marginTop="25dip"
             android:layout_marginLeft="47dp"/>
@@ -24,11 +25,12 @@
             android:hint="example@gmail.com"
             android:inputType="textEmailAddress"
             android:layout_marginTop="25dip"/>
-
     </TableRow>
-    <TableRow>
-        android:layout_width="wrap_content"
+
+    <TableRow android:layout_width="wrap_content"
         android:layout_height="wrap_content"
+        android:layout_gravity="center">
+
         <TextView android:text="First Name"
             android:padding="10dip"
             android:layout_marginLeft="47dp"/>
@@ -38,9 +40,10 @@
             android:autoSizeTextType="uniform"
             android:hint="John" />
     </TableRow>
-    <TableRow>
-        android:layout_width="wrap_content"
+    <TableRow  android:layout_width="wrap_content"
         android:layout_height="wrap_content"
+        android:layout_gravity="center">
+
         <TextView android:text="Last Name"
             android:padding="10dip"
             android:layout_marginLeft="47dp"/>
@@ -49,9 +52,10 @@
             android:autoSizeTextType="uniform"
             android:hint="Smith" />
     </TableRow>
-    <TableRow>
-        android:layout_width="wrap_content"
+    <TableRow android:layout_width="wrap_content"
         android:layout_height="wrap_content"
+        android:layout_gravity="center">
+
         <TextView android:text="Password"
             android:padding="10dp"
             android:layout_marginLeft="47dp"/>
@@ -75,9 +79,9 @@
 
 
     </TableRow>
-    <TableRow>
-        android:layout_width="wrap_content"
+    <TableRow     android:layout_width="wrap_content"
         android:layout_height="wrap_content"
+        android:layout_gravity="center">
         <TextView android:text="User Type"
             android:padding="10dip"
             android:layout_marginLeft="55dp"/>
@@ -143,6 +147,7 @@
     <TextView android:text="NOTE: Admins accounts need approval.It may take 2-5 business days for decision. Contact xyz@gmail.com if accountapproval is still pending"
         android:layout_marginLeft="5dp"
         android:layout_marginRight="5dp"
+        android:layout_gravity="center"
         android:layout_marginTop="5dp"></TextView>
 
 

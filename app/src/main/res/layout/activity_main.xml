@@ -1,14 +1,18 @@
 <?xml version="1.0" encoding="utf-8"?>
-<TableLayout xmlns:android="http://schemas.android.com/apk/res/android" xmlns:app="http://schemas.android.com/apk/res-auto" xmlns:tools="http://schemas.android.com/tools" android:layout_width="match_parent" android:layout_height="match_parent" tools:context=".MainActivity">
-    xmlns:android="http://schemas.android.com/apk/res/android"
-    xmlns:tools="http://schemas.android.com/tools"
+<ScrollView xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     tools:context=".MainActivity">
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:orientation="vertical" >
 
 
-    <RelativeLayout>
+    <RelativeLayout android:layout_width="wrap_content"
+        android:layout_height="wrap_content">
 
         <TextView
             android:layout_width="wrap_content"
@@ -31,25 +35,23 @@
             android:foregroundGravity="center"
             android:src="@drawable/quickwash_logo_gif_for_use" />
     </RelativeLayout>
-    <TableRow>
-        android:layout_width="wrap_content"
+    <TableRow android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-
+        android:layout_gravity="center">
         <TextView android:text="User name"
             android:padding="10dip"
-            android:layout_marginTop="15dp"
-            android:layout_marginLeft="45dip"/>
+            android:layout_marginTop="15dp" />
 
         <EditText
             android:id="@+id/user_name"
             android:layout_width="220dp"
             android:layout_marginTop="15dp"
             android:autoSizeTextType="uniform"
-            android:hint="example@gmail.com"
-            />
+            android:hint="example@gmail.com"></EditText>
 
     </TableRow>
-<TableLayout>
+<TableLayout android:layout_width="match_parent"
+    android:layout_height="match_parent">
     <TableRow
         android:layout_width="320dp"
         android:layout_height="33dp">
@@ -80,9 +82,10 @@
     </TableRow>
 
     </TableLayout>
-    <TableRow>
-        android:layout_width="wrap_content"
+    <TableRow  android:layout_width="wrap_content"
         android:layout_height="wrap_content"
+        android:layout_gravity="center">
+
         <TextView android:text="User Type"
             android:padding="10dip"
             android:layout_marginLeft="45dip"/>
@@ -104,27 +107,28 @@
         </RadioGroup>
     </TableRow>
     <Button
+        android:layout_height="match_parent"
+        android:layout_width="220dp"
         android:layout_column="1"
-        android:layout_marginLeft="80dip"
-        android:layout_marginRight="80dp"
+        android:layout_gravity="center"
         android:onClick="checkUser"
         android:text="Sign in" />
-    <TableRow/>
+
 
     <Button
+        android:layout_height="wrap_content"
         android:id="@+id/register"
-        android:layout_width="96dp"
-        android:layout_marginLeft="80dip"
-        android:layout_marginRight="80dp"
+        android:layout_width="220dp"
+        android:layout_gravity="center"
         android:layout_column="1"
         android:onClick="registerPage"
         android:text="New user? click here" />
 
     <Button
+        android:layout_height="match_parent"
         android:id="@+id/reset"
-        android:layout_width="96dp"
-        android:layout_marginLeft="80dip"
-        android:layout_marginRight="80dp"
+        android:layout_width="220dp"
+        android:layout_gravity="center"
         android:onClick="reset"
         android:layout_column="1"
         android:text="Reset"
@@ -132,6 +136,5 @@
         <!--android:onClick="reset"-->
 
 
-
-
-    </TableLayout>
+</LinearLayout>>
+    </ScrollView>

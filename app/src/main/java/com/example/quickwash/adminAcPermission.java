@@ -3,19 +3,13 @@ package com.example.quickwash;
 import android.content.Intent;
 import android.graphics.Point;
 import android.os.Bundle;
-import android.print.PrintAttributes;
-import android.text.InputType;
-import android.util.Log;
 import android.view.Gravity;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.Button;
-import android.widget.EditText;
 import android.widget.GridLayout;
 import android.widget.LinearLayout;
-import android.widget.RelativeLayout;
 import android.widget.ScrollView;
-import android.widget.TableLayout;
 import android.widget.TextView;
 import android.widget.Toast;
 
@@ -23,7 +17,7 @@ import androidx.appcompat.app.AppCompatActivity;
 
 import java.util.ArrayList;
 
-public class OwnerAdmin extends AppCompatActivity {
+public class adminAcPermission extends AppCompatActivity {
     private DatabaseManager dbManager;
     public static User myUser;
     int i = 1;
@@ -50,7 +44,7 @@ public class OwnerAdmin extends AppCompatActivity {
             // Use gridLayout
             GridLayout grid = new GridLayout(this);
             // set columns and rows
-            grid.setRowCount(myUserRegisterations.size());
+            grid.setRowCount(myUserRegisterations.size()+1);
             grid.setColumnCount(4);
 
 
@@ -67,11 +61,35 @@ public class OwnerAdmin extends AppCompatActivity {
            // ButtonHandler approveBtn = new ButtonHandler();
            // ButtonHandler1 rejectBtn = new ButtonHandler1();
 
+
+            TextView id  = new TextView(this);
+            id.setGravity(Gravity.CENTER);
+            id.setText(" ");
+            id.setTextSize(20);
+            TextView id1  = new TextView(this);
+            id1.setGravity(Gravity.CENTER);
+            id1.setText(" ");
+            TextView id2  = new TextView(this);
+            id2.setGravity(Gravity.CENTER);
+            id2.setText(" ");
+
+            TextView emailOwner = new TextView(this);
+            emailOwner.setText("Email");
+            emailOwner.setTextColor(getResources().getColor(R.color.red));
+            emailOwner.setTextSize(20);
             // retrieve width of screen
             Point size = new Point();
             getWindowManager().getDefaultDisplay().getSize(size);
             int width = size.x;
             int i = 0;
+
+            grid.addView(id, (int) (width * 0.10), ViewGroup.LayoutParams.WRAP_CONTENT);
+            grid.addView(emailOwner, (int) (width * 0.35),
+                    ViewGroup.LayoutParams.WRAP_CONTENT);
+            grid.addView(id1, (int) (width * 0.10),
+                    ViewGroup.LayoutParams.WRAP_CONTENT);
+            grid.addView(id2, (int) (width * 0.10),
+                    ViewGroup.LayoutParams.WRAP_CONTENT);
 
             for (userRegisteration myUser : myUserRegisterations) {
 
@@ -104,11 +122,11 @@ public class OwnerAdmin extends AppCompatActivity {
 
                         // add the elements to grid
                         grid.addView(ids[i], width / 15, ViewGroup.LayoutParams.WRAP_CONTENT);
-                grid.addView(emails[i], (int) (width * 0.5),
+                grid.addView(emails[i], (int) (width * 0.35),
                         ViewGroup.LayoutParams.WRAP_CONTENT);
                 grid.addView(approve[i], (int) (width * 0.20),
                         ViewGroup.LayoutParams.WRAP_CONTENT);
-                grid.addView(reject[i], (int) (width * 0.20),
+                grid.addView(reject[i], (int) (width * 0.15),
                         ViewGroup.LayoutParams.WRAP_CONTENT);
 
                 grid.setPadding(1,30,1,90);
@@ -119,9 +137,9 @@ public class OwnerAdmin extends AppCompatActivity {
                     public void onClick(View view) {
                         dbManager.requestAdminAC(myUser.getEmail(),"approve");
                         updateView();
-                        Toast.makeText(OwnerAdmin.this, "Account Approved",Toast.LENGTH_LONG).show();
+                        Toast.makeText(adminAcPermission.this, "Account Approved",Toast.LENGTH_LONG).show();
                         if(myUserRegisterations.isEmpty()){
-                            Intent myIntent = new Intent(OwnerAdmin.this, adminPage.class);
+                            Intent myIntent = new Intent(adminAcPermission.this, adminPage.class);
                             startActivity(myIntent);
                         }
                     }
@@ -133,9 +151,9 @@ public class OwnerAdmin extends AppCompatActivity {
                     public void onClick(View view) {
                     dbManager.deleteAdminByAdmin(myUser.getEmail());
                     updateView();
-                        Toast.makeText(OwnerAdmin.this, "Account rejected and deleted",Toast.LENGTH_LONG).show();
+                        Toast.makeText(adminAcPermission.this, "Account rejected and deleted",Toast.LENGTH_LONG).show();
                         if(myUserRegisterations.isEmpty()){
-                                    Intent myIntent = new Intent(OwnerAdmin.this, adminPage.class);
+                                    Intent myIntent = new Intent(adminAcPermission.this, adminPage.class);
                                     startActivity(myIntent);
                             }
                         }

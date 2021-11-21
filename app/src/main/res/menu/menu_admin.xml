@@ -25,6 +25,10 @@
         android:orderInCategory="100"
         android:title="Delete users" />
     <item
+        android:id="@+id/action_owner_access_list"
+        android:orderInCategory="100"
+        android:title="List of complete access users" />
+    <item
         android:id="@+id/action_logout"
         android:orderInCategory="100"
         android:title="Logout" />

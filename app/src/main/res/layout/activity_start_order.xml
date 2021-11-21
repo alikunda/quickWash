@@ -1,27 +1,40 @@
 <?xml version="1.0" encoding="utf-8"?>
-<TableLayout xmlns:android="http://schemas.android.com/apk/res/android"
-    xmlns:app="http://schemas.android.com/apk/res-auto"
-    xmlns:tools="http://schemas.android.com/tools"
-    android:layout_width="match_parent"
-    android:layout_height="match_parent"
-    tools:context="ui.order.StartOrderActivity">
+    <ScrollView xmlns:android="http://schemas.android.com/apk/res/android"
+        xmlns:app="http://schemas.android.com/apk/res-auto"
+        xmlns:tools="http://schemas.android.com/tools"
+        tools:context="ui.order.StartOrderActivity"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:fillViewport="true">
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:orientation="vertical" >
 
     <RelativeLayout
         android:layout_width="match_parent"
-        android:layout_height="wrap_content">
+        android:layout_height="wrap_content"
+        android:background="@color/teal_700"
+        android:layout_marginBottom="7dp">
 
         <TextView
             android:id="@+id/order"
-            android:layout_width="wrap_content"
+            android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:layout_alignParentStart="true"
             android:layout_alignParentLeft="true"
             android:layout_alignParentTop="true"
+            android:layout_alignParentEnd="true"
+            android:layout_marginEnd="0dp"
             android:text="Start a new order"
-            android:textSize="50dip" />
+            android:textSize="50dip"
+            android:textAlignment="center"/>
     </RelativeLayout>
 
- <TableLayout android:layout_marginBottom="10dp">
+ <TableLayout
+     android:layout_height="wrap_content"
+     android:layout_width="match_parent"
+     android:layout_marginBottom="20dp">
      <TableRow
          android:layout_width="wrap_content"
          android:layout_height="match_parent">
@@ -31,13 +44,14 @@
              android:textSize="30dp"
              android:layout_width="wrap_content"
              android:layout_height="wrap_content"
-             android:text="Select Garment"/>
+             android:text="Select Garment"
+             android:layout_marginLeft="20dp"/>
 
          <com.google.android.material.textfield.TextInputLayout
              android:id="@+id/garment_type_dropdown"
-             android:layout_width="wrap_content"
+             android:layout_width="120dp"
              android:layout_height="wrap_content"
-             android:layout_marginLeft="70dp"
+             android:layout_marginLeft="40dp"
              style="@style/Widget.MaterialComponents.TextInputLayout.OutlinedBox.ExposedDropdownMenu">
              <AutoCompleteTextView
                  android:id="@+id/garment_type_items"
@@ -49,24 +63,33 @@
 
      </TableRow>
  </TableLayout>
- <TableLayout android:layout_marginBottom="10dp">
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:orientation="vertical" >
+ <TableLayout
+     android:layout_height="match_parent"
+     android:layout_width="match_parent"
+     android:layout_marginBottom="10dp">
      <TableRow
          android:layout_width="wrap_content"
-         android:layout_height="match_parent">
+         android:layout_height="match_parent"
+         android:layout_marginBottom="20dp">
 
          <TextView
              android:id="@+id/quantity_select_TV"
              android:textSize="30dp"
              android:layout_width="wrap_content"
              android:layout_height="wrap_content"
-             android:text="How Many?"/>
+             android:text="Quantity"
+             android:layout_marginLeft="20dp"/>
 
          <EditText
              android:id="@+id/garment_quantity_ET"
-             android:layout_width="70dp"
-             android:layout_height="match_parent"
-             android:layout_marginLeft="120dip"
-             android:background="@null"
+             android:layout_width="120dp"
+             android:layout_height="55dp"
+             android:layout_marginLeft="135dip"
+             android:background="@color/purple_700"
              android:inputType="number"
              android:selectAllOnFocus="true"
              android:maxLines="0"
@@ -76,26 +99,31 @@
      </TableRow>
  </TableLayout>
 
-    <TableRow>
-        <TextView
-            android:layout_width="wrap_content"
-            android:text="How do you want the garment done?"
-            android:layout_gravity="center"
-            android:gravity="center"
-            android:textAlignment="center"
-            android:textSize="20sp" />
-    </TableRow>
-<TableLayout>
-
     <TableRow
         android:layout_width="match_parent"
         android:layout_height="match_parent">
+
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="match_parent"
+            android:layout_gravity="center"
+            android:layout_marginLeft="15dp"
+            android:gravity="center"
+            android:text="How do you want the garment done?"
+            android:textAlignment="center"
+            android:textSize="20sp" />
+    </TableRow>
+
+    <TableLayout android:layout_height="match_parent"
+        android:layout_width="match_parent">
+
     <RadioGroup
         android:id="@+id/radio_cleaning_method"
-        android:orientation="horizontal"
-        android:gravity="top|center"
+        android:orientation="vertical"
+        android:gravity="top|left"
         android:layout_height="wrap_content"
-        android:paddingTop="10dip">
+        android:paddingTop="10dip"
+        android:layout_marginLeft="25dp">
             <RadioButton
                 android:id="@+id/DC"
                 android:layout_width="wrap_content"
@@ -128,19 +156,21 @@
                 android:text="Heavy"
                 android:textSize="25dip"/>
               </RadioGroup>
-        </TableRow>
+
 </TableLayout>
+
 
 
     <Button
         android:id="@+id/addOrder"
         android:layout_width="200dp"
-        android:layout_height="70dp"
+        android:layout_height="62dp"
         android:layout_marginLeft="80dp"
         android:layout_marginTop="30dp"
+        android:layout_gravity="center"
         android:onClick="addOrder"
         android:layout_marginRight="70dp"
-        android:text="Add order"
+        android:text="Add to Cart"
         android:textSize="20dp" />
 
     <Button
@@ -148,13 +178,13 @@
         android:layout_width="200dp"
         android:layout_height="70dp"
         android:layout_marginLeft="80dp"
-        android:layout_marginTop="30dp"
+        android:layout_gravity="center"
+        android:layout_marginTop="20dp"
         android:onClick="pay"
         android:layout_marginRight="70dp"
         android:text="Proceed to pay"
         android:textSize="20dp" />
-
-
-
-</TableLayout>
+    </LinearLayout>
+    </LinearLayout>
+</ScrollView>
 

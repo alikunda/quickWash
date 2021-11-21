@@ -4,7 +4,6 @@ import android.content.Intent;
 import android.os.Bundle;
 import android.view.Menu;
 import android.view.MenuItem;
-import android.view.View;
 import android.widget.Toast;
 
 import androidx.appcompat.app.AppCompatActivity;
@@ -61,7 +60,7 @@ public class adminPage extends AppCompatActivity {
         }
         else if(id == R.id.action_access) {
             if (isOwner) {
-                Intent profile = new Intent(this,OwnerAdmin.class);
+                Intent profile = new Intent(this, adminAcPermission.class);
                 this.startActivity(profile);
                 return true;
             } else{
@@ -71,6 +70,15 @@ public class adminPage extends AppCompatActivity {
         else if(id == R.id.action_admins){
             if(isOwner) {
                 Intent myIntent = new Intent(this, displayAllAdmins.class);
+                startActivity(myIntent);
+            }
+            else{
+                Toast.makeText(this, "Access denied", Toast.LENGTH_LONG).show();
+            }
+        }
+        else if(id == R.id.action_owner_access_list){
+            if(isOwner){
+                Intent myIntent = new Intent(this, Owner_admin.class);
                 startActivity(myIntent);
             }
             else{

@@ -42,7 +42,7 @@ public class displayAllAdmins extends AppCompatActivity {
             // Use gridLayout
             GridLayout grid = new GridLayout(this);
             // set columns and rows
-            grid.setRowCount(myUserRegisterations.size());
+            grid.setRowCount(myUserRegisterations.size()+1);
             grid.setColumnCount(4);
             // create arrays of components
 
@@ -57,11 +57,36 @@ public class displayAllAdmins extends AppCompatActivity {
             // ButtonHandler approveBtn = new ButtonHandler();
             // ButtonHandler1 rejectBtn = new ButtonHandler1();
 
+            TextView id  = new TextView(this);
+            id.setGravity(Gravity.CENTER);
+            id.setText("Full Name");
+
+            id.setTextColor(getResources().getColor(R.color.red));
+            id.setTextSize(20);
+            TextView id1  = new TextView(this);
+            id1.setGravity(Gravity.CENTER);
+            id1.setText(" ");
+            TextView id2  = new TextView(this);
+            id2.setGravity(Gravity.CENTER);
+            id2.setText(" ");
+
+            TextView emailOwner = new TextView(this);
+            emailOwner.setText("Email");
+            emailOwner.setTextColor(getResources().getColor(R.color.red));
+            emailOwner.setTextSize(20);
             // retrieve width of screen
             Point size = new Point();
             getWindowManager().getDefaultDisplay().getSize(size);
             int width = size.x;
             int i = 0;
+
+            grid.addView(id, (int) (width * 0.22), ViewGroup.LayoutParams.WRAP_CONTENT);
+            grid.addView(emailOwner, (int) (width * 0.35),
+                    ViewGroup.LayoutParams.WRAP_CONTENT);
+            grid.addView(id1, (int) (width * 0.15),
+                    ViewGroup.LayoutParams.WRAP_CONTENT);
+            grid.addView(id2, (int) (width * 0.15),
+                    ViewGroup.LayoutParams.WRAP_CONTENT);
             for (userRegisteration myUser : myUserRegisterations) {
 //                // create the TextView for the candy's id
 //                ids[i] = new TextView(this);
@@ -69,7 +94,7 @@ public class displayAllAdmins extends AppCompatActivity {
 //                ids[i].setText("" + (i + 1));
 
                 ids[i] = new TextView(this);
-                ids[i].setText(myUser.getfName()+""+myUser.getlName());
+                ids[i].setText("    "+myUser.getfName()+" "+myUser.getlName());
                 ids[i].setId(10 * myUser.getId());
                 //emails
                 emails[i]= new TextView(this);
@@ -89,8 +114,8 @@ public class displayAllAdmins extends AppCompatActivity {
                 reject[i].setPadding(20,20,20,20);
 
                 // add the elements to grid
-                grid.addView(ids[i], width / 10, ViewGroup.LayoutParams.WRAP_CONTENT);
-                grid.addView(emails[i], (int) (width * 0.45),
+                grid.addView(ids[i],  (int) (width * 0.15), ViewGroup.LayoutParams.WRAP_CONTENT);
+                grid.addView(emails[i], (int) (width * 0.35),
                         ViewGroup.LayoutParams.WRAP_CONTENT);
                 grid.addView(approve[i], (int) (width * 0.20),
                         ViewGroup.LayoutParams.WRAP_CONTENT);
@@ -136,57 +161,6 @@ public class displayAllAdmins extends AppCompatActivity {
         }
 
     }
-    public void updateView1() {
-        int j = 0;
 
-        // Get all candies form the db table
-        myUserRegisterations = dbManager.selectAllOwners();
-        if (myUserRegisterations.size() > 0) {
-            // create ScrollView and GridLayout
-            ScrollView scrollView = new ScrollView(this);
-            // Use gridLayout
-            GridLayout grid = new GridLayout(this);
-            // set columns and rows
-            grid.setRowCount(myUserRegisterations.size());
-            grid.setColumnCount(3);
-            // create arrays of components
-            TextView[] ids = new TextView[myUserRegisterations.size()];
-            TextView[] name = new TextView[myUserRegisterations.size()];
-            TextView[] emails = new TextView[myUserRegisterations.size()];
-
-            // retrieve width of screen
-            Point size = new Point();
-            getWindowManager().getDefaultDisplay().getSize(size);
-            int width = size.x;
-
-            for (userRegisteration myUser : myUserRegisterations) {
-
-                ids[j] = new TextView(this);
-                ids[j].setGravity(Gravity.CENTER);
-                ids[j].setText("" + (j + 1));
-
-                name[j] = new TextView(this);
-                name[j].setText(myUser.getfName()+" "+myUser.getlName());
-                name[j].setId(10 * myUser.getId());
-                //emails
-                emails[j]= new TextView(this);
-                emails[j].setText(myUser.getEmail());
-                emails[j].setId(10 * myUser.getId());
-
-
-                // add the elements to grid
-                grid.addView(ids[j], width / 15, ViewGroup.LayoutParams.WRAP_CONTENT);
-                grid.addView(name[j], (int) (width * 0.45),
-                        ViewGroup.LayoutParams.WRAP_CONTENT);
-                grid.addView(emails[j], (int) (width * 0.45),
-                        ViewGroup.LayoutParams.WRAP_CONTENT);
-
-                j++;
-            }
-            // Add views
-            scrollView.addView(grid);
-            setContentView(scrollView);
-        }
-    }
 
 }

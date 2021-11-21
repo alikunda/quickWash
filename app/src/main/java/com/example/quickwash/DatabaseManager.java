@@ -235,7 +235,7 @@ public class DatabaseManager extends SQLiteOpenHelper {
      * @return
      */
     public ArrayList<userRegisteration> selectAllApprovedAdmins(){
-        String sqlQuery = "select * from "+TABLE_LOGIN +" WHERE "+APPROVAL +" <> 'denied'"+" and "+APPROVAL +" <> 'owner'";
+        String sqlQuery = "select * from "+TABLE_LOGIN +" WHERE "+APPROVAL +" = 'approve'";
         SQLiteDatabase db = this.getWritableDatabase();
         Cursor myCursor = db.rawQuery(sqlQuery, null);
         ArrayList<userRegisteration> myUsers = new ArrayList<>();
