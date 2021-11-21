@@ -16,15 +16,21 @@
     <string name="menu_slideshow">Contact</string>
     <string name="menu_logout">Logout</string>
 
-    <string-array name="garment_type">
-        <item>Shirt</item>
-        <item>Trouser</item>
-        <item>Short</item>
-        <item>Skirt</item>
-        <item>Jean</item>
-        <item>Sweater</item>
-        <item>Suit 2pc</item>
-        <item>Suit 3pc</item>
+    <string-array name="garment_type_DC">
+        <item>Shirt - $4.59</item>
+        <item>Trouser - $4.59</item>
+        <item>Short - $4.39</item>
+        <item>Skirt - $5.39</item>
+        <item>Sweater - $6.99</item>
+        <item>Suit 2pc - $10.59</item>
+        <item>Suit 3pc - $12.59</item>
+    </string-array>
+
+
+    <string-array name="garment_type_Laundry">
+        <item>Shirt - $2.49</item>
+        <item>Trouser - $4.59</item>
+        <item>Short - $4.69</item>
     </string-array>
 
     <!-- TODO: Remove or change this placeholder text -->
