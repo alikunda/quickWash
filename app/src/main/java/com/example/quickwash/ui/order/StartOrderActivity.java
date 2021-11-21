@@ -2,8 +2,10 @@ package com.example.quickwash.ui.order;
 
 import android.os.Bundle;
 import android.view.View;
+import android.widget.AdapterView;
 import android.widget.ArrayAdapter;
 import android.widget.AutoCompleteTextView;
+import android.widget.Button;
 import android.widget.EditText;
 import android.widget.RadioButton;
 import android.widget.RadioGroup;
@@ -33,6 +35,9 @@ public class StartOrderActivity extends AppCompatActivity  {
 
         dbManager2 = new DatabaseManager2(this);
 
+        Button dryCleanButton = findViewById(R.id.dry_clean_button);
+        Button washButton = findViewById(R.id.wash_button);
+
 
 
         TextInputLayout textInputLayout = findViewById(R.id.garment_type_dropdown);
@@ -41,9 +46,42 @@ public class StartOrderActivity extends AppCompatActivity  {
         String [] garmentTypesDC = getResources().getStringArray(R.array.garment_type_DC);
         String [] garmentTypesLaundry = getResources().getStringArray(R.array.garment_type_Laundry);
 
-        ArrayAdapter<String> arrayAdapter = new ArrayAdapter<>(StartOrderActivity.this,
-                R.layout.dropdown_item, garmentTypesDC);
-        garmentTV.setAdapter(arrayAdapter);
+        dryCleanButton.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+
+
+                ArrayAdapter<String> arrayAdapter = new ArrayAdapter<>(StartOrderActivity.this,
+                        R.layout.dropdown_item, garmentTypesDC);
+                garmentTV.setAdapter(arrayAdapter);
+
+            }
+        });
+
+        washButton.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                ArrayAdapter<String> arrayAdapter = new ArrayAdapter<>(StartOrderActivity.this,
+                        R.layout.dropdown_item, garmentTypesLaundry);
+                garmentTV.setAdapter(arrayAdapter);
+            }
+        });
+
+        garmentTV.setOnItemSelectedListener(new AdapterView.OnItemSelectedListener() {
+            @Override
+            public void onItemSelected(AdapterView<?> adapterView, View view, int i, long l) {
+                Toast.makeText(StartOrderActivity.this, "SELECT CLEANING METHOD ABOVE", Toast.LENGTH_LONG).show();
+            }
+
+            @Override
+            public void onNothingSelected(AdapterView<?> adapterView) {
+                Toast.makeText(StartOrderActivity.this, "SELECT CLEANING METHOD ABOVE", Toast.LENGTH_LONG).show();
+            }
+        });
+
+
+
+
         /*
         List<String> garmentTypes = Arrays.asList(getResources().getStringArray(R.array.garment_type));
         ArrayAdapter<String> arrayAdapter = new ArrayAdapter<String>(StartOrderActivity.this,

@@ -31,6 +31,60 @@
             android:textAlignment="center"/>
     </RelativeLayout>
 
+        <TableLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_gravity="center"
+            android:layout_marginBottom="5dp">
+            <TableRow
+                android:gravity="center">
+
+                <TextView
+                    android:layout_width="match_parent"
+                    android:layout_height="50dip"
+                    android:layout_gravity="center"
+                    android:text="Total:"
+                    android:textSize="30dip" />
+
+                <TextView
+                    android:id="@+id/total_tv"
+                    android:layout_width="150dip"
+                    android:layout_height="match_parent"
+                    android:hint="$0.00"
+                    android:textSize="30dip"
+                    android:gravity="center"
+                    android:background="@color/green" />
+
+            </TableRow>
+
+
+        </TableLayout>
+
+<TableLayout
+    android:layout_width="wrap_content"
+    android:layout_height="wrap_content"
+    android:layout_gravity="center">
+    <TableRow
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content">
+        <Button
+            android:text="Dry Clean"
+            android:id="@+id/dry_clean_button"
+            android:layout_marginRight="50dp"
+            android:layout_width="150dip"
+            android:layout_height="70dip"/>
+        <Button
+            android:id="@+id/wash_button"
+            android:layout_width="150dip"
+            android:layout_height="match_parent"
+            android:text="Wash"/>
+
+
+    </TableRow>
+
+
+</TableLayout>
+
  <TableLayout
      android:layout_height="wrap_content"
      android:layout_width="match_parent"
@@ -49,15 +103,15 @@
 
          <com.google.android.material.textfield.TextInputLayout
              android:id="@+id/garment_type_dropdown"
-             android:layout_width="120dp"
+             android:layout_width="160dp"
              android:layout_height="wrap_content"
-             android:layout_marginLeft="40dp"
+             android:layout_marginLeft="10dp"
              style="@style/Widget.MaterialComponents.TextInputLayout.OutlinedBox.ExposedDropdownMenu">
              <AutoCompleteTextView
                  android:id="@+id/garment_type_items"
                  android:layout_width="match_parent"
                  android:layout_height="match_parent"
-                 android:text="Shirt"
+                 android:hint="Select Garment"
                  android:inputType="none"/>
          </com.google.android.material.textfield.TextInputLayout>
 
@@ -125,35 +179,28 @@
         android:paddingTop="10dip"
         android:layout_marginLeft="25dp">
             <RadioButton
-                android:id="@+id/DC"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:checked="true"
-                android:text="DC"
-                android:textSize="25dip"/>
-            <RadioButton
                 android:id="@+id/no_starch"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:text="No"
+                android:text="No Starch..................(+$0.00)"
                 android:textSize="25dip"/>
             <RadioButton
                 android:id="@+id/l_starch"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:text="Light"
+                android:text="Light Starch..............(+$0.10)"
                 android:textSize="25dip"/>
             <RadioButton
                 android:id="@+id/m_starch"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:text="Med"
+                android:text="Medium Starch.........(+$0.20)"
                 android:textSize="25dip"/>
             <RadioButton
                 android:id="@+id/h_starch"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:text="Heavy"
+                android:text="Heavy Starch.............(+$0.30)"
                 android:textSize="25dip"/>
               </RadioGroup>
 

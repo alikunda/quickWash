@@ -1,6 +1,8 @@
 package com.example.quickwash.Garment.Garments;
 
-public class Short extends GarmentType {
+import com.example.quickwash.Garment.Garment;
+
+public class Short extends Garment {
 
     private double price = 4.39;
 }

@@ -24,9 +24,13 @@ public class Garment {
 
         cleaningMethod = cm;
         received = DateTime.getDefaultInstance();
-
-
         price = this.getPrice();
+
+
+    }
+
+    public Garment() {
+
     }
 
     public void setPrice(double newPrice) {

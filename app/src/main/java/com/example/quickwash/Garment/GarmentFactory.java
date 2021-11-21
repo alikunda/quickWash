@@ -12,10 +12,10 @@ public class GarmentFactory {
 
     public Garment getGarment(String garmentType, String cleaningMethod){
         if (garmentType.equalsIgnoreCase("shirt")){
-            return new Shirt(cleaningMethod);
+            return new Shirt();
         }
         if (garmentType.equalsIgnoreCase("trouser")){
-            return new Trouser(cleaningMethod);
+            return new Trouser();
         }
         else
             return null;
