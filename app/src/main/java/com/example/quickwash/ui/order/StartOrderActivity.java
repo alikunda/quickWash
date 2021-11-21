@@ -38,9 +38,11 @@ public class StartOrderActivity extends AppCompatActivity  {
         TextInputLayout textInputLayout = findViewById(R.id.garment_type_dropdown);
         AutoCompleteTextView garmentTV = findViewById(R.id.garment_type_items);
 
-        String [] garmentTypes = getResources().getStringArray(R.array.garment_type);
+        String [] garmentTypesDC = getResources().getStringArray(R.array.garment_type_DC);
+        String [] garmentTypesLaundry = getResources().getStringArray(R.array.garment_type_Laundry);
+
         ArrayAdapter<String> arrayAdapter = new ArrayAdapter<>(StartOrderActivity.this,
-                R.layout.dropdown_item, garmentTypes);
+                R.layout.dropdown_item, garmentTypesDC);
         garmentTV.setAdapter(arrayAdapter);
         /*
         List<String> garmentTypes = Arrays.asList(getResources().getStringArray(R.array.garment_type));
@@ -89,12 +91,12 @@ public class StartOrderActivity extends AppCompatActivity  {
         String cleaningMethodString = cleaningMethodRB.getText().toString();
 
 
-        //gf = new GarmentFactory();
+        gf = new GarmentFactory();
 
-        //Garment newGarment = gf.getGarment(garmentTypeString);//cleaning method
+        Garment newGarment = gf.getGarment(garmentTypeString, cleaningMethodString );//cleaning method
 
 
-        //dbManager2.insertGarment(newGarment, quantity);//cleaning method
+        dbManager2.insertGarment(newGarment, quantity);//cleaning method
 
 
 

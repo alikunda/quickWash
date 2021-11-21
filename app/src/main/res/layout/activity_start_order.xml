@@ -21,6 +21,13 @@
             android:textSize="50dip" />
     </RelativeLayout>
 
+    <TableLayout
+        android:layout_marginBottom="10dip">
+        <TableRow
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+    </TableLayout>
+
  <TableLayout android:layout_marginBottom="10dp">
      <TableRow
          android:layout_width="wrap_content"

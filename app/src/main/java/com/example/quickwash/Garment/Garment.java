@@ -1,16 +1,18 @@
 package com.example.quickwash.Garment;
 
+import com.google.type.DateTime;
+
 import java.text.DecimalFormat;
 
-public class Garment implements CleaningMethod {
+public class Garment {
     //private int id;
     private String garmentName;
     private double price;
-    private GarmentType garmentType;
+    //private GarmentType garmentType;
 
-    private boolean Laundry;
-    private boolean dryClean;
-    private boolean pressOnly;
+    private String cleaningMethod;
+    private DateTime received, delivered;
+
 
     private boolean ready;
 
@@ -18,7 +20,12 @@ public class Garment implements CleaningMethod {
 
     public final DecimalFormat MONEY = new DecimalFormat("$#,##0.00");
 
-    public Garment() {
+    public Garment(String cm) {
+
+        cleaningMethod = cm;
+        received = DateTime.getDefaultInstance();
+
+
         price = this.getPrice();
     }
 
@@ -32,54 +39,19 @@ public class Garment implements CleaningMethod {
     }
 
 
-    public GarmentType getGarmentType() {
-        return garmentType;
-    }
 
 
     public String getGarmentName() {
         return garmentName;
     }
 
-    public void setGarmentName(String garmentName) {
-        this.garmentName = this.garmentType.toString();
+
+    public void setCleaningMethod(String cleaningMethod) {
+        this.cleaningMethod = cleaningMethod;
     }
 
-
-
-
-    @Override
-    public void noStarch() {
-    }
-
-    @Override
-    public void lightStarch() {
-
-    }
-
-    @Override
-    public void mediumStarch() {
-
-    }
-
-    @Override
-    public void heavyStarch() {
-
-    }
-
-    @Override
-    public void DC() {
-
-    }
-
-    @Override
-    public void pressOnly() {
-
-    }
-
-    @Override
     public String getCleaningMethod() {
-        return null;
+        return cleaningMethod;
     }
 }
 

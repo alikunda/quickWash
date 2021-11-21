@@ -1,9 +1,7 @@
 package com.example.quickwash.Garment.Garments;
 
-import com.example.quickwash.Garment.GarmentType;
-
 public class Shirt extends GarmentType {
-    double laundryPrice = 2.49;
+    double laundryPrice = 2.49; // no starch, light starch +$.10, med starch +$.20
     double dryCleanPrice = 3.59;
 
     public Shirt() {
