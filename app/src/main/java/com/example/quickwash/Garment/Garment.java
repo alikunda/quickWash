@@ -10,7 +10,7 @@ public class Garment {
     private double price;
     //private GarmentType garmentType;
 
-    private String name;
+    //private String name;
 
     private String cleaningMethod;
     private DateTime received, delivered;
@@ -24,7 +24,7 @@ public class Garment {
 
     public Garment(String nm, String cm, double p) {
 
-        name = nm;
+        garmentName = nm;
         cleaningMethod = cm;
         received = DateTime.getDefaultInstance();
         price = p;
@@ -61,8 +61,8 @@ public class Garment {
         return cleaningMethod;
     }
 
-    public DateTime getReceived() {
-        return received;
+    public String getReceived() {
+        return received.toString();
     }
 
     public void setReceived(DateTime received) {

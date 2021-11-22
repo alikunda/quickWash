@@ -36,7 +36,7 @@ public class DatabaseManager2 extends SQLiteOpenHelper {
         String sqlCreate = "create table " + TABLE_ORDER + " ( " + ID;
         sqlCreate += " integer primary key autoincrement, " + GARMENT_TYPE + " text, ";
         sqlCreate += CLEANING_METHOD + " text, " + QUANTITY + " integer, " + PRICE + " real, ";
-        sqlCreate += RECEIVED + "datetime)";
+        sqlCreate += RECEIVED + " datetime )";
 
         db.execSQL(sqlCreate);
     }
@@ -44,8 +44,8 @@ public class DatabaseManager2 extends SQLiteOpenHelper {
     public void insertGarment(Garment garment, int quantity) {
         SQLiteDatabase db = this.getWritableDatabase();
         String sqlInsert = "insert into " + TABLE_ORDER + " values ( null, '" + garment.getGarmentName()
-                + "', '" + garment.getCleaningMethod() + "', " + quantity + ", " + garment.getPrice()
-                + ", " + garment.getReceived() + " )";
+                + "', '" + garment.getCleaningMethod() + "', " + quantity + ", " + garment.getPrice()*quantity
+                + ", '" + null + "' )";
         db.execSQL(sqlInsert);
         db.close();
 
