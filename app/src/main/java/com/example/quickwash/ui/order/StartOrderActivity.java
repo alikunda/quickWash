@@ -1,6 +1,8 @@
 package com.example.quickwash.ui.order;
 
+import android.app.FragmentManager;
 import android.content.Intent;
+import android.os.Build;
 import android.os.Bundle;
 import android.view.View;
 import android.widget.AdapterView;
@@ -13,12 +15,16 @@ import android.widget.RadioGroup;
 import android.widget.TextView;
 import android.widget.Toast;
 
+import androidx.annotation.RequiresApi;
 import androidx.appcompat.app.AppCompatActivity;
+import androidx.fragment.app.Fragment;
 
 import com.example.quickwash.DatabaseManager2;
 import com.example.quickwash.Garment.Garment;
 import com.example.quickwash.Garment.GarmentFactory;
+import com.example.quickwash.MainActivity;
 import com.example.quickwash.R;
+import com.example.quickwash.ui.gallery.GalleryFragment;
 import com.example.quickwash.ui.gallery.GalleryViewModel;
 import com.google.android.material.textfield.TextInputLayout;
 
@@ -33,6 +39,7 @@ public class StartOrderActivity extends AppCompatActivity  {
     //private ScriptGroup.Binding binding = new ScriptGroup.Binding()
     NumberFormat nf = NumberFormat.getCurrencyInstance();
     double runningTotal = 0.00;
+    private int recieptNumber = 1;
 
 
     @Override
@@ -138,7 +145,6 @@ public class StartOrderActivity extends AppCompatActivity  {
 
 
     public void updateView() {
-
         TextView totalView = findViewById(R.id.total_tv);
         totalView.setText(nf.format(runningTotal));
 
@@ -157,10 +163,9 @@ public class StartOrderActivity extends AppCompatActivity  {
 
         paymentView.setVisibility(View.GONE);
         garmentSelectView.setVisibility(View.GONE);
-
     }
 
-
+    @RequiresApi(api = Build.VERSION_CODES.O)
     public void addOrder(View v) {
         AutoCompleteTextView garmentTV = findViewById(R.id.garment_type_items);
         String[] garmentSelectArray = garmentTV.getText().toString().split(" - ");
@@ -169,55 +174,66 @@ public class StartOrderActivity extends AppCompatActivity  {
             Toast.makeText(this, "Select Garment type", Toast.LENGTH_SHORT).show();
         }
         else {
-        String garmentPriceString = garmentSelectArray[1];
-        double garmentPrice = Double.parseDouble(garmentPriceString.substring(1));
+            String garmentPriceString = garmentSelectArray[1];
+            double garmentPrice = Double.parseDouble(garmentPriceString.substring(1));
 
-        EditText quantityET = findViewById(R.id.garment_quantity_ET);
-        int quantity = Integer.parseInt(quantityET.getText().toString());
+            EditText quantityET = findViewById(R.id.garment_quantity_ET);
+            int quantity = Integer.parseInt(quantityET.getText().toString());
 
-        //radio group
-        RadioGroup cleaningMethodRG = findViewById(R.id.radio_cleaning_method);
-        int radioID = cleaningMethodRG.getCheckedRadioButtonId();
+            //radio group
+            RadioGroup cleaningMethodRG = findViewById(R.id.radio_cleaning_method);
+            int radioID = cleaningMethodRG.getCheckedRadioButtonId();
 
-        String cleaningMethodString;
-        RadioButton cleaningMethodRB = findViewById(radioID);
-        String garmentTVString = garmentTV.getText().toString();
+            String cleaningMethodString;
+            RadioButton cleaningMethodRB = findViewById(radioID);
+            String garmentTVString = garmentTV.getText().toString();
 
             if (radioID == -1) {
                 cleaningMethodString = "dry clean";
-            } else
+                Garment newGarment = gf.getGarment(garmentTypeString, cleaningMethodString, garmentPrice);//cleaning method
+
+                runningTotal += newGarment.getPrice() * quantity;
+
+                dbManager2.insertGarment(newGarment, quantity, "recieved", recieptNumber, MainActivity.myUser.getEmail());//cleaning method
+
+                Toast.makeText(StartOrderActivity.this, quantity + " " + cleaningMethodString +
+                        " " + garmentTypeString + ":  $" + garmentPrice + " added to order", Toast.LENGTH_LONG).show();
+
+            } else{
 
                 cleaningMethodString = cleaningMethodRB.getText().toString().split(" ")[0];
-
-
             Garment newGarment = gf.getGarment(garmentTypeString, cleaningMethodString, garmentPrice);//cleaning method
 
             runningTotal += newGarment.getPrice() * quantity;
 
-            dbManager2.insertGarment(newGarment, quantity, "recieved");//cleaning method
+            dbManager2.insertGarment(newGarment, quantity, "recieved", recieptNumber, MainActivity.myUser.getEmail());//cleaning method
 
             Toast.makeText(StartOrderActivity.this, quantity + " " + cleaningMethodString +
                     " " + garmentTypeString + ":  $" + garmentPrice + " added to order", Toast.LENGTH_LONG).show();
 
+        }
+            recieptNumber++;
             updateView();
         }
-
     }
-
     public void pay(View v ) {
 
         Toast.makeText(this, "payment button is clicked", Toast.LENGTH_LONG).show();
-        Intent payIntent = new Intent(this, GalleryViewModel.class);
-        startActivity(payIntent);
+//        FragmentManager fragmentManager = getFragmentManager();
+//
+//        Fragment fragment = new Fragment(R.layout.fragment_gallery);
+//        Bundle bundle = new Bundle();
+//
+//        fragment.setArguments(bundle);
+//        fragmentManager.beginTransaction().replace(R.id.container, R.layout).commit();
+//        Bundle bundle = new Bundle();
+//        bundle.putString("my_key", "1");
+//        GalleryFragment myFrag = new GalleryFragment();
+//        myFrag.setArguments(bundle);,ne
 
+//        Intent payIntent = new Intent(StartOrderActivity.this, GalleryFragment.class);
+//        startActivity(payIntent);
     }
-
-
-
-
-
-
-
 
     /*
     public void onViewCreated(@NonNull View view, Bundle savedInstanceState) {

@@ -8,6 +8,7 @@ import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.widget.Button;
 import android.widget.EditText;
 import android.widget.TextView;
 import android.widget.Toast;
@@ -24,11 +25,15 @@ import com.example.quickwash.R;
 import com.example.quickwash.databinding.FragmentGalleryBinding;
 import com.example.quickwash.register;
 
+import java.util.zip.Inflater;
+
 public class GalleryFragment extends Fragment {
 
     private GalleryViewModel galleryViewModel;
     private FragmentGalleryBinding binding;
     private DatabaseManager dbManager;
+    private int tracker = 0;
+
     public View onCreateView(@NonNull LayoutInflater inflater,
                              ViewGroup container, Bundle savedInstanceState) {
         galleryViewModel =
@@ -43,7 +48,14 @@ public class GalleryFragment extends Fragment {
     public void onViewCreated(@NonNull View view, Bundle savedInstanceState) {
         super.onViewCreated(view, savedInstanceState);
 
+        String name  = getArguments().getString("my_key");
 
+        tracker= Integer.parseInt(name);
+        if(tracker ==1){
+            Button payButton = binding.add.findViewById(R.id.add);
+            payButton.setText("Pay");
+            tracker = 0;
+        }
         String checking  = dbManager.is_user_exist(MainActivity.myUser.getEmail());
         if(checking == "true"){
             String Name = dbManager.sendName(MainActivity.myUser.getEmail());

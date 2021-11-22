@@ -1,8 +1,19 @@
 package com.example.quickwash;
 
 import android.content.Context;
+import android.database.Cursor;
 import android.database.sqlite.SQLiteDatabase;
 import android.database.sqlite.SQLiteOpenHelper;
+import android.os.Build;
+import android.util.Log;
+
+import androidx.annotation.RequiresApi;
+
+import java.text.SimpleDateFormat;
+import java.time.format.DateTimeFormatter;
+import java.time.LocalDateTime;
+import java.util.ArrayList;
+import java.util.Date;
 
 import com.example.quickwash.Garment.Garment;
 
@@ -21,12 +32,15 @@ public class DatabaseManager2 extends SQLiteOpenHelper {
     private static final String QUANTITY = "quantity";
     private static final String PRICE = "price";
     private static final String RECEIVED = "received";
+    private static final String STATUS = " order_status";
+    private static final String RECIEPTNUMBER = "OrderNumber";
+    private static final String CUSTOMER_EMAIL = "Cus_Email";
     private static final String DELIVERED = "delivered";
     private static final String SUBTOTAL = "price";
     private static final String TOTAL = "price";
     private static final String TAX = "price";
     private static final String OWNER = "owner";
-    private static final String STATUS = " order_status";
+
 
     public DatabaseManager2(Context context) {
         super(context, DATABASE_NAME, null, DATABASE_VERSION);
@@ -37,19 +51,35 @@ public class DatabaseManager2 extends SQLiteOpenHelper {
         String sqlCreate = "create table " + TABLE_ORDER + " ( " + ID;
         sqlCreate += " integer primary key autoincrement, " + GARMENT_TYPE + " text, ";
         sqlCreate += CLEANING_METHOD + " text, " + QUANTITY + " integer, " + PRICE + " real, ";
-        sqlCreate += RECEIVED + " datetime, "+STATUS+" text )";
+        sqlCreate += RECEIVED + " datetime, "+STATUS+" text, "+RECIEPTNUMBER+" text, "+CUSTOMER_EMAIL+" text )";
 
         db.execSQL(sqlCreate);
     }
 
-    public void insertGarment(Garment garment, int quantity, String status) {
+    @RequiresApi(api = Build.VERSION_CODES.O)
+    public void insertGarment(Garment garment, int quantity, String status, int recieptNum, String email) {
+        DateTimeFormatter dtf = DateTimeFormatter.ofPattern("yyyy/MM/dd HH:mm");
+        LocalDateTime now = LocalDateTime.now();
+        Log.w("DB","*****"+now);
         SQLiteDatabase db = this.getWritableDatabase();
         String sqlInsert = "insert into " + TABLE_ORDER + " values ( null, '" + garment.getGarmentName()
                 + "', '" + garment.getCleaningMethod() + "', " + quantity + ", " + garment.getPrice()*quantity
-                + ", '" + null +"', '"+status+"' )";
+                + ", '" + now +"', '"+status+"', '"+recieptNum+"', '"+email+"' )";
         db.execSQL(sqlInsert);
         db.close();
+    }
 
+    public ArrayList<Order> selectAllPendingOrders(){
+        String sqlQuery = "select * from "+TABLE_ORDER +" WHERE "+STATUS+" = 'recieved'";
+        SQLiteDatabase db = this.getWritableDatabase();
+        Cursor myCursor = db.rawQuery(sqlQuery, null);
+        ArrayList<Order> currentArray = new ArrayList<>();
+        while(myCursor.moveToNext()){
+            Order currentOrderInstane = new Order(myCursor.getString(1), myCursor.getString(2),myCursor.getString(3),myCursor.getString(4),myCursor.getString(5),myCursor.getString(6),myCursor.getString(7),myCursor.getString(8));
+            currentArray.add(currentOrderInstane);
+        }
+        db.close();
+        return currentArray;
     }
 
     /*

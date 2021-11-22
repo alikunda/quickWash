@@ -215,13 +215,13 @@ public class DatabaseManager extends SQLiteOpenHelper {
      * account with pending requests
      * @return
      */
-    public ArrayList<userRegisteration> selectAllPendingAdmins(){
-        String sqlQuery = "select * from "+TABLE_LOGIN +" WHERE "+APPROVAL +" = 'denied'";
+    public ArrayList<userRegisteration> selectAllPendingAdmins() {
+        String sqlQuery = "select * from " + TABLE_LOGIN + " WHERE " + APPROVAL + " = 'denied'";
         SQLiteDatabase db = this.getWritableDatabase();
         Cursor myCursor = db.rawQuery(sqlQuery, null);
         ArrayList<userRegisteration> myUsers = new ArrayList<>();
-        while(myCursor.moveToNext()){
-            userRegisteration currentuser = new userRegisteration(Integer.parseInt(myCursor.getString(0)), myCursor.getString(1),myCursor.getString(2),myCursor.getString(3),myCursor.getString(4),myCursor.getString(5));
+        while (myCursor.moveToNext()) {
+            userRegisteration currentuser = new userRegisteration(Integer.parseInt(myCursor.getString(0)), myCursor.getString(1), myCursor.getString(2), myCursor.getString(3), myCursor.getString(4), myCursor.getString(5));
             myUsers.add(currentuser);
         }
         db.close();
