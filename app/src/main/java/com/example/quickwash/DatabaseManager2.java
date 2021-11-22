@@ -26,6 +26,7 @@ public class DatabaseManager2 extends SQLiteOpenHelper {
     private static final String TOTAL = "price";
     private static final String TAX = "price";
     private static final String OWNER = "owner";
+    private static final String STATUS = " order_status";
 
     public DatabaseManager2(Context context) {
         super(context, DATABASE_NAME, null, DATABASE_VERSION);
@@ -36,23 +37,22 @@ public class DatabaseManager2 extends SQLiteOpenHelper {
         String sqlCreate = "create table " + TABLE_ORDER + " ( " + ID;
         sqlCreate += " integer primary key autoincrement, " + GARMENT_TYPE + " text, ";
         sqlCreate += CLEANING_METHOD + " text, " + QUANTITY + " integer, " + PRICE + " real, ";
-        sqlCreate += RECEIVED + " datetime )";
+        sqlCreate += RECEIVED + " datetime, "+STATUS+" text )";
 
         db.execSQL(sqlCreate);
     }
 
-    public void insertGarment(Garment garment, int quantity) {
+    public void insertGarment(Garment garment, int quantity, String status) {
         SQLiteDatabase db = this.getWritableDatabase();
         String sqlInsert = "insert into " + TABLE_ORDER + " values ( null, '" + garment.getGarmentName()
                 + "', '" + garment.getCleaningMethod() + "', " + quantity + ", " + garment.getPrice()*quantity
-                + ", '" + null + "' )";
+                + ", '" + null +"', '"+status+"' )";
         db.execSQL(sqlInsert);
         db.close();
 
     }
 
     /*
-
         public ArrayList<userRegisteration> selectAll(){
             String sqlQuery = "select * from "+TABLE_LOGIN +" WHERE "+USER_TYPE +" <> 'admin'";
             SQLiteDatabase db = this.getWritableDatabase();

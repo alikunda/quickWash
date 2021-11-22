@@ -1,5 +1,6 @@
 package com.example.quickwash.ui.order;
 
+import android.content.Intent;
 import android.os.Bundle;
 import android.view.View;
 import android.widget.AdapterView;
@@ -18,6 +19,7 @@ import com.example.quickwash.DatabaseManager2;
 import com.example.quickwash.Garment.Garment;
 import com.example.quickwash.Garment.GarmentFactory;
 import com.example.quickwash.R;
+import com.example.quickwash.ui.gallery.GalleryViewModel;
 import com.google.android.material.textfield.TextInputLayout;
 
 import java.text.NumberFormat;
@@ -69,7 +71,7 @@ public class StartOrderActivity extends AppCompatActivity  {
         dryCleanButton.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-
+                garmentTV.setText(" ");
 
                 ArrayAdapter<String> arrayAdapter = new ArrayAdapter<>(StartOrderActivity.this,
                         R.layout.dropdown_item, garmentTypesDC);
@@ -90,6 +92,7 @@ public class StartOrderActivity extends AppCompatActivity  {
         laundryButton.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
+                garmentTV.setText(" ");
                 ArrayAdapter<String> arrayAdapter = new ArrayAdapter<>(StartOrderActivity.this,
                         R.layout.dropdown_item, garmentTypesLaundry);
                 garmentTV.setAdapter(arrayAdapter);
@@ -149,14 +152,11 @@ public class StartOrderActivity extends AppCompatActivity  {
         RadioGroup cleaningMethodRG = findViewById(R.id.radio_cleaning_method);
         cleaningMethodRG.clearCheck();
 
-
-
         View paymentView = findViewById(R.id.payment_view);
         View garmentSelectView = findViewById(R.id.garment_select_view);
 
         paymentView.setVisibility(View.GONE);
         garmentSelectView.setVisibility(View.GONE);
-
 
     }
 
@@ -165,7 +165,10 @@ public class StartOrderActivity extends AppCompatActivity  {
         AutoCompleteTextView garmentTV = findViewById(R.id.garment_type_items);
         String[] garmentSelectArray = garmentTV.getText().toString().split(" - ");
         String garmentTypeString = garmentSelectArray[0];
-
+        if(garmentTypeString.isEmpty()|| garmentTypeString == null || garmentTypeString.equals(" ")){
+            Toast.makeText(this, "Select Garment type", Toast.LENGTH_SHORT).show();
+        }
+        else {
         String garmentPriceString = garmentSelectArray[1];
         double garmentPrice = Double.parseDouble(garmentPriceString.substring(1));
 
@@ -178,47 +181,34 @@ public class StartOrderActivity extends AppCompatActivity  {
 
         String cleaningMethodString;
         RadioButton cleaningMethodRB = findViewById(radioID);
+        String garmentTVString = garmentTV.getText().toString();
 
-        if(radioID == -1){
-            cleaningMethodString = "dry clean";
+            if (radioID == -1) {
+                cleaningMethodString = "dry clean";
+            } else
+
+                cleaningMethodString = cleaningMethodRB.getText().toString().split(" ")[0];
+
+
+            Garment newGarment = gf.getGarment(garmentTypeString, cleaningMethodString, garmentPrice);//cleaning method
+
+            runningTotal += newGarment.getPrice() * quantity;
+
+            dbManager2.insertGarment(newGarment, quantity, "recieved");//cleaning method
+
+            Toast.makeText(StartOrderActivity.this, quantity + " " + cleaningMethodString +
+                    " " + garmentTypeString + ":  $" + garmentPrice + " added to order", Toast.LENGTH_LONG).show();
+
+            updateView();
         }
-        else
-
-            cleaningMethodString = cleaningMethodRB.getText().toString().split(" ")[0];
-
-
-
-
-
-
-
-
-        Garment newGarment = gf.getGarment(garmentTypeString, cleaningMethodString, garmentPrice);//cleaning method
-
-
-        runningTotal += newGarment.getPrice() * quantity;
-
-        dbManager2.insertGarment(newGarment, quantity);//cleaning method
-
-
-
-
-
-
-
-        Toast.makeText(StartOrderActivity.this,  quantity + " " + cleaningMethodString +
-                " " + garmentTypeString + ":  $" + garmentPrice +  " added to order", Toast.LENGTH_LONG).show();
-
-        updateView();
 
     }
 
     public void pay(View v ) {
 
         Toast.makeText(this, "payment button is clicked", Toast.LENGTH_LONG).show();
-
-        //Intent payIntent = new Intent(this, payment.class);
-        //startActivity(payIntent);
+        Intent payIntent = new Intent(this, GalleryViewModel.class);
+        startActivity(payIntent);
 
     }
 

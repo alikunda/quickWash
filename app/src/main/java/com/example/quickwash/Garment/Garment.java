@@ -36,6 +36,7 @@ public class Garment {
 
     }
 
+
     public void setPrice(double newPrice) {
         if (newPrice >= 0.0)
             price = newPrice;
