@@ -74,10 +74,10 @@
             android:layout_width="150dip"
             android:layout_height="70dip"/>
         <Button
-            android:id="@+id/wash_button"
+            android:id="@+id/laundry_button"
             android:layout_width="150dip"
             android:layout_height="match_parent"
-            android:text="Wash"/>
+            android:text="Laundry"/>
 
 
     </TableRow>
@@ -91,7 +91,9 @@
      android:layout_marginBottom="20dp">
      <TableRow
          android:layout_width="wrap_content"
-         android:layout_height="match_parent">
+         android:layout_height="match_parent"
+         android:id="@+id/garment_select_view"
+         android:visibility="gone">
 
          <TextView
              android:id="@+id/garment_select_TV"
@@ -120,7 +122,9 @@
     <LinearLayout
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:orientation="vertical" >
+        android:orientation="vertical"
+        android:id="@+id/payment_view"
+        android:visibility="gone">
  <TableLayout
      android:layout_height="match_parent"
      android:layout_width="match_parent"
@@ -145,6 +149,7 @@
              android:layout_marginLeft="135dip"
              android:background="@color/purple_700"
              android:inputType="number"
+             android:textColor="@color/white"
              android:selectAllOnFocus="true"
              android:maxLines="0"
              android:text="1"
@@ -153,6 +158,13 @@
      </TableRow>
  </TableLayout>
 
+
+
+<TableLayout
+    android:layout_height="match_parent"
+    android:layout_width="match_parent"
+    android:id="@+id/laundry_layout"
+    android:visibility="gone">
     <TableRow
         android:layout_width="match_parent"
         android:layout_height="match_parent">
@@ -167,9 +179,6 @@
             android:textAlignment="center"
             android:textSize="20sp" />
     </TableRow>
-
-    <TableLayout android:layout_height="match_parent"
-        android:layout_width="match_parent">
 
     <RadioGroup
         android:id="@+id/radio_cleaning_method"

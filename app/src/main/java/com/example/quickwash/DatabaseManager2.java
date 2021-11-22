@@ -20,6 +20,8 @@ public class DatabaseManager2 extends SQLiteOpenHelper {
     private static final String CLEANING_METHOD = "cleaningMethod";
     private static final String QUANTITY = "quantity";
     private static final String PRICE = "price";
+    private static final String RECEIVED = "received";
+    private static final String DELIVERED = "delivered";
     private static final String SUBTOTAL = "price";
     private static final String TOTAL = "price";
     private static final String TAX = "price";
@@ -33,7 +35,8 @@ public class DatabaseManager2 extends SQLiteOpenHelper {
     public void onCreate(SQLiteDatabase db) {
         String sqlCreate = "create table " + TABLE_ORDER + " ( " + ID;
         sqlCreate += " integer primary key autoincrement, " + GARMENT_TYPE + " text, ";
-        sqlCreate += CLEANING_METHOD + " text, " + QUANTITY + " integer, " + PRICE + " real)";
+        sqlCreate += CLEANING_METHOD + " text, " + QUANTITY + " integer, " + PRICE + " real, ";
+        sqlCreate += RECEIVED + "datetime)";
 
         db.execSQL(sqlCreate);
     }
@@ -41,7 +44,8 @@ public class DatabaseManager2 extends SQLiteOpenHelper {
     public void insertGarment(Garment garment, int quantity) {
         SQLiteDatabase db = this.getWritableDatabase();
         String sqlInsert = "insert into " + TABLE_ORDER + " values ( null, '" + garment.getGarmentName()
-                + "', '" + garment.getCleaningMethod() + "', " + quantity + ", " + garment.getPrice() + " )";
+                + "', '" + garment.getCleaningMethod() + "', " + quantity + ", " + garment.getPrice()
+                + ", " + garment.getReceived() + " )";
         db.execSQL(sqlInsert);
         db.close();
 

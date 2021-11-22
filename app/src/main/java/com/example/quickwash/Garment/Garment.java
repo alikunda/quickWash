@@ -10,6 +10,8 @@ public class Garment {
     private double price;
     //private GarmentType garmentType;
 
+    private String name;
+
     private String cleaningMethod;
     private DateTime received, delivered;
 
@@ -20,11 +22,12 @@ public class Garment {
 
     public final DecimalFormat MONEY = new DecimalFormat("$#,##0.00");
 
-    public Garment(String cm) {
+    public Garment(String nm, String cm, double p) {
 
+        name = nm;
         cleaningMethod = cm;
         received = DateTime.getDefaultInstance();
-        price = this.getPrice();
+        price = p;
 
 
     }
@@ -56,6 +59,22 @@ public class Garment {
 
     public String getCleaningMethod() {
         return cleaningMethod;
+    }
+
+    public DateTime getReceived() {
+        return received;
+    }
+
+    public void setReceived(DateTime received) {
+        this.received = received;
+    }
+
+    public DateTime getDelivered() {
+        return delivered;
+    }
+
+    public void setDelivered(DateTime delivered) {
+        this.delivered = delivered;
     }
 }
 

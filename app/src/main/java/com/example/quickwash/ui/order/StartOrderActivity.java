@@ -9,6 +9,7 @@ import android.widget.Button;
 import android.widget.EditText;
 import android.widget.RadioButton;
 import android.widget.RadioGroup;
+import android.widget.TextView;
 import android.widget.Toast;
 
 import androidx.appcompat.app.AppCompatActivity;
@@ -19,6 +20,8 @@ import com.example.quickwash.Garment.GarmentFactory;
 import com.example.quickwash.R;
 import com.google.android.material.textfield.TextInputLayout;
 
+import java.text.NumberFormat;
+
 public class StartOrderActivity extends AppCompatActivity  {
 
     private orderViewModel myorderViewModel;
@@ -26,6 +29,8 @@ public class StartOrderActivity extends AppCompatActivity  {
     private Garment garment;
     private GarmentFactory gf;
     //private ScriptGroup.Binding binding = new ScriptGroup.Binding()
+    NumberFormat nf = NumberFormat.getCurrencyInstance();
+    double runningTotal = 0.00;
 
 
     @Override
@@ -34,10 +39,23 @@ public class StartOrderActivity extends AppCompatActivity  {
         setContentView(R.layout.activity_start_order);
 
         dbManager2 = new DatabaseManager2(this);
+        gf = new GarmentFactory();
+
+
+
+        TextView totalView = findViewById(R.id.total_tv);
+        totalView.setText(nf.format(runningTotal));
 
         Button dryCleanButton = findViewById(R.id.dry_clean_button);
-        Button washButton = findViewById(R.id.wash_button);
+        Button laundryButton = findViewById(R.id.laundry_button);
 
+        View laundryView = findViewById(R.id.laundry_layout);
+        View paymentView = findViewById(R.id.payment_view);
+        View garmentSelectView = findViewById(R.id.garment_select_view);
+
+        //radio group
+        RadioGroup cleaningMethodRG = findViewById(R.id.radio_cleaning_method);
+        //int radioID = cleaningMethodRG.getCheckedRadioButtonId();
 
 
         TextInputLayout textInputLayout = findViewById(R.id.garment_type_dropdown);
@@ -45,6 +63,8 @@ public class StartOrderActivity extends AppCompatActivity  {
 
         String [] garmentTypesDC = getResources().getStringArray(R.array.garment_type_DC);
         String [] garmentTypesLaundry = getResources().getStringArray(R.array.garment_type_Laundry);
+
+
 
         dryCleanButton.setOnClickListener(new View.OnClickListener() {
             @Override
@@ -55,15 +75,33 @@ public class StartOrderActivity extends AppCompatActivity  {
                         R.layout.dropdown_item, garmentTypesDC);
                 garmentTV.setAdapter(arrayAdapter);
 
+                cleaningMethodRG.check(-1);
+
+                laundryView.setVisibility(View.GONE);
+
+                garmentSelectView.setVisibility(View.VISIBLE);
+
+                paymentView.setVisibility(View.VISIBLE);
+
+
             }
         });
 
-        washButton.setOnClickListener(new View.OnClickListener() {
+        laundryButton.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
                 ArrayAdapter<String> arrayAdapter = new ArrayAdapter<>(StartOrderActivity.this,
                         R.layout.dropdown_item, garmentTypesLaundry);
                 garmentTV.setAdapter(arrayAdapter);
+
+                cleaningMethodRG.check(R.id.l_starch);
+
+
+                laundryView.setVisibility(View.VISIBLE);
+
+                garmentSelectView.setVisibility(View.VISIBLE);
+                paymentView.setVisibility(View.VISIBLE);
+
             }
         });
 
@@ -98,6 +136,9 @@ public class StartOrderActivity extends AppCompatActivity  {
 
     public void updateView() {
 
+        TextView totalView = findViewById(R.id.total_tv);
+        totalView.setText(nf.format(runningTotal));
+
         AutoCompleteTextView garmentTV = findViewById(R.id.garment_type_items);
         garmentTV.clearListSelection();
 
@@ -110,13 +151,23 @@ public class StartOrderActivity extends AppCompatActivity  {
 
 
 
+        View paymentView = findViewById(R.id.payment_view);
+        View garmentSelectView = findViewById(R.id.garment_select_view);
+
+        paymentView.setVisibility(View.GONE);
+        garmentSelectView.setVisibility(View.GONE);
+
 
     }
 
 
     public void addOrder(View v) {
         AutoCompleteTextView garmentTV = findViewById(R.id.garment_type_items);
-        String garmentTypeString = garmentTV.getText().toString();
+        String[] garmentSelectArray = garmentTV.getText().toString().split(" - ");
+        String garmentTypeString = garmentSelectArray[0];
+
+        String garmentPriceString = garmentSelectArray[1];
+        double garmentPrice = Double.parseDouble(garmentPriceString.substring(1));
 
         EditText quantityET = findViewById(R.id.garment_quantity_ET);
         int quantity = Integer.parseInt(quantityET.getText().toString());
@@ -125,21 +176,38 @@ public class StartOrderActivity extends AppCompatActivity  {
         RadioGroup cleaningMethodRG = findViewById(R.id.radio_cleaning_method);
         int radioID = cleaningMethodRG.getCheckedRadioButtonId();
 
+        String cleaningMethodString;
         RadioButton cleaningMethodRB = findViewById(radioID);
-        String cleaningMethodString = cleaningMethodRB.getText().toString();
+
+        if(radioID == -1){
+            cleaningMethodString = "dry clean";
+        }
+        else
+
+            cleaningMethodString = cleaningMethodRB.getText().toString().split(" ")[0];
 
 
-        gf = new GarmentFactory();
 
-        Garment newGarment = gf.getGarment(garmentTypeString, cleaningMethodString );//cleaning method
 
+
+
+
+
+        Garment newGarment = gf.getGarment(garmentTypeString, cleaningMethodString, garmentPrice);//cleaning method
+
+
+        runningTotal += newGarment.getPrice() * quantity;
 
         dbManager2.insertGarment(newGarment, quantity);//cleaning method
 
 
 
-        Toast.makeText(this,  quantity + " " + garmentTypeString + ":  " +
-                cleaningMethodString + " added to order", Toast.LENGTH_LONG).show();
+
+
+
+
+        Toast.makeText(StartOrderActivity.this,  quantity + " " + cleaningMethodString +
+                " " + garmentTypeString + ":  $" + garmentPrice +  " added to order", Toast.LENGTH_LONG).show();
 
         updateView();
 

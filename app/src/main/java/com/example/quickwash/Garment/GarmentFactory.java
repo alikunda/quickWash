@@ -1,8 +1,5 @@
 package com.example.quickwash.Garment;
 
-import com.example.quickwash.Garment.Garments.Shirt;
-import com.example.quickwash.Garment.Garments.Trouser;
-
 public class GarmentFactory {
 
     public GarmentFactory(){
@@ -10,14 +7,18 @@ public class GarmentFactory {
     }
 
 
-    public Garment getGarment(String garmentType, String cleaningMethod){
+    public Garment getGarment(String garmentType, String cleaningMethod, double price){
+
+        return new Garment(garmentType, cleaningMethod, price);
+
+        /*
         if (garmentType.equalsIgnoreCase("shirt")){
-            return new Shirt();
+            return new Shirt(cleaningMethod, price);
         }
         if (garmentType.equalsIgnoreCase("trouser")){
             return new Trouser();
         }
         else
-            return null;
+            return null;*/
     }
 }
