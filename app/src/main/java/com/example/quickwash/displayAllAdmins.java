@@ -51,6 +51,7 @@ public class displayAllAdmins extends AppCompatActivity {
             quote.setGravity(Gravity.CENTER);
             quote.setLayoutParams(new LinearLayout.LayoutParams(LinearLayout.LayoutParams.WRAP_CONTENT, LinearLayout.LayoutParams.WRAP_CONTENT));
             TextView[] ids = new TextView[myUserRegisterations.size()];
+            TextView[] IDS = new TextView[myUserRegisterations.size()];
             TextView[] emails = new TextView[myUserRegisterations.size()];
             Button[] approve = new Button[myUserRegisterations.size()];
             Button[] reject = new Button[myUserRegisterations.size()];
@@ -69,6 +70,9 @@ public class displayAllAdmins extends AppCompatActivity {
             TextView id2  = new TextView(this);
             id2.setGravity(Gravity.CENTER);
             id2.setText(" ");
+            TextView id3  = new TextView(this);
+            id3.setGravity(Gravity.CENTER);
+            id3.setText("");
 
             TextView emailOwner = new TextView(this);
             emailOwner.setText("Email");
@@ -87,6 +91,7 @@ public class displayAllAdmins extends AppCompatActivity {
                     ViewGroup.LayoutParams.WRAP_CONTENT);
             grid.addView(id2, (int) (width * 0.15),
                     ViewGroup.LayoutParams.WRAP_CONTENT);
+
             for (userRegisteration myUser : myUserRegisterations) {
 //                // create the TextView for the candy's id
 //                ids[i] = new TextView(this);
@@ -101,6 +106,10 @@ public class displayAllAdmins extends AppCompatActivity {
                 emails[i].setText(myUser.getEmail());
                 emails[i].setId(10 * myUser.getId());
 
+                IDS[i]= new TextView(this);
+                IDS[i].setText("");
+
+
                 // create the approve button
                 approve[i] = new Button(this);
                 approve[i].setText("Complete access");
@@ -111,18 +120,20 @@ public class displayAllAdmins extends AppCompatActivity {
                 reject[i] = new Button(this);
                 reject[i].setText("Delete");
                 reject[i].setBackgroundColor(getResources().getColor(android.R.color.holo_red_dark));
-                reject[i].setPadding(20,20,20,20);
+
 
                 // add the elements to grid
                 grid.addView(ids[i],  (int) (width * 0.15), ViewGroup.LayoutParams.WRAP_CONTENT);
-                grid.addView(emails[i], (int) (width * 0.35),
+                grid.addView(emails[i], (int) (width * 0.30),
                         ViewGroup.LayoutParams.WRAP_CONTENT);
                 grid.addView(approve[i], (int) (width * 0.20),
                         ViewGroup.LayoutParams.WRAP_CONTENT);
-                grid.addView(reject[i], (int) (width * 0.20),
+                grid.addView(reject[i], (int) (width * 0.15),
                         ViewGroup.LayoutParams.WRAP_CONTENT);
+                grid.setUseDefaultMargins(true);
 
-                grid.setPadding(1,30,1,90);
+
+
 
                 //aprove admins
                 approve[i].setOnClickListener(new View.OnClickListener() {

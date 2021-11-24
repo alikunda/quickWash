@@ -45,7 +45,7 @@ public class adminAcPermission extends AppCompatActivity {
             GridLayout grid = new GridLayout(this);
             // set columns and rows
             grid.setRowCount(myUserRegisterations.size()+1);
-            grid.setColumnCount(4);
+            grid.setColumnCount(5);
 
 
             // create arrays of components
@@ -56,6 +56,7 @@ public class adminAcPermission extends AppCompatActivity {
             quote.setLayoutParams(new LinearLayout.LayoutParams(LinearLayout.LayoutParams.WRAP_CONTENT, LinearLayout.LayoutParams.WRAP_CONTENT));
             TextView[] ids = new TextView[myUserRegisterations.size()];
             TextView[] emails = new TextView[myUserRegisterations.size()];
+            TextView[] IDS = new TextView[myUserRegisterations.size()];
             Button[] approve = new Button[myUserRegisterations.size()];
             Button[] reject = new Button[myUserRegisterations.size()];
            // ButtonHandler approveBtn = new ButtonHandler();
@@ -72,6 +73,12 @@ public class adminAcPermission extends AppCompatActivity {
             TextView id2  = new TextView(this);
             id2.setGravity(Gravity.CENTER);
             id2.setText(" ");
+            TextView id3  = new TextView(this);
+            id3.setGravity(Gravity.CENTER);
+
+            TextView id4  = new TextView(this);
+            id3.setGravity(Gravity.CENTER);
+            id3.setText(" ");
 
             TextView emailOwner = new TextView(this);
             emailOwner.setText("Email");
@@ -88,15 +95,22 @@ public class adminAcPermission extends AppCompatActivity {
                     ViewGroup.LayoutParams.WRAP_CONTENT);
             grid.addView(id1, (int) (width * 0.10),
                     ViewGroup.LayoutParams.WRAP_CONTENT);
+            grid.addView(id4, (int) (width * 0.10),
+                    ViewGroup.LayoutParams.WRAP_CONTENT);
             grid.addView(id2, (int) (width * 0.10),
                     ViewGroup.LayoutParams.WRAP_CONTENT);
 
             for (userRegisteration myUser : myUserRegisterations) {
 
+
                 // create the TextView for the candy's id
                 ids[i] = new TextView(this);
                 ids[i].setGravity(Gravity.CENTER);
                 ids[i].setText("" + (i + 1));
+
+                IDS[i] = new TextView(this);
+                IDS[i].setGravity(Gravity.CENTER);
+                IDS[i].setText("  " );
 
                 // create the two EditTexts for the candy's name and price
                 // dreate EditText for both name and price
@@ -108,6 +122,8 @@ public class adminAcPermission extends AppCompatActivity {
                 approve[i] = new Button(this);
                 approve[i].setText("Approve");
                 approve[i].setBackgroundColor(getResources().getColor(android.R.color.holo_green_dark));
+                approve[i].setHeight(20);
+               approve[i].setPadding(20,10,20,10);
                 //approve[i].setId(friend.getId());
                 // set up event handling
 
@@ -116,9 +132,11 @@ public class adminAcPermission extends AppCompatActivity {
                 reject[i] = new Button(this);
                 reject[i].setText("Deny");
                 reject[i].setBackgroundColor(getResources().getColor(android.R.color.holo_red_dark));
+                reject[i].setHeight(20);
                 //   reject[i].setId(friend.getId()+1);
                 // set up event handling
-                reject[i].setPadding(20,20,20,20);
+                reject[i].setPadding(20,10,20,10);
+
 
                         // add the elements to grid
                         grid.addView(ids[i], width / 15, ViewGroup.LayoutParams.WRAP_CONTENT);
@@ -126,8 +144,13 @@ public class adminAcPermission extends AppCompatActivity {
                         ViewGroup.LayoutParams.WRAP_CONTENT);
                 grid.addView(approve[i], (int) (width * 0.20),
                         ViewGroup.LayoutParams.WRAP_CONTENT);
+                grid.addView(IDS[i], (int) (width * 0.05),
+                        ViewGroup.LayoutParams.WRAP_CONTENT);
                 grid.addView(reject[i], (int) (width * 0.15),
                         ViewGroup.LayoutParams.WRAP_CONTENT);
+                grid.setUseDefaultMargins(true);
+
+
 
                 grid.setPadding(1,30,1,90);
 

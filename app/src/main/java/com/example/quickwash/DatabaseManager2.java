@@ -32,7 +32,7 @@ public class DatabaseManager2 extends SQLiteOpenHelper {
     private static final String QUANTITY = "quantity";
     private static final String PRICE = "price";
     private static final String RECEIVED = "received";
-    private static final String STATUS = " order_status";
+    private static final String STATUS = " order_status"; // recieved, processing , ready for pick up
     private static final String RECIEPTNUMBER = "OrderNumber";
     private static final String CUSTOMER_EMAIL = "Cus_Email";
     private static final String DELIVERED = "delivered";

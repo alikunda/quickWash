@@ -48,14 +48,11 @@ public class GalleryFragment extends Fragment {
     public void onViewCreated(@NonNull View view, Bundle savedInstanceState) {
         super.onViewCreated(view, savedInstanceState);
 
-        String name  = getArguments().getString("my_key");
-
-        tracker= Integer.parseInt(name);
-        if(tracker ==1){
-            Button payButton = binding.add.findViewById(R.id.add);
-            payButton.setText("Pay");
-            tracker = 0;
-        }
+//        if(tracker ==1){
+//            Button payButton = binding.add.findViewById(R.id.add);
+//            payButton.setText("Pay");
+//            tracker = 0;
+//        }
         String checking  = dbManager.is_user_exist(MainActivity.myUser.getEmail());
         if(checking == "true"){
             String Name = dbManager.sendName(MainActivity.myUser.getEmail());
