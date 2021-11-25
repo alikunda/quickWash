@@ -97,6 +97,11 @@ public class side_menu extends AppCompatActivity {
             this.startActivity(deleteIntent);
             return true;
         }
+        else if (id == R.id.action_cart) {
+            Intent myIntent = new Intent(this,Cart.class);
+            this.startActivity(myIntent);
+            return true;
+        }
         return super.onOptionsItemSelected(item);
     }
 

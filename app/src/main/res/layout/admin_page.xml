@@ -8,17 +8,13 @@
     tools:context=".adminPage">
     <!--first name-->
 
+    <TextView android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:text="There no pending orders"
+        android:textStyle="italic"
+        android:textSize="30dp"
+        android:textAlignment="center"
+        android:layout_gravity="center_horizontal"/>
 
-    <TableLayout>
-        <TableRow>
-    <Button
-        android:id="@+id/update_order"
-        android:layout_width="180dp"
-        android:layout_height="50dp"
-        android:layout_marginLeft="110dp"
-        android:layout_marginTop="30dp"
-        android:text="Update Orders"
-        android:backgroundTint="@color/teal_700"></Button>
-        </TableRow>
-    </TableLayout>
+
 </TableLayout>

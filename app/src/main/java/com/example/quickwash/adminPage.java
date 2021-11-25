@@ -41,7 +41,7 @@ public class adminPage extends AppCompatActivity {
         updateView();
     }
     public void updateView() {
-        myOrder = dbManager1.selectAllPendingOrders();
+        myOrder = dbManager1.selectAllNewOrders();
         if (myOrder.size() > 0) {
             // create ScrollView and GridLayout
             ScrollView scrollView = new ScrollView(this);
@@ -49,7 +49,7 @@ public class adminPage extends AppCompatActivity {
             GridLayout grid = new GridLayout(this);
             // set columns and rows
             grid.setRowCount(myOrder.size()+1);
-            grid.setColumnCount(4);
+            grid.setColumnCount(2);
 
 
             // create arrays of components
@@ -90,10 +90,6 @@ public class adminPage extends AppCompatActivity {
             grid.addView(id, (int) (width * 0.10), ViewGroup.LayoutParams.WRAP_CONTENT);
             grid.addView(emailOwner, (int) (width * 0.35),
                     ViewGroup.LayoutParams.WRAP_CONTENT);
-            grid.addView(id1, (int) (width * 0.10),
-                    ViewGroup.LayoutParams.WRAP_CONTENT);
-            grid.addView(id2, (int) (width * 0.10),
-                    ViewGroup.LayoutParams.WRAP_CONTENT);
 
             for ( Order myOrder : myOrder) {
 
@@ -105,63 +101,17 @@ public class adminPage extends AppCompatActivity {
                 // create the two EditTexts for the candy's name and price
                 // dreate EditText for both name and price
                 emails[i]= new TextView(this);
-                emails[i].setText(myOrder.getGARMENT_TYPE()+", "+myOrder.getCLEANING_METHOD());
+                emails[i].setText("Garment: "+myOrder.getGARMENT_TYPE()+"\nCleaning Method: "+myOrder.getCLEANING_METHOD()+"\nPrice: "+myOrder.getPRICE()+"\nQTY: "+myOrder.getQUANTITY()+"\nStatus: "+myOrder.getSTATUS()+"\nRecieved on "+myOrder.getRECEIVED()+"\n Customer email: "+myOrder.getCUSTOMER_EMAIL()+"\n Reciept number: "+myOrder.getRECIEPTNUMBER());
                 Log.w("AdminUpdate","****"+myOrder.getCUSTOMER_EMAIL()+myOrder.getCLEANING_METHOD());
-                // create the approve button
-                approve[i] = new Button(this);
-                approve[i].setText("Approve");
-                approve[i].setBackgroundColor(getResources().getColor(android.R.color.holo_green_dark));
-                //approve[i].setId(friend.getId());
-                // set up event handling
 
-
-                // create the deny button
-                reject[i] = new Button(this);
-                reject[i].setText("Deny");
-                reject[i].setBackgroundColor(getResources().getColor(android.R.color.holo_red_dark));
-                //   reject[i].setId(friend.getId()+1);
-                // set up event handling
-                reject[i].setPadding(20,20,20,20);
 
                 // add the elements to grid
                 grid.addView(ids[i], width / 15, ViewGroup.LayoutParams.WRAP_CONTENT);
-                grid.addView(emails[i], (int) (width * 0.35),
+                grid.addView(emails[i], (int) (width * 0.65),
                         ViewGroup.LayoutParams.WRAP_CONTENT);
-                grid.addView(approve[i], (int) (width * 0.20),
-                        ViewGroup.LayoutParams.WRAP_CONTENT);
-                grid.addView(reject[i], (int) (width * 0.15),
-                        ViewGroup.LayoutParams.WRAP_CONTENT);
-
                 grid.setPadding(1,30,1,90);
 
-                //aprove admins
-                approve[i].setOnClickListener(new View.OnClickListener() {
-                    @Override
-                    public void onClick(View view) {
-//                        dbManager.requestAdminAC(myOrder.getEmail(),"approve");
-//                        updateView();
-//                        Toast.makeText(adminAcPermission.this, "Account Approved",Toast.LENGTH_LONG).show();
-//                        if(Admin_Update_Order.this.myOrder.isEmpty()){
-//                            Intent myIntent = new Intent(adminAcPermission.this, adminPage.class);
-//                            startActivity(myIntent);
-//                        }
-                    }
 
-                });
-                //reject admins
-                reject[i].setOnClickListener(new View.OnClickListener() {
-                    @Override
-                    public void onClick(View view) {
-//                        dbManager.deleteAdminByAdmin(myOrder.getEmail());
-//                        updateView();
-//                        Toast.makeText(adminAcPermission.this, "Account rejected and deleted",Toast.LENGTH_LONG).show();
-//                        if(Admin_Update_Order.this.myOrder.isEmpty()){
-//                            Intent myIntent = new Intent(adminAcPermission.this, adminPage.class);
-//                            startActivity(myIntent);
-//                        }
-                    }
-
-                });
                 i++;
             }
 
@@ -177,7 +127,6 @@ public class adminPage extends AppCompatActivity {
         getMenuInflater().inflate(R.menu.menu_admin, menu);
         return true;
     }
-
     @Override
     public boolean onOptionsItemSelected(MenuItem item) {
         int id = item.getItemId();
@@ -212,7 +161,7 @@ public class adminPage extends AppCompatActivity {
                 this.startActivity(profile);
                 return true;
             } else{
-                    Toast.makeText(this, "Access denied", Toast.LENGTH_LONG).show();
+                Toast.makeText(this, "Access denied", Toast.LENGTH_LONG).show();
             }
         }
         else if(id == R.id.action_admins){

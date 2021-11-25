@@ -4,11 +4,14 @@ import android.app.FragmentManager;
 import android.content.Intent;
 import android.os.Build;
 import android.os.Bundle;
+import android.view.Menu;
+import android.view.MenuItem;
 import android.view.View;
 import android.widget.AdapterView;
 import android.widget.ArrayAdapter;
 import android.widget.AutoCompleteTextView;
 import android.widget.Button;
+import android.widget.Checkable;
 import android.widget.EditText;
 import android.widget.RadioButton;
 import android.widget.RadioGroup;
@@ -19,6 +22,7 @@ import androidx.annotation.RequiresApi;
 import androidx.appcompat.app.AppCompatActivity;
 import androidx.fragment.app.Fragment;
 
+import com.example.quickwash.Cart;
 import com.example.quickwash.DatabaseManager2;
 import com.example.quickwash.Garment.Garment;
 import com.example.quickwash.Garment.GarmentFactory;
@@ -26,6 +30,7 @@ import com.example.quickwash.MainActivity;
 import com.example.quickwash.R;
 import com.example.quickwash.ui.gallery.GalleryFragment;
 import com.example.quickwash.ui.gallery.GalleryViewModel;
+import com.example.quickwash.userProfileActivity;
 import com.google.android.material.textfield.TextInputLayout;
 
 import java.text.NumberFormat;
@@ -40,6 +45,7 @@ public class StartOrderActivity extends AppCompatActivity  {
     NumberFormat nf = NumberFormat.getCurrencyInstance();
     double runningTotal = 0.00;
     private int recieptNumber = 1;
+    public int react= 0;
 
 
     @Override
@@ -91,6 +97,7 @@ public class StartOrderActivity extends AppCompatActivity  {
                 garmentSelectView.setVisibility(View.VISIBLE);
 
                 paymentView.setVisibility(View.VISIBLE);
+                react = 1;
 
 
             }
@@ -188,37 +195,40 @@ public class StartOrderActivity extends AppCompatActivity  {
             RadioButton cleaningMethodRB = findViewById(radioID);
             String garmentTVString = garmentTV.getText().toString();
 
-            if (radioID == -1) {
+            if (react ==1) {
                 cleaningMethodString = "dry clean";
+
                 Garment newGarment = gf.getGarment(garmentTypeString, cleaningMethodString, garmentPrice);//cleaning method
 
                 runningTotal += newGarment.getPrice() * quantity;
 
-                dbManager2.insertGarment(newGarment, quantity, "recieved", recieptNumber, MainActivity.myUser.getEmail());//cleaning method
+                dbManager2.insertGarment(newGarment, quantity, "in cart", recieptNumber, MainActivity.myUser.getEmail());//cleaning method
 
                 Toast.makeText(StartOrderActivity.this, quantity + " " + cleaningMethodString +
-                        " " + garmentTypeString + ":  $" + garmentPrice + " added to order", Toast.LENGTH_LONG).show();
-
-            } else{
+                        " " + garmentTypeString + ":  $" + garmentPrice + " added to Cart", Toast.LENGTH_LONG).show();
+                react=0;
+            }
+            else {
 
                 cleaningMethodString = cleaningMethodRB.getText().toString().split(" ")[0];
-            Garment newGarment = gf.getGarment(garmentTypeString, cleaningMethodString, garmentPrice);//cleaning method
+                Garment newGarment = gf.getGarment(garmentTypeString, cleaningMethodString, garmentPrice);//cleaning method
 
-            runningTotal += newGarment.getPrice() * quantity;
+                runningTotal += newGarment.getPrice() * quantity;
 
-            dbManager2.insertGarment(newGarment, quantity, "recieved", recieptNumber, MainActivity.myUser.getEmail());//cleaning method
+                dbManager2.insertGarment(newGarment, quantity, "in cart", recieptNumber, MainActivity.myUser.getEmail());//cleaning method
 
-            Toast.makeText(StartOrderActivity.this, quantity + " " + cleaningMethodString +
-                    " " + garmentTypeString + ":  $" + garmentPrice + " added to order", Toast.LENGTH_LONG).show();
+                Toast.makeText(StartOrderActivity.this, quantity + " " + cleaningMethodString +
+                        " " + garmentTypeString + ":  $" + garmentPrice + " added to Cart", Toast.LENGTH_LONG).show();
 
-        }
+            }
             recieptNumber++;
             updateView();
         }
     }
-    public void pay(View v ) {
-
-        Toast.makeText(this, "payment button is clicked", Toast.LENGTH_LONG).show();
+    public void Checkout(View v ) {
+        Intent myIntent = new Intent(this, Cart.class);
+        startActivity(myIntent);
+        this.finish();
 //        FragmentManager fragmentManager = getFragmentManager();
 //
 //        Fragment fragment = new Fragment(R.layout.fragment_gallery);
@@ -263,5 +273,29 @@ public class StartOrderActivity extends AppCompatActivity  {
         super.onDestroy();
         binding = null;
     }*/
+
+    //menu
+    @Override
+    public boolean onCreateOptionsMenu(Menu menu) {
+        // Inflate the menu; this adds items to the action bar if it is present.
+        getMenuInflater().inflate(R.menu.side_menu, menu);
+        return true;
+    }
+    public boolean onOptionsItemSelected(MenuItem item) {
+        int id = item.getItemId();
+
+        //noinspection SimplifiableIfStatement
+        if (id == R.id.action_userProfile) {
+            Intent deleteIntent = new Intent(this, userProfileActivity.class);
+            this.startActivity(deleteIntent);
+            return true;
+        }
+        else if (id == R.id.action_cart) {
+            Intent myIntent = new Intent(this,Cart.class);
+            this.startActivity(myIntent);
+            return true;
+        }
+        return super.onOptionsItemSelected(item);
+    }
 }
 

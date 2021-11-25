@@ -49,6 +49,12 @@
             android:label="Admins" android:parentActivityName=".adminPage"></activity>
         <activity android:name=".Owner_admin"
             android:label="Complete access accounts list" android:parentActivityName=".adminPage"></activity>
+        <activity android:name=".Cart"
+            android:label="Cart" android:parentActivityName=".ui.order.StartOrderActivity"></activity>
+        <activity android:name=".OrderPlacedActivty" android:label="Your order has been placed"
+            android:parentActivityName=".ui.order.StartOrderActivity"></activity>
+        <activity android:name=".PayementOrder" android:label="Payement Gateway"
+            android:parentActivityName=".ui.order.StartOrderActivity"></activity>
     </application>
 
 </manifest>

@@ -10,20 +10,25 @@ public class Order {
     private  String QUANTITY;
     private  String PRICE;
     private  String RECEIVED;
+    private String DELIVERED;
     private  String STATUS;
     private  String RECIEPTNUMBER;
     private  String CUSTOMER_EMAIL;
-    public Order(String garmenType,String Cleaning_method, String quantity, String price, String Rec, String Status, String Rec_num, String email){
+    public Order(String garmenType,String Cleaning_method, String quantity, String price, String Rec,String del, String Status, String Rec_num, String email){
         setGarmentType(garmenType);
         setCleaingMethod(Cleaning_method);
         setQuantity(quantity);
         setPrice(price);
         setReceved(Rec);
+        setDelivered(del);
         setStatus(Status);
         setRec_num(Rec_num);
         setEmail(email);
     }
 
+    public void setDelivered(String del){
+     DELIVERED = del;
+    }
     public  void setRec_num(String rec_num) {
         RECIEPTNUMBER = rec_num;
     }
@@ -77,6 +82,9 @@ public class Order {
     }
     public String getCUSTOMER_EMAIL(){
         return CUSTOMER_EMAIL;
+    }
+    public String getDELIVERED(){
+        return DELIVERED;
     }
 
 

@@ -1,0 +1,43 @@
+<?xml version="1.0" encoding="utf-8"?>
+<RelativeLayout
+    xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="fill_parent"
+    android:layout_height="fill_parent"
+    android:background="@color/green">
+    <RelativeLayout
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_alignParentBottom="true">
+
+        <ImageView
+            android:id="@+id/checkedMarked"
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:src="@drawable/ic_check_foreground"></ImageView>
+
+        <TextView
+            android:id="@+id/orderPlaced"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_alignBottom="@+id/checkedMarked"
+            android:layout_marginBottom="245dp"
+            android:gravity="center_horizontal"
+            android:text="Order sucessfully placed!!!"
+            android:textSize="25dp"
+            android:fontFamily="sans-serif-condensed-medium"
+            android:textStyle="italic"></TextView>
+        <Button
+            android:id="@+id/trackOrder"
+            android:layout_width="300dp"
+            android:layout_centerInParent="true"
+            android:layout_height="wrap_content"
+            android:layout_alignBottom="@+id/checkedMarked"
+            android:layout_marginBottom="180dp"
+            android:gravity="center_horizontal"
+            android:text="Track order"
+            android:textSize="25dp"
+            android:fontFamily="sans-serif-condensed-medium"
+            android:textStyle="italic"></Button>
+
+    </RelativeLayout>
+</RelativeLayout>
