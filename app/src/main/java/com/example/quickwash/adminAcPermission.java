@@ -45,7 +45,7 @@ public class adminAcPermission extends AppCompatActivity {
             GridLayout grid = new GridLayout(this);
             // set columns and rows
             grid.setRowCount(myUserRegisterations.size()+1);
-            grid.setColumnCount(5);
+            grid.setColumnCount(4);
 
 
             // create arrays of components
@@ -95,8 +95,6 @@ public class adminAcPermission extends AppCompatActivity {
                     ViewGroup.LayoutParams.WRAP_CONTENT);
             grid.addView(id1, (int) (width * 0.10),
                     ViewGroup.LayoutParams.WRAP_CONTENT);
-            grid.addView(id4, (int) (width * 0.10),
-                    ViewGroup.LayoutParams.WRAP_CONTENT);
             grid.addView(id2, (int) (width * 0.10),
                     ViewGroup.LayoutParams.WRAP_CONTENT);
 
@@ -143,8 +141,6 @@ public class adminAcPermission extends AppCompatActivity {
                 grid.addView(emails[i], (int) (width * 0.35),
                         ViewGroup.LayoutParams.WRAP_CONTENT);
                 grid.addView(approve[i], (int) (width * 0.20),
-                        ViewGroup.LayoutParams.WRAP_CONTENT);
-                grid.addView(IDS[i], (int) (width * 0.05),
                         ViewGroup.LayoutParams.WRAP_CONTENT);
                 grid.addView(reject[i], (int) (width * 0.15),
                         ViewGroup.LayoutParams.WRAP_CONTENT);

@@ -78,7 +78,7 @@ public class adminPage extends AppCompatActivity {
             id2.setText(" ");
 
             TextView emailOwner = new TextView(this);
-            emailOwner.setText("Garment Type ");
+            emailOwner.setText("Pending orders ");
             emailOwner.setTextColor(getResources().getColor(R.color.red));
             emailOwner.setTextSize(20);
             // retrieve width of screen
@@ -110,6 +110,7 @@ public class adminPage extends AppCompatActivity {
                 grid.addView(emails[i], (int) (width * 0.65),
                         ViewGroup.LayoutParams.WRAP_CONTENT);
                 grid.setPadding(1,30,1,90);
+                grid.setUseDefaultMargins(true);
 
 
                 i++;

@@ -113,6 +113,7 @@ public class displayAllAdmins extends AppCompatActivity {
                 // create the approve button
                 approve[i] = new Button(this);
                 approve[i].setText("Complete access");
+                approve[i].setTextSize(10);
                 approve[i].setBackgroundColor(getResources().getColor(R.color.green));
 
 

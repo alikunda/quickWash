@@ -54,6 +54,9 @@ public class DatabaseManager2 extends SQLiteOpenHelper {
     private static final String CART_STATUS = " order_status"; // recieved, processing , ready for pick up
     private static final String CART_RECIEPTNUMBER = "OrderNumber";
     private static final String CART_CUSTOMER_EMAIL = "Cus_Email";
+    private  static int CART_REC_NUM = 1;
+    private  static  int ORDER_REC_NUM = 1;
+
 
 
     public DatabaseManager2(Context context) {
@@ -79,28 +82,32 @@ public class DatabaseManager2 extends SQLiteOpenHelper {
     @RequiresApi(api = Build.VERSION_CODES.O)
     public void insertGarmentInOrder(String garmentName, String cleaningMethod, double price, double quantity, String status, int recieptNum, String email) {
         Log.w("DB insert garment","*****"+garmentName+" "+cleaningMethod+" "+price+" "+quantity+" "+status+" "+recieptNum+" "+email);
-        DateTimeFormatter dtf = DateTimeFormatter.ofPattern("yyyy/MM/dd HH:mm");
+        DateTimeFormatter dtf = DateTimeFormatter.ofPattern("yyyy/MM/dd   HH:mm");
         LocalDateTime now = LocalDateTime.now();
         Log.w("DB","*****"+now);
         SQLiteDatabase db = this.getWritableDatabase();
         String sqlInsert = "insert into " + TABLE_ORDER + " values ( null, '" + garmentName
                 + "', '" + cleaningMethod + "', " + quantity + ", " + price*quantity
-                + ", '" + now +"', null, '"+status+"', '"+recieptNum+"', '"+email+"' )";
+                + ", '" + now +"', null, '"+status+"', '"+ORDER_REC_NUM+"', '"+email+"' )";
         db.execSQL(sqlInsert);
         db.close();
+        ORDER_REC_NUM = ORDER_REC_NUM+1;
     }
 
     @RequiresApi(api = Build.VERSION_CODES.O)
     public void insertGarment(Garment garment, int quantity, String status, int recieptNum, String email) {
-        DateTimeFormatter dtf = DateTimeFormatter.ofPattern("yyyy/MM/dd HH:mm");
+        DateTimeFormatter dtf = DateTimeFormatter.ofPattern("yyyy/MM/dd   HH:mm");
         LocalDateTime now = LocalDateTime.now();
         Log.w("DB","*****"+now);
         SQLiteDatabase db = this.getWritableDatabase();
         String sqlInsert = "insert into " + TABLE_CART + " values ( null, '" + garment.getGarmentName()
                 + "', '" + garment.getCleaningMethod() + "', " + quantity + ", " + garment.getPrice()*quantity
-                + ", '" + now +"', null,'"+status+"', '"+recieptNum+"', '"+email+"' )";
+                + ", '" + now +"', null,'"+status+"', '"+CART_REC_NUM+"', '"+email+"' )";
+
         db.execSQL(sqlInsert);
         db.close();
+        CART_REC_NUM = CART_REC_NUM+1;
+        Log.w("rec num","******"+CART_REC_NUM );
     }
     //admin
     public ArrayList<Order> selectAllNewOrders(){

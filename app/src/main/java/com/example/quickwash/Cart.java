@@ -110,7 +110,7 @@ public class Cart extends AppCompatActivity {
                 // create the two EditTexts for the candy's name and price
                 // dreate EditText for both name and price
                 orderItems[i]= new TextView(this);
-                orderItems[i].setText("Garment: "+myOrder.getGARMENT_TYPE()+"\nCleaning Method: "+myOrder.getCLEANING_METHOD()+"\nPrice: "+myOrder.getPRICE()+"\nQTY: "+myOrder.getQUANTITY()+"\nStatus: "+myOrder.getSTATUS()+"\nRecieved on "+myOrder.getRECEIVED()+"\n Customer email: "+myOrder.getCUSTOMER_EMAIL()+"\n Reciept number: "+myOrder.getRECIEPTNUMBER());
+                orderItems[i].setText("Garment: "+myOrder.getGARMENT_TYPE()+"\nCleaning Method: "+myOrder.getCLEANING_METHOD()+"\nPrice: "+myOrder.getPRICE()+"\nQTY: "+myOrder.getQUANTITY()+"\nContact information: "+myOrder.getCUSTOMER_EMAIL()+"\nReciept number: "+myOrder.getRECIEPTNUMBER());
                       //  setText("Garment: "+myOrder.getGARMENT_TYPE()+"\nQTY:"+myOrder.getQUANTITY()+"\n"+"Cleaning Method: "+myOrder.getCLEANING_METHOD() +"\nPrice:$"+myOrder.getPRICE());
                 // create the approve button
 

@@ -6,15 +6,26 @@
     <item
         android:id="@+id/action_Profile"
         android:orderInCategory="100"
-        android:title="Profile" />
-    <item
-        android:id="@+id/action_access"
-        android:orderInCategory="100"
-        android:title="Account requests(Admin) " />
-    <item
-        android:id="@+id/action_admins"
-        android:orderInCategory="100"
-        android:title="Admins"/>
+        android:title="My Profile" />
+
+
+    <item android:title="Admin">
+    <menu>
+        <item
+            android:id="@+id/action_access"
+            android:orderInCategory="100"
+            android:title="Account requests(Admin) " />
+        <item
+            android:id="@+id/action_admins"
+            android:orderInCategory="100"
+            android:title="Admins"/>
+        <item
+            android:id="@+id/action_owner_access_list"
+            android:orderInCategory="100"
+            android:title="List of complete access users" />
+    </menu>
+    </item>
+
 
     <item
         android:id="@+id/action_customer"
@@ -24,10 +35,7 @@
         android:id="@+id/action_delete"
         android:orderInCategory="100"
         android:title="Delete users" />
-    <item
-        android:id="@+id/action_owner_access_list"
-        android:orderInCategory="100"
-        android:title="List of complete access users" />
+
     <item
         android:id="@+id/action_logout"
         android:orderInCategory="100"
