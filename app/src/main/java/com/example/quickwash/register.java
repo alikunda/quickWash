@@ -1,7 +1,10 @@
 package com.example.quickwash;
 
+import android.app.ProgressDialog;
 import android.content.Intent;
 import android.os.Bundle;
+import android.os.Handler;
+import android.os.Message;
 import android.view.View;
 import android.widget.Button;
 import android.widget.EditText;
@@ -98,6 +101,40 @@ public class register extends AppCompatActivity {
                     if (checkUser) {
                         Toast.makeText(this, emailString + " Already exists ", Toast.LENGTH_LONG).show();
                     } else {
+
+                        ProgressDialog progressDialog;
+                        progressDialog = new ProgressDialog(register.this);
+                        progressDialog.setMax(100);
+                        progressDialog.setMessage("Please wait...");
+                        progressDialog.setTitle("Registering Account");
+                        progressDialog.setProgressStyle(ProgressDialog.STYLE_SPINNER);
+                        progressDialog.show();
+                        final Handler handle = new Handler() {
+                            @Override
+                            public void handleMessage(Message msg) {
+                                super.handleMessage(msg);
+                                progressDialog.incrementProgressBy(1);
+                            }
+                        };
+                        new Thread(new Runnable() {
+                            @Override
+                            public void run() {
+                                try {
+                                    while (progressDialog.getProgress() <= progressDialog
+                                            .getMax()) {
+                                        Thread.sleep(300);
+                                        handle.sendMessage(handle.obtainMessage());
+                                        if (progressDialog.getProgress() == progressDialog
+                                                .getMax()) {
+                                            progressDialog.dismiss();
+                                        }
+
+                                    }
+                                } catch (Exception e) {
+                                    e.printStackTrace();
+                                }
+                            }
+                        }).start();
 
                         if(myUserRegisteration.getUserType().equals("admin")||myUserRegisteration.getUserType().equals("Admin")){ //*******//
                             dbManager.insertUserv2(myUserRegisteration, "denied"); //*******//

@@ -1,11 +1,14 @@
 package com.example.quickwash;
 
 import android.app.AlertDialog;
+import android.app.ProgressDialog;
 import android.content.DialogInterface;
 import android.content.Intent;
 import android.content.SharedPreferences;
 import android.os.Build;
 import android.os.Bundle;
+import android.os.Handler;
+import android.os.Message;
 import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
@@ -90,6 +93,39 @@ public class PayementOrder extends AppCompatActivity {
                 String checking_for_dup = dbManager.check_if_exist(name, accountNum, MMYY, CVV, email);
                 Log.w("Gallery","******"+checking_for_dup);
                 if (checking_for_dup =="true") {
+                    ProgressDialog progressDialog;
+                    progressDialog = new ProgressDialog(PayementOrder.this);
+                    progressDialog.setMax(100);
+                    progressDialog.setMessage("Please wait...");
+                    progressDialog.setTitle("Processing Payment");
+                    progressDialog.setProgressStyle(ProgressDialog.STYLE_SPINNER);
+                    progressDialog.show();
+                    final Handler handle = new Handler() {
+                        @Override
+                        public void handleMessage(Message msg) {
+                            super.handleMessage(msg);
+                            progressDialog.incrementProgressBy(1);
+                        }
+                    };
+                    new Thread(new Runnable() {
+                        @Override
+                        public void run() {
+                            try {
+                                while (progressDialog.getProgress() <= progressDialog
+                                        .getMax()) {
+                                    Thread.sleep(30);
+                                    handle.sendMessage(handle.obtainMessage());
+                                    if (progressDialog.getProgress() == progressDialog
+                                            .getMax()) {
+                                        progressDialog.dismiss();
+                                    }
+
+                                }
+                            } catch (Exception e) {
+                                e.printStackTrace();
+                            }
+                        }
+                    }).start();
                     Toast.makeText(PayementOrder.this, "Payement made Sucessfully!", Toast.LENGTH_SHORT).show();
                     orders = dbManager2.selectAllPendingOrders(MainActivity.myUser.getEmail());
                     for ( Order myOrder : orders) {
@@ -108,6 +144,40 @@ public class PayementOrder extends AppCompatActivity {
                     finish();
 
                 } else {
+                    ProgressDialog progressDialog;
+                    progressDialog = new ProgressDialog(PayementOrder.this);
+                    progressDialog.setMax(100);
+                    progressDialog.setMessage("Please wait...");
+                    progressDialog.setTitle("Processing Payment");
+                    progressDialog.setProgressStyle(ProgressDialog.STYLE_SPINNER);
+                    progressDialog.show();
+                    final Handler handle = new Handler() {
+                        @Override
+                        public void handleMessage(Message msg) {
+                            super.handleMessage(msg);
+                            progressDialog.incrementProgressBy(1);
+                        }
+                    };
+                    new Thread(new Runnable() {
+                        @Override
+                        public void run() {
+                            try {
+                                while (progressDialog.getProgress() <= progressDialog
+                                        .getMax()) {
+                                    Thread.sleep(300);
+                                    handle.sendMessage(handle.obtainMessage());
+                                    if (progressDialog.getProgress() == progressDialog
+                                            .getMax()) {
+                                        progressDialog.dismiss();
+                                    }
+
+                                }
+                            } catch (Exception e) {
+                                e.printStackTrace();
+                            }
+                        }
+                    }).start();
+
                     dbManager.insertPayement(name, accountNum,MMYY, CVV,email);  //inserting payment method in DB
                     Toast.makeText(PayementOrder.this, "Payement made Sucessfully!", Toast.LENGTH_SHORT).show();
                     orders = dbManager2.selectAllPendingOrders(MainActivity.myUser.getEmail());
