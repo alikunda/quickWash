@@ -15,6 +15,7 @@ import android.widget.GridLayout;
 import android.widget.LinearLayout;
 import android.widget.RelativeLayout;
 import android.widget.ScrollView;
+import android.widget.TableLayout;
 import android.widget.TextView;
 import android.widget.Toast;
 
@@ -23,6 +24,7 @@ import androidx.appcompat.app.AppCompatActivity;
 
 import com.example.quickwash.ui.gallery.GalleryFragment;
 
+import java.text.DecimalFormat;
 import java.util.ArrayList;
 
 /**
@@ -36,6 +38,9 @@ public class Cart extends AppCompatActivity {
     public static User myUser;
     ArrayList<Order> orders;
     private int recieptNumber = 1;
+    private double subTotal = 0.0;
+    public final DecimalFormat rate_prec = new DecimalFormat("#.##");
+    private boolean isdelete = false;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -55,7 +60,7 @@ public class Cart extends AppCompatActivity {
             // Use gridLayout
             GridLayout grid = new GridLayout(this);
             // set columns and rows
-            grid.setRowCount(orders.size()+1);
+            grid.setRowCount(orders.size()+2);
             grid.setColumnCount(3);
 
 
@@ -82,6 +87,12 @@ public class Cart extends AppCompatActivity {
             TextView id2  = new TextView(this);
             id2.setGravity(Gravity.CENTER);
             id2.setText(" ");
+            TextView id3  = new TextView(this);
+            id3.setGravity(Gravity.CENTER);
+            id3.setText(" ");
+            TextView id4  = new TextView(this);
+            id4.setGravity(Gravity.CENTER);
+            id4.setText(" ");
 
             TextView emailOwner = new TextView(this);
             emailOwner.setText("Items ");
@@ -111,6 +122,13 @@ public class Cart extends AppCompatActivity {
                 // dreate EditText for both name and price
                 orderItems[i]= new TextView(this);
                 orderItems[i].setText("Garment: "+myOrder.getGARMENT_TYPE()+"\nCleaning Method: "+myOrder.getCLEANING_METHOD()+"\nPrice: "+myOrder.getPRICE()+"\nQTY: "+myOrder.getQUANTITY()+"\nContact information: "+myOrder.getCUSTOMER_EMAIL()+"\nReciept number: "+myOrder.getRECIEPTNUMBER());
+
+                if(!isdelete) {
+                    double d1 = Double.parseDouble(myOrder.getPRICE());
+                    double d2 = Double.parseDouble(myOrder.getQUANTITY());
+                    subTotal = subTotal + (d1 * d2);
+                }
+
                       //  setText("Garment: "+myOrder.getGARMENT_TYPE()+"\nQTY:"+myOrder.getQUANTITY()+"\n"+"Cleaning Method: "+myOrder.getCLEANING_METHOD() +"\nPrice:$"+myOrder.getPRICE());
                 // create the approve button
 
@@ -138,6 +156,10 @@ public class Cart extends AppCompatActivity {
                     @Override
                     public void onClick(View view) {
                      dbManager1.deleteItem(myOrder.getCLEANING_METHOD(),myOrder.getGARMENT_TYPE(),myOrder.getQUANTITY(),myOrder.getRECEIVED(), myOrder.getRECIEPTNUMBER());
+                        double d1 = Double.parseDouble(myOrder.getPRICE());
+                        double d2 = Double.parseDouble(myOrder.getQUANTITY());
+                        subTotal = subTotal - (d1 * d2);
+                     isdelete = true;
                      Toast.makeText(Cart.this, "Item deleted!!!",Toast.LENGTH_SHORT).show();
                      updateView();
                         if(orders.isEmpty()) {
@@ -148,9 +170,27 @@ public class Cart extends AppCompatActivity {
                     }
 
                 });
-
                 i++;
+
             }
+            TextView SUBtotal = new TextView(this);
+            double tax = subTotal *0.0825;
+            double total = subTotal+tax;
+            SUBtotal.setText("Subtotal..............$"+rate_prec.format(subTotal)+"\nTAX..................$"+rate_prec.format(tax)+"\nTotal..................$"+rate_prec.format(total));
+            SUBtotal.setTextSize(20);
+            SUBtotal.setGravity(Gravity.FILL_HORIZONTAL);
+            SUBtotal.setGravity(View.TEXT_ALIGNMENT_CENTER);
+            SUBtotal.setBackground(getResources().getDrawable(R.drawable.border));
+            grid.addView(id3, width / 15, ViewGroup.LayoutParams.WRAP_CONTENT);
+            grid.addView(SUBtotal, (int) (width * 0.55),
+                    ViewGroup.LayoutParams.WRAP_CONTENT);
+            grid.addView(id4, (int) (width * 0.5),
+                    ViewGroup.LayoutParams.WRAP_CONTENT);
+
+            grid.setUseDefaultMargins(true);
+            grid.setPadding(1,30,30,90);
+
+
 
             // create a back button
             Button Pay = new Button(this);
@@ -161,7 +201,6 @@ public class Cart extends AppCompatActivity {
                     Intent myIntent = new Intent(Cart.this, PayementOrder.class);
                     startActivity(myIntent);
                     finish();
-
                 }
             });
             // Add views
@@ -173,7 +212,9 @@ public class Cart extends AppCompatActivity {
             params.addRule(RelativeLayout.ALIGN_PARENT_BOTTOM);
             params.addRule(RelativeLayout.CENTER_HORIZONTAL);
             params.setMargins(0, 0, 0, 50);
-            layout.addView(Pay, params);
+            layout.addView(Pay,params);
+
+
 
             setContentView(layout);
         }
