@@ -35,7 +35,7 @@ public class MainActivity extends AppCompatActivity {
         if(!adminCheck){ //*******//
             dbManager.insertUserManually("admin@admin.com","admin","owner","admin","admin","owner");
 
-            Toast.makeText(this, "admin created",Toast.LENGTH_LONG).show();  //*******//
+            //Toast.makeText(this, "admin created",Toast.LENGTH_LONG).show();  //*******//
             Log.w("testing main activity","****Created"); //*******//
         }
     }

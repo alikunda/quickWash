@@ -121,7 +121,10 @@ public class Cart extends AppCompatActivity {
                 // create the two EditTexts for the candy's name and price
                 // dreate EditText for both name and price
                 orderItems[i]= new TextView(this);
-                orderItems[i].setText("Garment: "+myOrder.getGARMENT_TYPE()+"\nCleaning Method: "+myOrder.getCLEANING_METHOD()+"\nPrice: "+myOrder.getPRICE()+"\nQTY: "+myOrder.getQUANTITY()+"\nContact information: "+myOrder.getCUSTOMER_EMAIL()+"\nReciept number: "+myOrder.getRECIEPTNUMBER());
+                double D1 = Double.parseDouble(myOrder.getPRICE());
+                double D2 = Double.parseDouble(myOrder.getQUANTITY());
+                double TOTAL = D1*D2;
+                orderItems[i].setText("Garment: "+myOrder.getGARMENT_TYPE()+"\nCleaning Method: "+myOrder.getCLEANING_METHOD()+"\nPrice: "+rate_prec.format(TOTAL)+"\nTAX: "+rate_prec.format((D1*D2)*0.0825)+"\nTotal: "+rate_prec.format(TOTAL+((D1*D2)*0.0825))+"\nQTY: "+myOrder.getQUANTITY()+"\nContact information: "+myOrder.getCUSTOMER_EMAIL()+"\nReciept number: "+myOrder.getRECIEPTNUMBER());
 
                 if(!isdelete) {
                     double d1 = Double.parseDouble(myOrder.getPRICE());
@@ -176,7 +179,7 @@ public class Cart extends AppCompatActivity {
             TextView SUBtotal = new TextView(this);
             double tax = subTotal *0.0825;
             double total = subTotal+tax;
-            SUBtotal.setText("Subtotal..............$"+rate_prec.format(subTotal)+"\nTAX..................$"+rate_prec.format(tax)+"\nTotal..................$"+rate_prec.format(total));
+            SUBtotal.setText("Subtotal..............$"+rate_prec.format(subTotal)+"\nTAX(8.25%)..............$"+rate_prec.format(tax)+"\nTotal..................$"+rate_prec.format(total));
             SUBtotal.setTextSize(20);
             SUBtotal.setGravity(Gravity.FILL_HORIZONTAL);
             SUBtotal.setGravity(View.TEXT_ALIGNMENT_CENTER);
