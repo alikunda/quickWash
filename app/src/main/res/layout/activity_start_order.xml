@@ -81,6 +81,17 @@
 
 
     </TableRow>
+    <Button
+        android:id="@+id/procced"
+        android:layout_width="200dp"
+        android:layout_height="70dp"
+        android:layout_marginLeft="80dp"
+        android:layout_gravity="center"
+        android:layout_marginTop="20dp"
+        android:onClick="Checkout"
+        android:layout_marginRight="70dp"
+        android:text="Check out"
+        android:textSize="20dp" />
 
 
 </TableLayout>
@@ -229,18 +240,9 @@
         android:text="Add to Cart"
         android:textSize="20dp" />
 
-    <Button
-        android:id="@+id/procced"
-        android:layout_width="200dp"
-        android:layout_height="70dp"
-        android:layout_marginLeft="80dp"
-        android:layout_gravity="center"
-        android:layout_marginTop="20dp"
-        android:onClick="Checkout"
-        android:layout_marginRight="70dp"
-        android:text="Check out"
-        android:textSize="20dp" />
+
     </LinearLayout>
+
     </LinearLayout>
 </ScrollView>
 

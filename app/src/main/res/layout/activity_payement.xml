@@ -107,8 +107,10 @@
                             android:id="@+id/instructions"
                             android:layout_width="400dp"
                             android:layout_marginTop="10dp"
-                            android:layout_marginLeft="4dp"
-                            android:layout_marginRight="53dp"
+
+
+                            android:layout_gravity="center"
+                            android:textAlignment="center"
                             android:text="Instructions: You can add one payment method at a time, in order to use different card or payment information, first delete the current payment information and then you can add the new information."
                             android:textColor="@color/red"
                             android:textSize="20dp"

@@ -5,6 +5,7 @@ import android.app.FragmentTransaction;
 import android.content.Intent;
 import android.graphics.Point;
 import android.os.Bundle;
+import android.util.Log;
 import android.view.Gravity;
 import android.view.Menu;
 import android.view.MenuItem;
@@ -39,7 +40,7 @@ public class Cart extends AppCompatActivity {
     ArrayList<Order> orders;
     private int recieptNumber = 1;
     private double subTotal = 0.0;
-    public final DecimalFormat rate_prec = new DecimalFormat("#.##");
+    public final DecimalFormat rate_prec = new DecimalFormat(".00");
     private boolean isdelete = false;
 
     @Override
@@ -60,7 +61,7 @@ public class Cart extends AppCompatActivity {
             // Use gridLayout
             GridLayout grid = new GridLayout(this);
             // set columns and rows
-            grid.setRowCount(orders.size()+2);
+            grid.setRowCount(orders.size()+3);
             grid.setColumnCount(3);
 
 
@@ -73,9 +74,6 @@ public class Cart extends AppCompatActivity {
             TextView[] ids = new TextView[orders.size()];
             TextView[] orderItems = new TextView[orders.size()];
             Button[] remove = new Button[orders.size()];
-            // ButtonHandler approveBtn = new ButtonHandler();
-            // ButtonHandler1 rejectBtn = new ButtonHandler1();
-
 
             TextView id  = new TextView(this);
             id.setGravity(Gravity.CENTER);
@@ -93,6 +91,15 @@ public class Cart extends AppCompatActivity {
             TextView id4  = new TextView(this);
             id4.setGravity(Gravity.CENTER);
             id4.setText(" ");
+            TextView id5  = new TextView(this);
+            id5.setGravity(Gravity.CENTER);
+            id5.setText(" ");
+            TextView id6  = new TextView(this);
+            id6.setGravity(Gravity.CENTER);
+            id6.setText(" ");
+            TextView id7  = new TextView(this);
+            id7.setGravity(Gravity.CENTER);
+            id7.setText(" ");
 
             TextView emailOwner = new TextView(this);
             emailOwner.setText("Items ");
@@ -123,13 +130,14 @@ public class Cart extends AppCompatActivity {
                 orderItems[i]= new TextView(this);
                 double D1 = Double.parseDouble(myOrder.getPRICE());
                 double D2 = Double.parseDouble(myOrder.getQUANTITY());
-                double TOTAL = D1*D2;
-                orderItems[i].setText("Garment: "+myOrder.getGARMENT_TYPE()+"\nCleaning Method: "+myOrder.getCLEANING_METHOD()+"\nPrice: "+rate_prec.format(TOTAL)+"\nTAX: "+rate_prec.format((D1*D2)*0.0825)+"\nTotal: "+rate_prec.format(TOTAL+((D1*D2)*0.0825))+"\nQTY: "+myOrder.getQUANTITY()+"\nContact information: "+myOrder.getCUSTOMER_EMAIL()+"\nReciept number: "+myOrder.getRECIEPTNUMBER());
+                double TOTAL = D1;
+                Log.w("Total testing: ","******"+D1+", "+D2);
+                orderItems[i].setText("Garment: "+myOrder.getGARMENT_TYPE()+"\nCleaning Method: "+myOrder.getCLEANING_METHOD()+"\nPrice: "+rate_prec.format(TOTAL)+"\nTAX: "+rate_prec.format((D1)*0.0825)+"\nTotal: "+rate_prec.format(TOTAL+((D1)*0.0825))+"\nQTY: "+myOrder.getQUANTITY()+"\nContact information: "+myOrder.getCUSTOMER_EMAIL()+"\nReciept number: "+myOrder.getRECIEPTNUMBER());
 
                 if(!isdelete) {
                     double d1 = Double.parseDouble(myOrder.getPRICE());
                     double d2 = Double.parseDouble(myOrder.getQUANTITY());
-                    subTotal = subTotal + (d1 * d2);
+                    subTotal = subTotal + (d1);
                 }
 
                       //  setText("Garment: "+myOrder.getGARMENT_TYPE()+"\nQTY:"+myOrder.getQUANTITY()+"\n"+"Cleaning Method: "+myOrder.getCLEANING_METHOD() +"\nPrice:$"+myOrder.getPRICE());
@@ -161,7 +169,7 @@ public class Cart extends AppCompatActivity {
                      dbManager1.deleteItem(myOrder.getCLEANING_METHOD(),myOrder.getGARMENT_TYPE(),myOrder.getQUANTITY(),myOrder.getRECEIVED(), myOrder.getRECIEPTNUMBER());
                         double d1 = Double.parseDouble(myOrder.getPRICE());
                         double d2 = Double.parseDouble(myOrder.getQUANTITY());
-                        subTotal = subTotal - (d1 * d2);
+                        subTotal = subTotal - (d1);
                      isdelete = true;
                      Toast.makeText(Cart.this, "Item deleted!!!",Toast.LENGTH_SHORT).show();
                      updateView();
@@ -179,7 +187,7 @@ public class Cart extends AppCompatActivity {
             TextView SUBtotal = new TextView(this);
             double tax = subTotal *0.0825;
             double total = subTotal+tax;
-            SUBtotal.setText("Subtotal..............$"+rate_prec.format(subTotal)+"\nTAX(8.25%)..............$"+rate_prec.format(tax)+"\nTotal..................$"+rate_prec.format(total));
+            SUBtotal.setText("Subtotal.............$"+rate_prec.format(subTotal)+"\nTAX(8.25%).......$"+rate_prec.format(tax)+"\nTotal..................$"+rate_prec.format(total));
             SUBtotal.setTextSize(20);
             SUBtotal.setGravity(Gravity.FILL_HORIZONTAL);
             SUBtotal.setGravity(View.TEXT_ALIGNMENT_CENTER);
@@ -189,7 +197,6 @@ public class Cart extends AppCompatActivity {
                     ViewGroup.LayoutParams.WRAP_CONTENT);
             grid.addView(id4, (int) (width * 0.5),
                     ViewGroup.LayoutParams.WRAP_CONTENT);
-
             grid.setUseDefaultMargins(true);
             grid.setPadding(1,30,30,90);
 
@@ -206,6 +213,14 @@ public class Cart extends AppCompatActivity {
                     finish();
                 }
             });
+            grid.addView(id6, width / 8, ViewGroup.LayoutParams.WRAP_CONTENT);
+            grid.addView(Pay, (int) (width * 0.55),
+                    ViewGroup.LayoutParams.WRAP_CONTENT);
+            grid.addView(id7, (int) (width * 0.5),
+                    ViewGroup.LayoutParams.WRAP_CONTENT);
+
+            grid.setUseDefaultMargins(true);
+            grid.setPadding(1,30,30,90);
             // Add views
             scrollView.addView(grid);
             layout.addView(scrollView);
@@ -215,7 +230,7 @@ public class Cart extends AppCompatActivity {
             params.addRule(RelativeLayout.ALIGN_PARENT_BOTTOM);
             params.addRule(RelativeLayout.CENTER_HORIZONTAL);
             params.setMargins(0, 0, 0, 50);
-            layout.addView(Pay,params);
+           // layout.addView(Pay,params);
 
 
 
