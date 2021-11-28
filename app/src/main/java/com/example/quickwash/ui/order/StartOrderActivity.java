@@ -1,6 +1,5 @@
 package com.example.quickwash.ui.order;
 
-import android.app.FragmentManager;
 import android.content.Intent;
 import android.os.Build;
 import android.os.Bundle;
@@ -11,7 +10,6 @@ import android.widget.AdapterView;
 import android.widget.ArrayAdapter;
 import android.widget.AutoCompleteTextView;
 import android.widget.Button;
-import android.widget.Checkable;
 import android.widget.EditText;
 import android.widget.RadioButton;
 import android.widget.RadioGroup;
@@ -20,7 +18,6 @@ import android.widget.Toast;
 
 import androidx.annotation.RequiresApi;
 import androidx.appcompat.app.AppCompatActivity;
-import androidx.fragment.app.Fragment;
 
 import com.example.quickwash.Cart;
 import com.example.quickwash.DatabaseManager2;
@@ -28,8 +25,6 @@ import com.example.quickwash.Garment.Garment;
 import com.example.quickwash.Garment.GarmentFactory;
 import com.example.quickwash.MainActivity;
 import com.example.quickwash.R;
-import com.example.quickwash.ui.gallery.GalleryFragment;
-import com.example.quickwash.ui.gallery.GalleryViewModel;
 import com.example.quickwash.userProfileActivity;
 import com.google.android.material.textfield.TextInputLayout;
 
@@ -43,7 +38,7 @@ public class StartOrderActivity extends AppCompatActivity  {
     private GarmentFactory gf;
     //private ScriptGroup.Binding binding = new ScriptGroup.Binding()
     NumberFormat nf = NumberFormat.getCurrencyInstance();
-    double runningTotal = 0.00;
+    double runningTotal;
     private int recieptNumber = 1;
     public int react= 0;
 

@@ -34,6 +34,12 @@
         <activity android:name=".ui.order.StartOrderActivity"
             android:parentActivityName=".side_menu"
             android:label="Start new order"/>
+        <activity android:name=".ui.history.HistoryActivity"
+            android:parentActivityName=".side_menu"
+            android:label="History"/>
+        <activity android:name=".ui.checkOrder.CheckOrderActivity"
+            android:parentActivityName=".side_menu"
+            android:label="History"/>
         <activity android:name=".ProfileActivity"
             android:label="Profile"
             android:parentActivityName=".adminPage"></activity>

@@ -9,14 +9,11 @@ import android.util.Log;
 
 import androidx.annotation.RequiresApi;
 
-import java.text.SimpleDateFormat;
-import java.time.format.DateTimeFormatter;
-import java.time.LocalDateTime;
-import java.util.ArrayList;
-import java.util.Date;
-
 import com.example.quickwash.Garment.Garment;
-import com.google.type.DateTime;
+
+import java.time.LocalDateTime;
+import java.time.format.DateTimeFormatter;
+import java.util.ArrayList;
 
 /**
  * Database manage for user info used in login and register procces
@@ -33,7 +30,7 @@ public class DatabaseManager2 extends SQLiteOpenHelper {
     private static final String QUANTITY = "quantity";
     private static final String PRICE = "price";
     private static final String RECEIVED = "received";
-    private static final String STATUS = " order_status"; // recieved, processing , ready for pick up
+    private static final String STATUS = " order_status"; // recieved, processing , ready for pick up, delivered
     private static final String RECIEPTNUMBER = "OrderNumber";
     private static final String CUSTOMER_EMAIL = "Cus_Email";
     private static final String DELIVERED = "delivered";
@@ -51,7 +48,7 @@ public class DatabaseManager2 extends SQLiteOpenHelper {
     private static final String CART_PRICE = "price";
     private static final String CART_RECEIVED = "received";
     private static final String CART_DELIVERED = "delivered";
-    private static final String CART_STATUS = " order_status"; // recieved, processing , ready for pick up
+    private static final String CART_STATUS = " order_status"; // recieved, processing , ready for pick up, delivered
     private static final String CART_RECIEPTNUMBER = "OrderNumber";
     private static final String CART_CUSTOMER_EMAIL = "Cus_Email";
     private  static int CART_REC_NUM = 1;
@@ -111,8 +108,9 @@ public class DatabaseManager2 extends SQLiteOpenHelper {
     }
     //admin
     public ArrayList<Order> selectAllNewOrders(){
-        String sqlQuery = "select * from "+TABLE_ORDER +" WHERE "+STATUS+" = 'recieved'";
         SQLiteDatabase db = this.getWritableDatabase();
+        String sqlQuery = "select * from "+TABLE_ORDER +" WHERE "+STATUS+" = 'recieved'";
+
         Cursor myCursor = db.rawQuery(sqlQuery, null);
         ArrayList<Order> currentArray = new ArrayList<>();
         while(myCursor.moveToNext()){
@@ -121,6 +119,41 @@ public class DatabaseManager2 extends SQLiteOpenHelper {
         }
         db.close();
         return currentArray;
+    }
+
+    public ArrayList<Order> selectUserOrderHistory(String email){
+        SQLiteDatabase db = this.getWritableDatabase();
+        String sqlQuery = "select * from " + TABLE_ORDER + " where " + CUSTOMER_EMAIL + "= '"
+                + email + "' ";
+        Cursor myCursor = db.rawQuery(sqlQuery, null);
+        ArrayList<Order> currentArray = new ArrayList<>();
+        while(myCursor.moveToNext()){
+            Order currentOrderInstant = new Order(myCursor.getString(1), myCursor.getString(2),
+                    myCursor.getString(3), myCursor.getString(4), myCursor.getString(5),
+                    myCursor.getString(6),myCursor.getString(7),myCursor.getString(8),myCursor.getString(9));
+            currentArray.add(currentOrderInstant);
+        }
+        db.close();
+        return currentArray;
+
+    }
+
+
+    public ArrayList<Order> checkStatus(String email){
+        SQLiteDatabase db = this.getWritableDatabase();
+        String sqlQuery = "select * from " + TABLE_ORDER + " where " + CUSTOMER_EMAIL + "= '"
+                + email + "' ";
+        Cursor myCursor = db.rawQuery(sqlQuery, null);
+        ArrayList<Order> currentArray = new ArrayList<>();
+        while(myCursor.moveToNext()){
+            Order currentOrderInstant = new Order(myCursor.getString(1), myCursor.getString(2),
+                    myCursor.getString(3), myCursor.getString(4), myCursor.getString(5),
+                    myCursor.getString(6),myCursor.getString(7),myCursor.getString(8),myCursor.getString(9));
+            currentArray.add(currentOrderInstant);
+        }
+        db.close();
+        return currentArray;
+
     }
 
     public ArrayList<Order> selectAllPendingOrders(String email){
@@ -135,6 +168,20 @@ public class DatabaseManager2 extends SQLiteOpenHelper {
         db.close();
         return currentArray;
     }
+
+//    public ArrayList<Order> selectCurrentOrders(String email){
+//        String sqlQuery = "select * from "+TABLE_CART +" WHERE "+STATUS+" = 'in cart' and "+CART_CUSTOMER_EMAIL+" = '"+email+"'";
+//        SQLiteDatabase db = this.getWritableDatabase();
+//        Cursor myCursor = db.rawQuery(sqlQuery, null);
+//        ArrayList<Order> currentArray = new ArrayList<>();
+//        while(myCursor.moveToNext()){
+//            Order currentOrderInstane = new Order(myCursor.getString(1), myCursor.getString(2),myCursor.getString(3),myCursor.getString(4),myCursor.getString(5),myCursor.getString(6),myCursor.getString(7),myCursor.getString(8),myCursor.getString(9));
+//            currentArray.add(currentOrderInstane);
+//        }
+//        db.close();
+//        return currentArray;
+//    }
+
     public void deleteItem(String cleaningMethod, String garmentType, String quantity, String time, String number){
         SQLiteDatabase db = this.getWritableDatabase();
         String sqlDelete = "delete from "+TABLE_CART+" where "+CART_CLEANING_METHOD +" = '"+cleaningMethod+"' and "+CART_GARMENT_TYPE +" = '"+garmentType+"' and "+CART_QUANTITY+" = '"+quantity+"' and "+CART_RECEIVED+" = '"+time+"' and "+CART_RECIEPTNUMBER+" = '"+number+"'";

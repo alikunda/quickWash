@@ -27,14 +27,14 @@
         android:name="com.example.quickwash.ui.order.StartOrderActivity"
         android:label="Order"
         tools:layout="@layout/activity_start_order" />
-    <fragment
+    <activity
         android:id="@+id/nav_status"
-        android:name="com.example.quickwash.ui.checkOrder.checkOrderFragment"
+        android:name="com.example.quickwash.ui.checkOrder.CheckOrderActivity"
         android:label="Status"
-        tools:layout="@layout/fragment_check_order" />
-    <fragment
+        tools:layout="@layout/activity_check_order" />
+    <activity
         android:id="@+id/nav_check_history"
-        android:name="com.example.quickwash.ui.history.historyFragment"
+        android:name="com.example.quickwash.ui.history.HistoryActivity"
         android:label="History"
-        tools:layout="@layout/fragment_history" />
+        tools:layout="@layout/activity_order_history" />
 </navigation>

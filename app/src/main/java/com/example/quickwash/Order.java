@@ -4,6 +4,7 @@ import com.example.quickwash.Garment.GarmentFactory;
 
 public class Order {
     private GarmentFactory garmentFactory;
+    private int ID;
     private User newUser;
     private  String GARMENT_TYPE;
     private  String CLEANING_METHOD;
@@ -94,6 +95,11 @@ public class Order {
 
     public void setNewUser(User newUser) {
         this.newUser = newUser;
+    }
+
+    public String toString(){
+        return QUANTITY + " " + GARMENT_TYPE + ": " + CLEANING_METHOD + " - " + Double.parseDouble(PRICE)
+                + " " + STATUS;
     }
 
 
