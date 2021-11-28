@@ -76,7 +76,7 @@ public class HistoryActivity extends AppCompatActivity {
             id2.setText(" ");
 
             TextView emailOwner = new TextView(this);
-            emailOwner.setText("Order HistoryActivity");
+            emailOwner.setText("Order History");
             emailOwner.setTextColor(getResources().getColor(R.color.red));
             emailOwner.setTextSize(20);
             // retrieve width of screen
@@ -99,7 +99,11 @@ public class HistoryActivity extends AppCompatActivity {
                 // create the two EditTexts for the candy's name and price
                 // dreate EditText for both name and price
                 emails[i] = new TextView(this);
-                emails[i].setText("Garment: " + myOrder.getGARMENT_TYPE() + "\nCleaning Method: " + myOrder.getCLEANING_METHOD() + "\nPrice: " + myOrder.getPRICE() + "\nQTY: " + myOrder.getQUANTITY() + "\nStatus: " + myOrder.getSTATUS() + "\nRecieved on " + myOrder.getRECEIVED() + "\n Customer email: " + myOrder.getCUSTOMER_EMAIL() + "\n Reciept number: " + myOrder.getRECIEPTNUMBER());
+                emails[i].setText("Garment: " + myOrder.getGARMENT_TYPE() + "\nCleaning Method: " +
+                        myOrder.getCLEANING_METHOD() + "\nPrice: " + myOrder.getPRICE() + "\nQTY: " +
+                        myOrder.getQUANTITY() + "\nStatus: " + myOrder.getSTATUS() + "\nRecieved on " +
+                        myOrder.getRECEIVED() + "\n Customer email: " + myOrder.getCUSTOMER_EMAIL() +
+                        "\n Reciept number: " + myOrder.getID());
                 Log.w("AdminUpdate", "****" + myOrder.getCUSTOMER_EMAIL() + myOrder.getCLEANING_METHOD());
 
 

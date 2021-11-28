@@ -7,7 +7,6 @@ import android.util.Log;
 import android.view.Gravity;
 import android.view.Menu;
 import android.view.MenuItem;
-import android.view.View;
 import android.view.ViewGroup;
 import android.widget.Button;
 import android.widget.GridLayout;
@@ -101,7 +100,11 @@ public class adminPage extends AppCompatActivity {
                 // create the two EditTexts for the candy's name and price
                 // dreate EditText for both name and price
                 emails[i]= new TextView(this);
-                emails[i].setText("Garment: "+myOrder.getGARMENT_TYPE()+"\nCleaning Method: "+myOrder.getCLEANING_METHOD()+"\nPrice: "+myOrder.getPRICE()+"\nQTY: "+myOrder.getQUANTITY()+"\nStatus: "+myOrder.getSTATUS()+"\nRecieved on "+myOrder.getRECEIVED()+"\n Customer email: "+myOrder.getCUSTOMER_EMAIL()+"\n Reciept number: "+myOrder.getRECIEPTNUMBER());
+                emails[i].setText("Garment: "+myOrder.getGARMENT_TYPE()+"\nCleaning Method: "+
+                        myOrder.getCLEANING_METHOD()+"\nPrice: "+myOrder.getPRICE()+"\nQTY: "+
+                        myOrder.getQUANTITY()+"\nStatus: "+myOrder.getSTATUS()+"\nRecieved on "+
+                        myOrder.getRECEIVED()+"\n Customer email: "+myOrder.getCUSTOMER_EMAIL()+
+                        "\n Reciept number: "+myOrder.getID());
                 Log.w("AdminUpdate","****"+myOrder.getCUSTOMER_EMAIL()+myOrder.getCLEANING_METHOD());
 
 

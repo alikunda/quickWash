@@ -114,7 +114,11 @@ public class DatabaseManager2 extends SQLiteOpenHelper {
         Cursor myCursor = db.rawQuery(sqlQuery, null);
         ArrayList<Order> currentArray = new ArrayList<>();
         while(myCursor.moveToNext()){
-            Order currentOrderInstane = new Order(myCursor.getString(1), myCursor.getString(2),myCursor.getString(3),myCursor.getString(4),myCursor.getString(5),myCursor.getString(6),myCursor.getString(7),myCursor.getString(8),myCursor.getString(9));
+            Order currentOrderInstane = new Order(Integer.parseInt(myCursor.getString(0)),
+                    myCursor.getString(1), myCursor.getString(2),
+                    myCursor.getString(3),myCursor.getString(4),myCursor.getString(5),
+                    myCursor.getString(6),myCursor.getString(7),myCursor.getString(8),
+                    myCursor.getString(9));
             currentArray.add(currentOrderInstane);
         }
         db.close();
@@ -128,7 +132,8 @@ public class DatabaseManager2 extends SQLiteOpenHelper {
         Cursor myCursor = db.rawQuery(sqlQuery, null);
         ArrayList<Order> currentArray = new ArrayList<>();
         while(myCursor.moveToNext()){
-            Order currentOrderInstant = new Order(myCursor.getString(1), myCursor.getString(2),
+            Order currentOrderInstant = new Order(Integer.parseInt(myCursor.getString(0)),
+                    myCursor.getString(1), myCursor.getString(2),
                     myCursor.getString(3), myCursor.getString(4), myCursor.getString(5),
                     myCursor.getString(6),myCursor.getString(7),myCursor.getString(8),myCursor.getString(9));
             currentArray.add(currentOrderInstant);
@@ -146,7 +151,8 @@ public class DatabaseManager2 extends SQLiteOpenHelper {
         Cursor myCursor = db.rawQuery(sqlQuery, null);
         ArrayList<Order> currentArray = new ArrayList<>();
         while(myCursor.moveToNext()){
-            Order currentOrderInstant = new Order(myCursor.getString(1), myCursor.getString(2),
+            Order currentOrderInstant = new Order(Integer.parseInt(myCursor.getString(0)),
+                    myCursor.getString(1), myCursor.getString(2),
                     myCursor.getString(3), myCursor.getString(4), myCursor.getString(5),
                     myCursor.getString(6),myCursor.getString(7),myCursor.getString(8),myCursor.getString(9));
             currentArray.add(currentOrderInstant);
@@ -162,7 +168,10 @@ public class DatabaseManager2 extends SQLiteOpenHelper {
         Cursor myCursor = db.rawQuery(sqlQuery, null);
         ArrayList<Order> currentArray = new ArrayList<>();
         while(myCursor.moveToNext()){
-            Order currentOrderInstane = new Order(myCursor.getString(1), myCursor.getString(2),myCursor.getString(3),myCursor.getString(4),myCursor.getString(5),myCursor.getString(6),myCursor.getString(7),myCursor.getString(8),myCursor.getString(9));
+            Order currentOrderInstane = new Order(Integer.parseInt(myCursor.getString(0)),
+                    myCursor.getString(1), myCursor.getString(2),
+                    myCursor.getString(3), myCursor.getString(4), myCursor.getString(5),
+                    myCursor.getString(6),myCursor.getString(7),myCursor.getString(8),myCursor.getString(9));
             currentArray.add(currentOrderInstane);
         }
         db.close();

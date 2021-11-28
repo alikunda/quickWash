@@ -15,7 +15,10 @@ public class Order {
     private  String STATUS;
     private  String RECIEPTNUMBER;
     private  String CUSTOMER_EMAIL;
-    public Order(String garmenType,String Cleaning_method, String quantity, String price, String Rec,String del, String Status, String Rec_num, String email){
+    public Order(int id, String garmenType,String Cleaning_method, String quantity, String price,
+                 String Rec,String del, String Status, String Rec_num, String email){
+
+        setID(id);
         setGarmentType(garmenType);
         setCleaingMethod(Cleaning_method);
         setQuantity(quantity);
@@ -100,6 +103,14 @@ public class Order {
     public String toString(){
         return QUANTITY + " " + GARMENT_TYPE + ": " + CLEANING_METHOD + " - " + Double.parseDouble(PRICE)
                 + " " + STATUS;
+    }
+
+    public int getID() {
+        return ID;
+    }
+
+    public void setID(int ID) {
+        this.ID = ID;
     }
 
 
