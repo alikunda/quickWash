@@ -41,6 +41,10 @@
         android:title="Delete users" />
 
     <item
+        android:id="@+id/action_feedback"
+        android:orderInCategory="100"
+        android:title="Feedback" />
+    <item
         android:id="@+id/action_logout"
         android:orderInCategory="100"
         android:title="Logout" />

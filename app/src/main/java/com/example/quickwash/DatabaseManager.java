@@ -33,6 +33,11 @@ public class DatabaseManager extends SQLiteOpenHelper {
     private static final String MMYY = "mmyy";
     private static final String user_email = "email";
     private int temp1;
+    //Feedback table
+    private static final String TABLE_feedback = "feedback";
+    private static final String feed_back = "fmessage";
+    private static final String feed_email = "email1";
+
 
     public DatabaseManager(Context context) {
         super(context, DATABASE_NAME, null, DATABASE_VERSION);
@@ -54,8 +59,14 @@ public class DatabaseManager extends SQLiteOpenHelper {
         sqlCreatePayement +=  " integer primary key autoincrement, " +account_holder+" text, " +account_number;
         sqlCreatePayement += " long, " + MMYY +" integer, "+CVV +" integer, "+user_email+" text" +") "; //0 = false, 1 = true
 
+        String sqlCreatef = "create table "+ TABLE_feedback+" ("+ID;
+        sqlCreatef += " integer primary key autoincrement, "+ feed_back + " text, " + feed_email;
+        sqlCreatef += " text" + ") ";
+
+
         db.execSQL(sqlCreate);
         db.execSQL(sqlCreatePayement);
+        db.execSQL(sqlCreatef);
     }
     //*******//
 
@@ -257,6 +268,19 @@ public class DatabaseManager extends SQLiteOpenHelper {
         return myUsers;
     }
 
+    public ArrayList<RegisterFeed> showAllFeedback(){
+        String sqlQuery = "select * from "+TABLE_feedback;
+        SQLiteDatabase db = this.getWritableDatabase();
+        Cursor myCursor = db.rawQuery(sqlQuery, null);
+        ArrayList<RegisterFeed> myUsers = new ArrayList<>();
+        while(myCursor.moveToNext()){
+            RegisterFeed currentfeed = new RegisterFeed(Integer.parseInt(myCursor.getString(0)), myCursor.getString(1), myCursor.getString(2));
+            myUsers.add(currentfeed);
+        }
+        db.close();
+        return myUsers;
+    }
+
     //return first name
     public String fName(String email){
         String sqlQuery = "select "+fNAME+" "+" from "+TABLE_LOGIN +" WHERE "+EMAIL +" = '"+email+"'";
@@ -440,6 +464,13 @@ public class DatabaseManager extends SQLiteOpenHelper {
         String sqlInsert = "insert into " + TABLE_payement + " values (null, '" +
                 name + "' , '" + acc + "' , '" +mmdd + "' , '" + cvv+ "' , '" +email + "'  )";
         db.execSQL(sqlInsert);
+        db.close();
+    }
+
+    public void insertFeedback(String feedback, String email1){
+        SQLiteDatabase db = this.getWritableDatabase();
+        String sqlInsert1 = "insert into " + TABLE_feedback + " values (null, '" + feedback + "' , '" + email1 + "' )";
+        db.execSQL(sqlInsert1);
         db.close();
     }
     //admin section (delete user)

@@ -253,6 +253,11 @@ public class adminPage extends AppCompatActivity {
             startActivity(myIntent);
             this.finish();
         }
+        else if(id == R.id.action_feedback){
+            Intent myIntent = new Intent(this, feedbackActivity.class);
+            startActivity(myIntent);
+            this.finish();
+        }
         return super.onOptionsItemSelected(item);
     }
 
