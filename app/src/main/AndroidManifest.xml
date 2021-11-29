@@ -46,6 +46,9 @@
         <activity android:name=".display_customers"
             android:label="Display customer"
             android:parentActivityName=".adminPage"></activity>
+        <activity android:name=".feedbackActivity"
+            android:label="Display feedback"
+            android:parentActivityName=".adminPage"></activity>
         <activity android:name=".adminAcPermission"
             android:label="Admins"
             android:parentActivityName=".adminPage"></activity>

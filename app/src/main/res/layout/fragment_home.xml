@@ -21,17 +21,44 @@
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent" />
 
-    <pl.droidsonroids.gif.GifImageView
-        android:id="@+id/gifImageView"
-        android:layout_width="350dp"
-        android:layout_height="420dp"
-        android:layout_marginStart="28dp"
-        android:layout_marginTop="96dp"
-        android:background="#fff"
-        android:foregroundGravity="center"
-        android:src="@drawable/quickwash_logo_gif_for_use"
-        app:layout_constraintStart_toStartOf="@+id/textView3"
-        app:layout_constraintTop_toTopOf="@+id/textView3" />
+    <TextView
+        android:layout_width="407dp"
+        android:layout_height="174dp"
+        android:text="We are delighted that you have chosen our business for your dry
+        cleaning needs. Since you have created an account, you can now
+        take advantage of all the functionalities in our app. Open the side
+        bar menu and choose an action. You can start a new order or see the status of your order. You can also add your payment
+        information. Your full order history can also be displayed. If you
+        would like to give our business some feedback or if you have
+        any concerns about your order you can use the
+contact form to contact us. Thank you for choosing Quick Wash! We appreciate your business!"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintHorizontal_bias="0.428"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent"
+        app:layout_constraintVertical_bias="0.087"></TextView>
+
+    <TextView
+        android:layout_width="277dp"
+        android:layout_height="22dp"
+        android:text="Click the button below to start a new order"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent"
+        app:layout_constraintVertical_bias="0.359"></TextView>
+
+    <Button
+        android:id="@+id/OrderBtn"
+        android:layout_width="167dp"
+        android:layout_height="44dp"
+        android:text="Start Order"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent"
+        app:layout_constraintVertical_bias="0.425"></Button>
 
 
 </androidx.constraintlayout.widget.ConstraintLayout>

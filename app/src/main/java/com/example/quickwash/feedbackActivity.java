@@ -38,30 +38,22 @@ public class feedbackActivity extends AppCompatActivity {
         for(RegisterFeed Users: myUsers) {
             TextView quote = new TextView(this);
             quote.setId(Users.getID());
-            quote.setText(i + ". " + Users.toString()+" Pass:"+Users.getFeedback()+"\n");
+            quote.setText(i + ". " + Users.getEmail()+"\n"+" Feedback:"+Users.getFeedback()+"\n");
             quote.setTextSize(18);
-            quote.setBackgroundColor(getResources().getColor(R.color.yellow));
+            quote.setBackgroundColor(getResources().getColor(R.color.white));
             quote.setGravity(Gravity.CENTER);
             quote.setLayoutParams(new LinearLayout.LayoutParams(LinearLayout.LayoutParams.WRAP_CONTENT, LinearLayout.LayoutParams.WRAP_CONTENT));
             linearLayout.addView(quote);
             i++;
         }
-//            String temp;
-//        for(userRegisteration Users: myUser){
-//            TextView textView = new TextView(this);
-//            textView.setId(Users.getId());
-//            textView.setText(+i+". "+Users.toString());
-//
-//        }
+
 
         // create a back button
-        Button backButton = new Button(this);
-        backButton.setText("Back");
+        Button backBtn = new Button(this);
+        backBtn.setText("Back");
 
-        backButton.setOnClickListener(new View.OnClickListener() {
-            public void onClick(View v) {
-                feedbackActivity.this.finish();
-            }
+        backBtn.setOnClickListener(new View.OnClickListener() {
+            public void onClick(View v) { feedbackActivity.this.finish(); }
         });
         scrollView.addView(linearLayout);
         layout.addView(scrollView);
@@ -76,7 +68,7 @@ public class feedbackActivity extends AppCompatActivity {
         params.addRule(RelativeLayout.ALIGN_PARENT_BOTTOM);
         params.addRule(RelativeLayout.CENTER_HORIZONTAL);
         params.setMargins(0, 0, 0, 50);
-        layout.addView(backButton, params);
+        layout.addView(backBtn, params);
 
         setContentView(layout);
     }

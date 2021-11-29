@@ -1,5 +1,6 @@
 package com.example.quickwash.ui.home;
 
+import android.content.Intent;
 import android.os.Bundle;
 import android.view.LayoutInflater;
 import android.view.View;
@@ -12,6 +13,7 @@ import androidx.lifecycle.Observer;
 import androidx.lifecycle.ViewModelProvider;
 
 import com.example.quickwash.databinding.FragmentHomeBinding;
+import com.example.quickwash.ui.order.StartOrderActivity;
 
 public class HomeFragment extends Fragment {
 
@@ -25,15 +27,20 @@ public class HomeFragment extends Fragment {
 
         binding = FragmentHomeBinding.inflate(inflater, container, false);
         View root = binding.getRoot();
+        return root;
+    }
 
-        //final TextView textView = binding.textHome;
-        homeViewModel.getText().observe(getViewLifecycleOwner(), new Observer<String>() {
+    public void onViewCreated(@NonNull View view, Bundle savedInstanceState) {
+        super.onViewCreated(view, savedInstanceState);
+
+        binding.OrderBtn.setOnClickListener(new View.OnClickListener() {
             @Override
-            public void onChanged(@Nullable String s) {
-                //textView.setText(s);
+            public void onClick(View view) {
+                Intent myIntent = new Intent(getActivity(), StartOrderActivity.class);
+                startActivity(myIntent);
             }
         });
-        return root;
+
     }
 
     @Override
