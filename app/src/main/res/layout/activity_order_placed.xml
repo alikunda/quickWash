@@ -15,7 +15,6 @@
             android:id="@+id/orderPlaced"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:layout_marginBottom="243dp"
             android:fontFamily="sans-serif-condensed-medium"
             android:gravity="center_horizontal"
             android:text="Order sucessfully placed!!!"

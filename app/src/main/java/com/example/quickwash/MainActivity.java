@@ -83,39 +83,41 @@ public class MainActivity extends AppCompatActivity {
                 }else {
 
                 }
-                ProgressDialog progressDialog;
-                progressDialog = new ProgressDialog(MainActivity.this);
-                progressDialog.setMax(100);
-                progressDialog.setMessage("Please wait...");
-                progressDialog.setTitle("Logging in");
-                progressDialog.setProgressStyle(ProgressDialog.STYLE_SPINNER);
-                progressDialog.show();
-                final Handler handle = new Handler() {
-                    @Override
-                    public void handleMessage(Message msg) {
-                        super.handleMessage(msg);
-                        progressDialog.incrementProgressBy(1);
-                    }
-                };
-                new Thread(new Runnable() {
-                    @Override
-                    public void run() {
-                        try {
-                            while (progressDialog.getProgress() <= progressDialog
-                                    .getMax()) {
-                                Thread.sleep(30);
-                                handle.sendMessage(handle.obtainMessage());
-                                if (progressDialog.getProgress() == progressDialog
-                                        .getMax()) {
-                                    progressDialog.dismiss();
-                                }
-
-                            }
-                        } catch (Exception e) {
-                            e.printStackTrace();
+                if(uType.equalsIgnoreCase("success")) {
+                    ProgressDialog progressDialog;
+                    progressDialog = new ProgressDialog(MainActivity.this);
+                    progressDialog.setMax(100);
+                    progressDialog.setMessage("Please wait...");
+                    progressDialog.setTitle("Logging in");
+                    progressDialog.setProgressStyle(ProgressDialog.STYLE_SPINNER);
+                    progressDialog.show();
+                    final Handler handle = new Handler() {
+                        @Override
+                        public void handleMessage(Message msg) {
+                            super.handleMessage(msg);
+                            progressDialog.incrementProgressBy(1);
                         }
-                    }
-                }).start();
+                    };
+                    new Thread(new Runnable() {
+                        @Override
+                        public void run() {
+                            try {
+                                while (progressDialog.getProgress() <= progressDialog
+                                        .getMax()) {
+                                    Thread.sleep(30);
+                                    handle.sendMessage(handle.obtainMessage());
+                                    if (progressDialog.getProgress() == progressDialog
+                                            .getMax()) {
+                                        progressDialog.dismiss();
+                                    }
+
+                                }
+                            } catch (Exception e) {
+                                e.printStackTrace();
+                            }
+                        }
+                    }).start();
+                }
 
                 homePage(rb.getText().toString(),myUser);
                 userName.setText("");

@@ -142,7 +142,6 @@ public class register extends AppCompatActivity {
                         }
                         else {
                             dbManager.insertUser(myUserRegisteration); //*******//
-                            Toast.makeText(this, "Account has been registered!", Toast.LENGTH_LONG).show();
                         }
                         email.setText("");
                         fname.setText("");
