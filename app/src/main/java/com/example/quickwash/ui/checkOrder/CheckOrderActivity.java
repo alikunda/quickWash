@@ -28,18 +28,14 @@ public class CheckOrderActivity extends AppCompatActivity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_check_order);
         updateView();
-
     }
 
     public void updateView(){
         orders = db.checkStatus(MainActivity.myUser.getEmail());
-
         RelativeLayout relativeLayout = new RelativeLayout(this);
         ScrollView scrollView = new ScrollView(this);
 
         RadioGroup group = new RadioGroup(this);
-
-
         for (Order order: orders){
             RadioButton rb = new RadioButton(this);
             rb.setId(Integer.parseInt(order.getRECIEPTNUMBER()));

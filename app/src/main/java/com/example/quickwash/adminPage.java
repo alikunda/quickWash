@@ -124,12 +124,12 @@ public class adminPage extends AppCompatActivity {
                 double tax = D1 * 0.0825;
                 double total  = D1+tax;
 
-                emails[i].setText(+(i+1)+" Garment:  "+myOrder.getGARMENT_TYPE()+"\n Cleaning Method: "+myOrder.getCLEANING_METHOD()+"\n Price: "+rate_prec.format(D1)+" ("+rate_prec.format(D1/D2)+" EA)"+"\n Tax:"+rate_prec.format(tax)+"\n Total: "+rate_prec.format(total)+"\n QTY: "+myOrder.getQUANTITY()+"\n Status: "+myOrder.getSTATUS()+"\n Recieved on "+myOrder.getRECEIVED()+"\n Customer email: "+myOrder.getCUSTOMER_EMAIL()+"\n Reciept number: "+myOrder.getRECIEPTNUMBER());
-                emails[i].setText("Garment: "+myOrder.getGARMENT_TYPE()+"\nCleaning Method: "+
-                        myOrder.getCLEANING_METHOD()+"\nPrice: "+D1+"\nTax: "+tax+"\nTotal: "+total+"\nQTY: "+
+             //   emails[i].setText(+(i+1)+" Garment:  "+myOrder.getGARMENT_TYPE()+"\n Cleaning Method: "+myOrder.getCLEANING_METHOD()+"\n Price: "+rate_prec.format(D1)+" ("+rate_prec.format(D1/D2)+" EA)"+"\n Tax:"+rate_prec.format(tax)+"\n Total: "+rate_prec.format(total)+"\n QTY: "+myOrder.getQUANTITY()+"\n Status: "+myOrder.getSTATUS()+"\n Recieved on "+myOrder.getRECEIVED()+"\n Customer email: "+myOrder.getCUSTOMER_EMAIL()+"\n Reciept number: "+myOrder.getRECIEPTNUMBER());
+                emails[i].setText(+(i+1)+" Garment: "+myOrder.getGARMENT_TYPE()+"\nCleaning Method: "+
+                        myOrder.getCLEANING_METHOD()+"\nPrice: "+rate_prec.format(D1)+"\nTax: "+rate_prec.format(tax)+"\nTotal: "+rate_prec.format(total)+"\nQTY: "+
                         myOrder.getQUANTITY()+"\nStatus: "+myOrder.getSTATUS()+"\nRecieved on "+
-                        myOrder.getRECEIVED()+"\n Customer email: "+myOrder.getCUSTOMER_EMAIL()+
-                        "\n Reciept number: "+myOrder.getID());
+                        myOrder.getRECEIVED()+"\nCustomer email: "+myOrder.getCUSTOMER_EMAIL()+
+                        "\nReciept number: "+myOrder.getID());
                 Log.w("AdminUpdate","****"+myOrder.getCUSTOMER_EMAIL()+myOrder.getCLEANING_METHOD());
 
                 IDS[i] = new TextView(this);
@@ -156,6 +156,7 @@ public class adminPage extends AppCompatActivity {
                       else if(myOrders.isEmpty()){
                           Intent myIntent = new Intent(adminPage.this, adminPage.class);
                           startActivity(myIntent);
+                          finish();
                       }
                       else{
                           dbManager1.updateStatus(myOrder.getCUSTOMER_EMAIL(),ETUpdateSatus,myOrder.getRECEIVED(),myOrder.getGARMENT_TYPE());
@@ -246,7 +247,6 @@ public class adminPage extends AppCompatActivity {
         else if(id == R.id.action_orders_done){
             Intent myIntent = new Intent(this, displayAllOrdersAdmin.class);
             startActivity(myIntent);
-            this.finish();
         }
         else if(id == R.id.action_logout){
             Intent myIntent = new Intent(this, MainActivity.class);
@@ -255,8 +255,8 @@ public class adminPage extends AppCompatActivity {
         }
         else if(id == R.id.action_feedback){
             Intent myIntent = new Intent(this, feedbackActivity.class);
-            this.startActivity(myIntent);
-            return true;
+            startActivity(myIntent);
+
         }
         return super.onOptionsItemSelected(item);
     }
