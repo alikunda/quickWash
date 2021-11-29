@@ -44,6 +44,7 @@ public class CheckOrderActivity extends AppCompatActivity {
             RadioButton rb = new RadioButton(this);
             rb.setId(Integer.parseInt(order.getRECIEPTNUMBER()));
             rb.setText(order.toString());
+            rb.setTextSize(20);
             if(order.getSTATUS().equalsIgnoreCase("recieved")){
                 rb.setBackgroundColor(Color.YELLOW);
             }

@@ -18,17 +18,23 @@ import android.widget.Toast;
 
 import androidx.annotation.RequiresApi;
 import androidx.appcompat.app.AppCompatActivity;
+import androidx.fragment.app.Fragment;
 
 import com.example.quickwash.Cart;
 import com.example.quickwash.DatabaseManager2;
 import com.example.quickwash.Garment.Garment;
 import com.example.quickwash.Garment.GarmentFactory;
 import com.example.quickwash.MainActivity;
+import com.example.quickwash.Order;
 import com.example.quickwash.R;
+import com.example.quickwash.ui.gallery.GalleryFragment;
+import com.example.quickwash.ui.gallery.GalleryViewModel;
 import com.example.quickwash.userProfileActivity;
 import com.google.android.material.textfield.TextInputLayout;
 
+import java.text.DecimalFormat;
 import java.text.NumberFormat;
+import java.util.ArrayList;
 
 public class StartOrderActivity extends AppCompatActivity  {
 
@@ -38,15 +44,20 @@ public class StartOrderActivity extends AppCompatActivity  {
     private GarmentFactory gf;
     //private ScriptGroup.Binding binding = new ScriptGroup.Binding()
     NumberFormat nf = NumberFormat.getCurrencyInstance();
+    public final DecimalFormat rate_prec = new DecimalFormat("$0.00");
     double runningTotal;
     private int recieptNumber = 1;
+    ArrayList<Order> orders;
     public int react= 0;
+
 
 
     @Override
     public void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_start_order);
+
+
 
         dbManager2 = new DatabaseManager2(this);
         gf = new GarmentFactory();

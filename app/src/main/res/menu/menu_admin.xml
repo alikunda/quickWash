@@ -32,6 +32,10 @@
         android:orderInCategory="100"
         android:title="Customers" />
     <item
+        android:id="@+id/action_orders_done"
+        android:orderInCategory="100"
+        android:title="All Orders" />
+    <item
         android:id="@+id/action_delete"
         android:orderInCategory="100"
         android:title="Delete users" />

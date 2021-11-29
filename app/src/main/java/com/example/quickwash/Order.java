@@ -101,8 +101,8 @@ public class Order {
     }
 
     public String toString(){
-        return QUANTITY + " " + GARMENT_TYPE + ": " + CLEANING_METHOD + " - " + Double.parseDouble(PRICE)
-                + " " + STATUS;
+        return "\nQTY: "+QUANTITY + " " +"\nGarment Type"+ GARMENT_TYPE + "\nCleaning Method: " + CLEANING_METHOD + "\nPrice: " + Double.parseDouble(PRICE)
+                + "\nStatus:  " + STATUS;
     }
 
     public int getID() {

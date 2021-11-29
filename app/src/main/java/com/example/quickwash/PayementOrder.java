@@ -179,7 +179,6 @@ public class PayementOrder extends AppCompatActivity {
                     }).start();
 
                     dbManager.insertPayement(name, accountNum,MMYY, CVV,email);  //inserting payment method in DB
-                    Toast.makeText(PayementOrder.this, "Payement made Sucessfully!", Toast.LENGTH_SHORT).show();
                     orders = dbManager2.selectAllPendingOrders(MainActivity.myUser.getEmail());
                     for ( Order myOrder : orders) {
 

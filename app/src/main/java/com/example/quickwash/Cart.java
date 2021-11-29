@@ -40,7 +40,7 @@ public class Cart extends AppCompatActivity {
     ArrayList<Order> orders;
     private int recieptNumber = 1;
     private double subTotal = 0.0;
-    public final DecimalFormat rate_prec = new DecimalFormat(".00");
+    public final DecimalFormat rate_prec = new DecimalFormat("$0.00");
     private boolean isdelete = false;
 
     @Override
@@ -131,8 +131,8 @@ public class Cart extends AppCompatActivity {
                 double D1 = Double.parseDouble(myOrder.getPRICE());
                 double D2 = Double.parseDouble(myOrder.getQUANTITY());
                 double TOTAL = D1;
-                Log.w("Total testing: ","******"+D1+", "+D2);
-                orderItems[i].setText("Garment: "+myOrder.getGARMENT_TYPE()+"\nCleaning Method: "+myOrder.getCLEANING_METHOD()+"\nPrice: "+rate_prec.format(TOTAL)+"\nTAX: "+rate_prec.format((D1)*0.0825)+"\nTotal: "+rate_prec.format(TOTAL+((D1)*0.0825))+"\nQTY: "+myOrder.getQUANTITY()+"\nContact information: "+myOrder.getCUSTOMER_EMAIL()+"\nReciept number: "+myOrder.getRECIEPTNUMBER());
+                Log.w("Total testing: ","******"+D1);
+                orderItems[i].setText("Garment: "+myOrder.getGARMENT_TYPE()+"\nCleaning Method: "+myOrder.getCLEANING_METHOD()+"\nPrice: "+rate_prec.format(TOTAL)+" ("+rate_prec.format(D1/D2)+" EA)"+"\nTAX: "+rate_prec.format((D1)*0.0825)+"\nTotal: "+rate_prec.format(TOTAL+((D1)*0.0825))+"\nQTY: "+myOrder.getQUANTITY()+"\nContact information: "+myOrder.getCUSTOMER_EMAIL());
 
                 if(!isdelete) {
                     double d1 = Double.parseDouble(myOrder.getPRICE());
@@ -179,7 +179,6 @@ public class Cart extends AppCompatActivity {
                             finish();
                     }
                     }
-
                 });
                 i++;
 
@@ -187,7 +186,7 @@ public class Cart extends AppCompatActivity {
             TextView SUBtotal = new TextView(this);
             double tax = subTotal *0.0825;
             double total = subTotal+tax;
-            SUBtotal.setText("Subtotal.............$"+rate_prec.format(subTotal)+"\nTAX(8.25%).......$"+rate_prec.format(tax)+"\nTotal..................$"+rate_prec.format(total));
+            SUBtotal.setText("Subtotal............"+rate_prec.format(subTotal)+"\nTAX(8.25%)......."+rate_prec.format(tax)+"\nTotal................."+rate_prec.format(total));
             SUBtotal.setTextSize(20);
             SUBtotal.setGravity(Gravity.FILL_HORIZONTAL);
             SUBtotal.setGravity(View.TEXT_ALIGNMENT_CENTER);

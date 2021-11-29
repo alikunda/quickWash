@@ -84,7 +84,7 @@ public class displayAllAdmins extends AppCompatActivity {
             int width = size.x;
             int i = 0;
 
-            grid.addView(id, (int) (width * 0.22), ViewGroup.LayoutParams.WRAP_CONTENT);
+            grid.addView(id, ViewGroup.LayoutParams.WRAP_CONTENT);
             grid.addView(emailOwner, (int) (width * 0.35),
                     ViewGroup.LayoutParams.WRAP_CONTENT);
             grid.addView(id1, (int) (width * 0.15),

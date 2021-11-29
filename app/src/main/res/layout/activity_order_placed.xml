@@ -4,22 +4,17 @@
     android:layout_width="fill_parent"
     android:layout_height="fill_parent"
     android:background="@drawable/gradient">
+
     <RelativeLayout
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:layout_alignParentBottom="true">
-
-        <ImageView
-            android:id="@+id/checkedMarked"
-            android:layout_width="match_parent"
-            android:layout_height="match_parent"
-            android:src="@drawable/ic_check_foreground"></ImageView>
+        android:layout_alignParentBottom="true"
+        android:layout_marginBottom="42dp">
 
         <TextView
             android:id="@+id/orderPlaced"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:layout_alignBottom="@+id/checkedMarked"
             android:layout_marginBottom="243dp"
             android:fontFamily="sans-serif-condensed-medium"
             android:gravity="center_horizontal"
@@ -31,7 +26,7 @@
             android:id="@+id/trackOrder"
             android:layout_width="300dp"
             android:layout_height="wrap_content"
-            android:layout_alignBottom="@+id/checkedMarked"
+            android:onClick="trackOrder"
             android:layout_centerInParent="true"
             android:layout_marginBottom="159dp"
             android:fontFamily="sans-serif-condensed-medium"
@@ -41,4 +36,13 @@
             android:textStyle="italic"></Button>
 
     </RelativeLayout>
+
+    <ImageView
+        android:id="@+id/checkedMarked"
+        android:layout_width="500dp"
+        android:layout_height="500dp"
+        android:layout_marginTop="50dp"
+        android:src="@drawable/ic_check_foreground"></ImageView>
+
+
 </RelativeLayout>

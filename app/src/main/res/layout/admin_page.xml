@@ -10,7 +10,7 @@
 
     <TextView android:layout_width="match_parent"
         android:layout_height="match_parent"
-        android:text="There no pending orders"
+        android:text="There is no pending orders"
         android:textStyle="italic"
         android:textSize="30dp"
         android:textAlignment="center"

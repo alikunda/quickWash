@@ -39,7 +39,7 @@
             android:label="History"/>
         <activity android:name=".ui.checkOrder.CheckOrderActivity"
             android:parentActivityName=".side_menu"
-            android:label="History"/>
+            android:label="Track Order"/>
         <activity android:name=".ProfileActivity"
             android:label="Profile"
             android:parentActivityName=".adminPage"></activity>
@@ -61,6 +61,7 @@
             android:parentActivityName=".ui.order.StartOrderActivity"></activity>
         <activity android:name=".PayementOrder" android:label="Payement Gateway"
             android:parentActivityName=".ui.order.StartOrderActivity"></activity>
+        <activity android:name=".displayAllOrdersAdmin" android:label="Orders Completed" android:parentActivityName=".adminPage"></activity>
     </application>
 
 </manifest>

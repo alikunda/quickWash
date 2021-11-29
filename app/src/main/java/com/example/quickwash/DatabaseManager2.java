@@ -79,12 +79,12 @@ public class DatabaseManager2 extends SQLiteOpenHelper {
     @RequiresApi(api = Build.VERSION_CODES.O)
     public void insertGarmentInOrder(String garmentName, String cleaningMethod, double price, double quantity, String status, int recieptNum, String email) {
         Log.w("DB insert garment","*****"+garmentName+" "+cleaningMethod+" "+price+" "+quantity+" "+status+" "+recieptNum+" "+email);
-        DateTimeFormatter dtf = DateTimeFormatter.ofPattern("yyyy/MM/dd   HH:mm");
+        DateTimeFormatter dtf = DateTimeFormatter.ofPattern("mm/dd/yyyy"+" "+"HH:mm");
         LocalDateTime now = LocalDateTime.now();
         Log.w("DB","*****"+now);
         SQLiteDatabase db = this.getWritableDatabase();
         String sqlInsert = "insert into " + TABLE_ORDER + " values ( null, '" + garmentName
-                + "', '" + cleaningMethod + "', " + quantity + ", " + price*quantity
+                + "', '" + cleaningMethod + "', " + quantity + ", " + price
                 + ", '" + now +"', null, '"+status+"', '"+ORDER_REC_NUM+"', '"+email+"' )";
         db.execSQL(sqlInsert);
         db.close();
@@ -93,7 +93,7 @@ public class DatabaseManager2 extends SQLiteOpenHelper {
 
     @RequiresApi(api = Build.VERSION_CODES.O)
     public void insertGarment(Garment garment, int quantity, String status, int recieptNum, String email) {
-        DateTimeFormatter dtf = DateTimeFormatter.ofPattern("yyyy/MM/dd   HH:mm");
+        DateTimeFormatter dtf = DateTimeFormatter.ofPattern("mm/dd/yyyy"+" "+"HH:mm");
         LocalDateTime now = LocalDateTime.now();
         Log.w("DB","*****"+now);
         SQLiteDatabase db = this.getWritableDatabase();
@@ -109,7 +109,25 @@ public class DatabaseManager2 extends SQLiteOpenHelper {
     //admin
     public ArrayList<Order> selectAllNewOrders(){
         SQLiteDatabase db = this.getWritableDatabase();
-        String sqlQuery = "select * from "+TABLE_ORDER +" WHERE "+STATUS+" = 'recieved'";
+        String sqlQuery = "select * from "+TABLE_ORDER +" WHERE "+STATUS+" <> 'delivered'";
+
+        Cursor myCursor = db.rawQuery(sqlQuery, null);
+        ArrayList<Order> currentArray = new ArrayList<>();
+        while(myCursor.moveToNext()){
+            Order currentOrderInstane = new Order(Integer.parseInt(myCursor.getString(0)),
+                    myCursor.getString(1), myCursor.getString(2),
+                    myCursor.getString(3),myCursor.getString(4),myCursor.getString(5),
+                    myCursor.getString(6),myCursor.getString(7),myCursor.getString(8),
+                    myCursor.getString(9));
+            currentArray.add(currentOrderInstane);
+        }
+        db.close();
+        return currentArray;
+    }
+    //admin
+    public ArrayList<Order> selectAllOrdersDone(){
+        SQLiteDatabase db = this.getWritableDatabase();
+        String sqlQuery = "select * from "+TABLE_ORDER +" WHERE "+STATUS+" = 'delivered'";
 
         Cursor myCursor = db.rawQuery(sqlQuery, null);
         ArrayList<Order> currentArray = new ArrayList<>();
@@ -191,6 +209,23 @@ public class DatabaseManager2 extends SQLiteOpenHelper {
 //        return currentArray;
 //    }
 
+    @RequiresApi(api = Build.VERSION_CODES.O)
+    public void updateStatus(String email, String status, String date, String garment){
+        if(status.equals("delivered")){
+            DateTimeFormatter dtf = DateTimeFormatter.ofPattern("mm/dd/yyyy"+" "+"HH:mm");
+            LocalDateTime now = LocalDateTime.now();
+            SQLiteDatabase db = this.getWritableDatabase();
+            String sqlUpdate = "update " + TABLE_ORDER + " set " + STATUS + " = '"+ status+"', "+DELIVERED+" = '"+now+"'  where " + CUSTOMER_EMAIL + " = '" + email+"' and "+RECEIVED+" = '"+date+"' and "+GARMENT_TYPE+" ='"+garment+"'";
+            db.execSQL(sqlUpdate);
+            db.close();
+        }
+        else{
+            SQLiteDatabase db = this.getWritableDatabase();
+            String sqlUpdate = "update " + TABLE_ORDER + " set " + STATUS + " = '" + status+"' where " + CUSTOMER_EMAIL + " = '" + email+"' and "+RECEIVED+" = '"+date+"' and "+GARMENT_TYPE+" ='"+garment+"'";
+            db.execSQL(sqlUpdate);
+            db.close();
+        }
+    }
     public void deleteItem(String cleaningMethod, String garmentType, String quantity, String time, String number){
         SQLiteDatabase db = this.getWritableDatabase();
         String sqlDelete = "delete from "+TABLE_CART+" where "+CART_CLEANING_METHOD +" = '"+cleaningMethod+"' and "+CART_GARMENT_TYPE +" = '"+garmentType+"' and "+CART_QUANTITY+" = '"+quantity+"' and "+CART_RECEIVED+" = '"+time+"' and "+CART_RECIEPTNUMBER+" = '"+number+"'";
