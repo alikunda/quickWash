@@ -102,11 +102,9 @@ public class HistoryActivity extends AppCompatActivity {
                 emails[i].setText("Garment: " + myOrder.getGARMENT_TYPE() + "\nCleaning Method: " +
                         myOrder.getCLEANING_METHOD() + "\nPrice: " + myOrder.getPRICE() + "\nQTY: " +
                         myOrder.getQUANTITY() + "\nStatus: " + myOrder.getSTATUS() + "\nRecieved on " +
-                        myOrder.getRECEIVED() + "\n Customer email: " + myOrder.getCUSTOMER_EMAIL() +
-                        "\n Reciept number: " + myOrder.getID());
+                        myOrder.getRECEIVED()+"\nDelivered: "+ myOrder.getDELIVERED() + "\nCustomer email: " + myOrder.getCUSTOMER_EMAIL() +
+                        "\nReciept number: " + myOrder.getID());
                 Log.w("AdminUpdate", "****" + myOrder.getCUSTOMER_EMAIL() + myOrder.getCLEANING_METHOD());
-
-
 
                 // add the elements to grid
                 grid.addView(ids[i], width / 15, ViewGroup.LayoutParams.WRAP_CONTENT);

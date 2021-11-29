@@ -60,6 +60,7 @@
         <activity android:name=".PayementOrder" android:label="Payement Gateway"
             android:parentActivityName=".ui.order.StartOrderActivity"></activity>
         <activity android:name=".displayAllOrdersAdmin" android:label="Orders Completed" android:parentActivityName=".adminPage"></activity>
+        <activity android:name=".feedbackActivity" android:label="Customers feedback" android:parentActivityName=".adminPage"></activity>
     </application>
 
 </manifest>

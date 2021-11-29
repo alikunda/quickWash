@@ -1,6 +1,7 @@
 package com.example.quickwash.ui.slideshow;
 
 import android.os.Bundle;
+import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -42,17 +43,17 @@ public class SlideshowFragment extends Fragment {
             @Override
             public void onClick(View view) {
                 String feedb = binding.fback.getText().toString();
-                String email = MainActivity.myUser.getEmail();
-                dbManager.insertFeedback(feedb, email);
-                Toast.makeText(getActivity(), "Feedback Submitted", Toast.LENGTH_SHORT).show();
-                binding.fback.setText("");
+            if(feedb.isEmpty()){
+                    Toast.makeText(getActivity(), "No input detected", Toast.LENGTH_SHORT).show();
+                }else {
+                    dbManager.insertFeedback(feedb,MainActivity.myUser.getEmail());
+                Log.w("Feedback","******"+MainActivity.myUser.getEmail());
+                    Toast.makeText(getActivity(), "Feedback Submitted", Toast.LENGTH_SHORT).show();
+                    binding.fback.setText("");
+                }
 
             }
         });
-
-
-
-
     }
 
     @Override

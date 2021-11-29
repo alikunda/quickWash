@@ -146,7 +146,7 @@ public class DatabaseManager2 extends SQLiteOpenHelper {
     public ArrayList<Order> selectUserOrderHistory(String email){
         SQLiteDatabase db = this.getWritableDatabase();
         String sqlQuery = "select * from " + TABLE_ORDER + " where " + CUSTOMER_EMAIL + "= '"
-                + email + "' ";
+                + email + "' and "+STATUS+" = 'delivered'";
         Cursor myCursor = db.rawQuery(sqlQuery, null);
         ArrayList<Order> currentArray = new ArrayList<>();
         while(myCursor.moveToNext()){
@@ -158,14 +158,11 @@ public class DatabaseManager2 extends SQLiteOpenHelper {
         }
         db.close();
         return currentArray;
-
     }
-
-
     public ArrayList<Order> checkStatus(String email){
         SQLiteDatabase db = this.getWritableDatabase();
         String sqlQuery = "select * from " + TABLE_ORDER + " where " + CUSTOMER_EMAIL + "= '"
-                + email + "' ";
+                + email + "' and"+STATUS+" <> 'delivered'";
         Cursor myCursor = db.rawQuery(sqlQuery, null);
         ArrayList<Order> currentArray = new ArrayList<>();
         while(myCursor.moveToNext()){

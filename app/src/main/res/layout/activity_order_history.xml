@@ -13,6 +13,7 @@
             android:layout_width="match_parent"
             android:layout_height="match_parent"
             android:text="Order History"
+            android:gravity="center"
             android:textSize="45dp"
             android:layout_alignParentTop="true"></TextView>
     </RelativeLayout>
