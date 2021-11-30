@@ -1,5 +1,9 @@
 package com.example.quickwash;
 
+import android.app.AlertDialog;
+import android.app.FragmentManager;
+import android.app.FragmentTransaction;
+import android.content.DialogInterface;
 import android.content.Intent;
 import android.graphics.Point;
 import android.os.Bundle;
@@ -10,6 +14,7 @@ import android.view.MenuItem;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.Button;
+import android.widget.EditText;
 import android.widget.GridLayout;
 import android.widget.LinearLayout;
 import android.widget.RelativeLayout;
@@ -125,9 +130,18 @@ public class Cart extends AppCompatActivity {
                 double D1 = Double.parseDouble(myOrder.getPRICE());
                 double D2 = Double.parseDouble(myOrder.getQUANTITY());
                 double TOTAL = D1;
-                Log.w("Total testing: ","******"+D1+", "+D2);
-                orderItems[i].setText("Garment: "+myOrder.getGARMENT_TYPE()+"\nCleaning Method: "+myOrder.getCLEANING_METHOD()+"\nPrice: "+rate_prec.format(TOTAL)+"\nTAX: "+rate_prec.format((D1)*0.0825)+"\nTotal: "+rate_prec.format(TOTAL+((D1)*0.0825))+"\nQTY: "+myOrder.getQUANTITY()+"\nContact information: "+myOrder.getCUSTOMER_EMAIL()+"\nReciept number: "+myOrder.getRECIEPTNUMBER());
-
+                Log.w("Total testing: ","******"+D1);
+                if(myOrder.getCLEANING_METHOD().equals("Light")) {
+                    orderItems[i].setText("Garment: " + myOrder.getGARMENT_TYPE() + "\nCleaning Method: " + myOrder.getCLEANING_METHOD() + "\nPrice: " + rate_prec.format(TOTAL) + " (" + rate_prec.format((D1 / D2)-0.10) + " EA + 0.10)" +"\nExtra Charge for light starch: $0.10"+"\nTAX: " + rate_prec.format((D1) * 0.0825) + "\nTotal: " + rate_prec.format(TOTAL + ((D1) * 0.0825)) + "\nQTY: " + myOrder.getQUANTITY() + "\nContact information: " + myOrder.getCUSTOMER_EMAIL());
+                } else if(myOrder.getCLEANING_METHOD().equals("Medium")){
+                    orderItems[i].setText("Garment: " + myOrder.getGARMENT_TYPE() + "\nCleaning Method: " + myOrder.getCLEANING_METHOD() + "\nPrice: " + rate_prec.format(TOTAL) + " (" + rate_prec.format((D1 / D2)-0.20) + " EA + 0.20)" +"\nExtra Charge for medium starch: $0.20"+"\nTAX: " + rate_prec.format((D1) * 0.0825) + "\nTotal: " + rate_prec.format(TOTAL + ((D1) * 0.0825)) + "\nQTY: " + myOrder.getQUANTITY() + "\nContact information: " + myOrder.getCUSTOMER_EMAIL());
+                }
+                else if(myOrder.getCLEANING_METHOD().equals("Heavy")){
+                    orderItems[i].setText("Garment: " + myOrder.getGARMENT_TYPE() + "\nCleaning Method: " + myOrder.getCLEANING_METHOD() + "\nPrice: " + rate_prec.format(TOTAL) + " (" + rate_prec.format((D1 / D2)-0.30) + " EA + 0.30)" +"\nExtra Charge for heavy starch: $0.30"+"\nTAX: " + rate_prec.format((D1) * 0.0825) + "\nTotal: " + rate_prec.format(TOTAL + ((D1) * 0.0825)) + "\nQTY: " + myOrder.getQUANTITY() + "\nContact information: " + myOrder.getCUSTOMER_EMAIL());
+                }
+                else{
+                    orderItems[i].setText("Garment: " + myOrder.getGARMENT_TYPE() + "\nCleaning Method: " + myOrder.getCLEANING_METHOD() + "\nPrice: " + rate_prec.format(TOTAL) + " (" + rate_prec.format(D1 / D2) + " EA)" +"\nTAX: " + rate_prec.format((D1) * 0.0825) + "\nTotal: " + rate_prec.format(TOTAL + ((D1) * 0.0825)) + "\nQTY: " + myOrder.getQUANTITY() + "\nContact information: " + myOrder.getCUSTOMER_EMAIL());
+                }
                 if(!isdelete) {
                     double d1 = Double.parseDouble(myOrder.getPRICE());
                     double d2 = Double.parseDouble(myOrder.getQUANTITY());
@@ -160,20 +174,40 @@ public class Cart extends AppCompatActivity {
                 remove[i].setOnClickListener(new View.OnClickListener() {
                     @Override
                     public void onClick(View view) {
-                     dbManager1.deleteItem(myOrder.getCLEANING_METHOD(),myOrder.getGARMENT_TYPE(),myOrder.getQUANTITY(),myOrder.getRECEIVED(), myOrder.getRECIEPTNUMBER());
-                        double d1 = Double.parseDouble(myOrder.getPRICE());
-                        double d2 = Double.parseDouble(myOrder.getQUANTITY());
-                        subTotal = subTotal - (d1);
-                     isdelete = true;
-                     Toast.makeText(Cart.this, "Item deleted!!!",Toast.LENGTH_SHORT).show();
-                     updateView();
-                        if(orders.isEmpty()) {
-                            Intent myIntent = new Intent(Cart.this, Cart.class);
-                            startActivity(myIntent);
-                            finish();
-                    }
-                    }
 
+                        AlertDialog.Builder builder1 = new AlertDialog.Builder(Cart.this);
+                        builder1.setMessage("Are you sure you want to delete item from cart");
+                        builder1.setCancelable(true);
+
+                        builder1.setPositiveButton(
+                                "Yes",
+                                new DialogInterface.OnClickListener() {
+                                    public void onClick(DialogInterface dialog, int id) {
+                                        dbManager1.deleteItem(myOrder.getCLEANING_METHOD(),myOrder.getGARMENT_TYPE(),myOrder.getQUANTITY(),myOrder.getRECEIVED(), myOrder.getRECIEPTNUMBER());
+                                        double d1 = Double.parseDouble(myOrder.getPRICE());
+                                        double d2 = Double.parseDouble(myOrder.getQUANTITY());
+                                        subTotal = subTotal - (d1);
+                                        isdelete = true;
+                                        Toast.makeText(Cart.this, "Item deleted!!!",Toast.LENGTH_SHORT).show();
+                                        updateView();
+                                        if(orders.isEmpty()) {
+                                            Intent myIntent = new Intent(Cart.this, Cart.class);
+                                            startActivity(myIntent);
+                                            finish();
+                                        }
+                                    }
+                                });
+                        builder1.setNegativeButton(
+                                "No",
+                                new DialogInterface.OnClickListener() {
+                                    public void onClick(DialogInterface dialog, int id) {
+                                        dialog.cancel();
+                                    }
+                                });
+                        AlertDialog alert11 = builder1.create();
+                        alert11.show();
+
+                    }
                 });
                 i++;
 

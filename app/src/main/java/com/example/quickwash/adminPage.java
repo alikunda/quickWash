@@ -1,5 +1,6 @@
 package com.example.quickwash;
 
+import android.content.DialogInterface;
 import android.content.Intent;
 import android.graphics.Point;
 import android.os.Build;
@@ -19,6 +20,7 @@ import android.widget.TextView;
 import android.widget.Toast;
 
 import androidx.annotation.RequiresApi;
+import androidx.appcompat.app.AlertDialog;
 import androidx.appcompat.app.AppCompatActivity;
 
 import java.text.DecimalFormat;
@@ -148,21 +150,45 @@ public class adminPage extends AppCompatActivity {
                     @RequiresApi(api = Build.VERSION_CODES.O)
                     @Override
                     public void onClick(View view) {
-                        ETUpdateSatus = updateStatus[finalI].getText().toString();
-                      if(ETUpdateSatus.isEmpty()){
+                        AlertDialog.Builder builder1 = new AlertDialog.Builder(adminPage.this);
+                        builder1.setMessage("Are you sure you want update status to "+updateStatus[finalI].getText().toString()+"?");
+                        builder1.setCancelable(true);
 
-                          Toast.makeText(adminPage.this,"Field is empty",Toast.LENGTH_SHORT).show();
-                      }
-                      else if(myOrders.isEmpty()){
-                          Intent myIntent = new Intent(adminPage.this, adminPage.class);
-                          startActivity(myIntent);
-                          finish();
-                      }
-                      else{
-                          dbManager1.updateStatus(myOrder.getCUSTOMER_EMAIL(),ETUpdateSatus,myOrder.getRECEIVED(),myOrder.getGARMENT_TYPE());
-                          Toast.makeText(adminPage.this,"Updated",Toast.LENGTH_SHORT).show();
-                      }
-                        updateView();
+                        builder1.setPositiveButton(
+                                "Yes",
+                                new DialogInterface.OnClickListener() {
+                                    public void onClick(DialogInterface dialog, int id) {
+                                        if (updateStatus[finalI].getText().toString().isEmpty()) {
+                                            Toast.makeText(adminPage.this, "Status field empty", Toast.LENGTH_SHORT).show();
+
+                                        } else {
+                                            ETUpdateSatus = updateStatus[finalI].getText().toString();
+                                            if (ETUpdateSatus.isEmpty()) {
+                                                Toast.makeText(adminPage.this, "Field is empty", Toast.LENGTH_SHORT).show();
+                                            }
+                                          if (myOrders.isEmpty()) {
+                                                Intent myIntent = new Intent(adminPage.this, adminPage.class);
+                                                startActivity(myIntent);
+                                                finish();
+                                                updateView();
+                                            } else {
+                                                dbManager1.updateStatus(myOrder.getCUSTOMER_EMAIL(), ETUpdateSatus, myOrder.getRECEIVED(), myOrder.getGARMENT_TYPE());
+                                                Toast.makeText(adminPage.this, "Updated", Toast.LENGTH_SHORT).show();
+                                            }
+                                            updateView();
+                                        }
+                                    }
+                                });
+                        builder1.setNegativeButton(
+                                "No",
+                                new DialogInterface.OnClickListener() {
+                                    public void onClick(DialogInterface dialog, int id) {
+                                        dialog.cancel();
+                                    }
+                                });
+                        AlertDialog alert11 = builder1.create();
+                        alert11.show();
+
                     }
                 });
                 // add the elements to grid

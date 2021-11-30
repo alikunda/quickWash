@@ -195,6 +195,7 @@ public class StartOrderActivity extends AppCompatActivity  {
             String garmentPriceString = garmentSelectArray[1];
             double garmentPrice = Double.parseDouble(garmentPriceString.substring(1));
 
+
             EditText quantityET = findViewById(R.id.garment_quantity_ET);
             int quantity = Integer.parseInt(quantityET.getText().toString());
 
@@ -213,10 +214,11 @@ public class StartOrderActivity extends AppCompatActivity  {
 
                 runningTotal += newGarment.getPrice() * quantity;
 
+
                 dbManager2.insertGarment(newGarment, quantity, "in cart", recieptNumber, MainActivity.myUser.getEmail());//cleaning method
 
                 Toast.makeText(StartOrderActivity.this, quantity + " " + cleaningMethodString +
-                        " " + garmentTypeString + ":  $" + garmentPrice + " added to Cart", Toast.LENGTH_LONG).show();
+                        " " + garmentTypeString + ":  $" + rate_prec.format(garmentPrice) + " added to Cart", Toast.LENGTH_LONG).show();
                 react=0;
             }
             else {
@@ -225,8 +227,6 @@ public class StartOrderActivity extends AppCompatActivity  {
 
 
                 if(cleaningMethodString.equalsIgnoreCase("light")){
-
-
                     Garment newGarment = gf.getGarment(garmentTypeString, cleaningMethodString, garmentPrice);//cleaning method
                     garmentPrice = newGarment.getPrice()+.10;//light starch price
                     newGarment.setPrice(garmentPrice);
@@ -253,7 +253,7 @@ public class StartOrderActivity extends AppCompatActivity  {
                 //dbManager2.insertGarment(newGarment, quantity, "in cart", recieptNumber, MainActivity.myUser.getEmail());//cleaning method
 
                 Toast.makeText(StartOrderActivity.this, quantity + " " + cleaningMethodString +
-                        " " + garmentTypeString + ":  $" + garmentPrice + " added to Cart", Toast.LENGTH_LONG).show();
+                        " " + garmentTypeString + ":  $" + rate_prec.format(garmentPrice) + " added to Cart", Toast.LENGTH_LONG).show();
 
             }
 
@@ -264,7 +264,7 @@ public class StartOrderActivity extends AppCompatActivity  {
         Intent myIntent = new Intent(this, Cart.class);
         startActivity(myIntent);
         recieptNumber++;
-        this.finish();
+
 //        FragmentManager fragmentManager = getFragmentManager();
 //
 //        Fragment fragment = new Fragment(R.layout.fragment_gallery);
