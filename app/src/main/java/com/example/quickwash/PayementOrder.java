@@ -120,9 +120,12 @@ public class PayementOrder extends AppCompatActivity {
                     }).start();
                     Toast.makeText(PayementOrder.this, "Payement made Sucessfully!", Toast.LENGTH_SHORT).show();
                     orders = dbManager2.selectAllPendingOrders(MainActivity.myUser.getEmail());
+
+                    count = Integer.parseInt(orders.get(0).getRECIEPTNUMBER())+1;
                     for ( Order myOrder : orders) {
                         //  dbManager2.insertGarment(newGarment, quantity, "in cart", recieptNumber, MainActivity.myUser.getEmail());//cleaning method
                         //(String garmentName, String cleaningMethod, int price, int quantity, String status, int recieptNum, String email)
+
                         double price = Double.parseDouble(myOrder.getPRICE());
                         double qty = Double.parseDouble(myOrder.getQUANTITY());
                         dbManager2.insertGarmentInOrder(myOrder.getGARMENT_TYPE(),myOrder.getCLEANING_METHOD(),price, qty,"recieved",count,myOrder.getCUSTOMER_EMAIL());
@@ -172,6 +175,8 @@ public class PayementOrder extends AppCompatActivity {
 
                     dbManager.insertPayement(name, accountNum,MMYY, CVV,email);  //inserting payment method in DB
                     orders = dbManager2.selectAllPendingOrders(MainActivity.myUser.getEmail());
+
+                    count = Integer.parseInt(orders.get(0).getRECIEPTNUMBER())+1;
                     for ( Order myOrder : orders) {
 
                       //  dbManager2.insertGarment(newGarment, quantity, "in cart", recieptNumber, MainActivity.myUser.getEmail());//cleaning method

@@ -62,10 +62,12 @@ public class DatabaseManager2 extends SQLiteOpenHelper {
 
     @Override
     public void onCreate(SQLiteDatabase db) {
+
+        //int ORDER_REC_NUM = 10000000;
         String sqlCreate = "create table " + TABLE_ORDER + " ( " + ID;
         sqlCreate += " integer primary key autoincrement, " + GARMENT_TYPE + " text, ";
         sqlCreate += CLEANING_METHOD + " text, " + QUANTITY + " integer, " + PRICE + " real, ";
-        sqlCreate += RECEIVED + " datetime, "+DELIVERED+" datetime, "+STATUS+" text, "+ RECIEPT_NUMBER +" numeric(7,0), "+CUSTOMER_EMAIL+" text )";
+        sqlCreate += RECEIVED + " datetime, "+DELIVERED+" datetime, "+STATUS+" text, "+ RECIEPT_NUMBER +" numeric(7,0) , "+CUSTOMER_EMAIL+" text )";
 
         String sqlCart = "create table " + TABLE_CART + " ( " + CART_ID;
         sqlCart += " integer primary key autoincrement, " + CART_GARMENT_TYPE + " text, ";
@@ -81,11 +83,12 @@ public class DatabaseManager2 extends SQLiteOpenHelper {
         Log.w("DB insert garment","*****"+garmentName+" "+cleaningMethod+" "+price+" "+quantity+" "+status+" "+recieptNum+" "+email);
         DateTimeFormatter dtf = DateTimeFormatter.ofPattern("mm/dd/yyyy"+" "+"HH:mm");
         LocalDateTime now = LocalDateTime.now();
+
         Log.w("DB","*****"+now);
         SQLiteDatabase db = this.getWritableDatabase();
         String sqlInsert = "insert into " + TABLE_ORDER + " values ( null, '" + garmentName
                 + "', '" + cleaningMethod + "', " + quantity + ", " + price
-                + ", '" + now +"', null, '"+status+"', '"+ORDER_REC_NUM+"', '"+email+"' )";
+                + ", '" + now +"', null, '"+status+"', '"+recieptNum+"', '"+email+"' )";
         db.execSQL(sqlInsert);
         db.close();
         //ORDER_REC_NUM = ORDER_REC_NUM+1;
@@ -106,6 +109,19 @@ public class DatabaseManager2 extends SQLiteOpenHelper {
         CART_REC_NUM = CART_REC_NUM+1;
         Log.w("rec num","******"+CART_REC_NUM );
     }
+
+
+    public double getCartTotal(){
+
+        SQLiteDatabase db = this.getWritableDatabase();
+        String sqlSelect = "select sum('" + PRICE + "') from " + TABLE_CART;
+        Cursor cursor = db.rawQuery(sqlSelect,null);
+
+        double v = Double.parseDouble(cursor.getString(0));
+        return v;
+
+    }
+
 
 
 
@@ -162,6 +178,8 @@ public class DatabaseManager2 extends SQLiteOpenHelper {
         db.close();
         return currentArray;
     }
+
+
     public ArrayList<Order> checkStatus(String email){
         SQLiteDatabase db = this.getWritableDatabase();
         String sqlQuery = "select * from " + TABLE_ORDER + " where " + CUSTOMER_EMAIL + "= '"

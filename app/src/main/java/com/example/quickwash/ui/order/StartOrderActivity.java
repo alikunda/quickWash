@@ -43,7 +43,7 @@ public class StartOrderActivity extends AppCompatActivity  {
     //private ScriptGroup.Binding binding = new ScriptGroup.Binding()
     NumberFormat nf = NumberFormat.getCurrencyInstance();
     public final DecimalFormat rate_prec = new DecimalFormat("$0.00");
-    double runningTotal;
+    double runningTotal = 0.00;
     private int recieptNumber = 100001;
     ArrayList<Order> orders;
     public int react= 0;
@@ -63,8 +63,8 @@ public class StartOrderActivity extends AppCompatActivity  {
 
 
 
-        TextView totalView = findViewById(R.id.total_tv);
-        totalView.setText(nf.format(runningTotal));
+//        TextView totalView = findViewById(R.id.total_tv);
+        //totalView.setText(nf.format(runningTotal));
 
         Button dryCleanButton = findViewById(R.id.dry_clean_button);
         Button laundryButton = findViewById(R.id.laundry_button);
@@ -83,13 +83,17 @@ public class StartOrderActivity extends AppCompatActivity  {
 
         String [] garmentTypesDC = getResources().getStringArray(R.array.garment_type_DC);
         String [] garmentTypesLaundry = getResources().getStringArray(R.array.garment_type_Laundry);
-        updateView();
+        //updateView();
+
+        //runningTotal = dbManager2.getCartTotal();
 
 
 
         dryCleanButton.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
+                TextView totalView = findViewById(R.id.total_tv);
+                totalView.setText(nf.format(runningTotal));
                 garmentTV.setText(" ");
 
                 ArrayAdapter<String> arrayAdapter = new ArrayAdapter<>(StartOrderActivity.this,
@@ -112,6 +116,9 @@ public class StartOrderActivity extends AppCompatActivity  {
         laundryButton.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
+                TextView totalView = findViewById(R.id.total_tv);
+
+                totalView.setText(nf.format(runningTotal));
                 garmentTV.setText(" ");
                 ArrayAdapter<String> arrayAdapter = new ArrayAdapter<>(StartOrderActivity.this,
                         R.layout.dropdown_item, garmentTypesLaundry);
@@ -192,7 +199,6 @@ public class StartOrderActivity extends AppCompatActivity  {
             String garmentPriceString = garmentSelectArray[1];
             double garmentPrice = Double.parseDouble(garmentPriceString.substring(1));
 
-
             EditText quantityET = findViewById(R.id.garment_quantity_ET);
             int quantity = Integer.parseInt(quantityET.getText().toString());
 
@@ -211,11 +217,10 @@ public class StartOrderActivity extends AppCompatActivity  {
 
                 runningTotal += newGarment.getPrice() * quantity;
 
-
                 dbManager2.insertGarment(newGarment, quantity, "in cart", recieptNumber, MainActivity.myUser.getEmail());//cleaning method
 
                 Toast.makeText(StartOrderActivity.this, quantity + " " + cleaningMethodString +
-                        " " + garmentTypeString + ":  $" + rate_prec.format(garmentPrice) + " added to Cart", Toast.LENGTH_LONG).show();
+                        " " + garmentTypeString + ":  $" + garmentPrice + " added to Cart", Toast.LENGTH_LONG).show();
 
                 react=0;
             }
@@ -225,6 +230,8 @@ public class StartOrderActivity extends AppCompatActivity  {
 
 
                 if(cleaningMethodString.equalsIgnoreCase("light")){
+
+
                     Garment newGarment = gf.getGarment(garmentTypeString, cleaningMethodString, garmentPrice);//cleaning method
                     garmentPrice = newGarment.getPrice()+.10;//light starch price
                     newGarment.setPrice(garmentPrice);
@@ -251,7 +258,7 @@ public class StartOrderActivity extends AppCompatActivity  {
                 //dbManager2.insertGarment(newGarment, quantity, "in cart", recieptNumber, MainActivity.myUser.getEmail());//cleaning method
 
                 Toast.makeText(StartOrderActivity.this, quantity + " " + cleaningMethodString +
-                        " " + garmentTypeString + ":  $" + rate_prec.format(garmentPrice) + " added to Cart", Toast.LENGTH_LONG).show();
+                        " " + garmentTypeString + ":  $" + garmentPrice + " added to Cart", Toast.LENGTH_LONG).show();
 
             }
             updateView();
@@ -262,7 +269,7 @@ public class StartOrderActivity extends AppCompatActivity  {
         Intent myIntent = new Intent(this, Cart.class);
         startActivity(myIntent);
         recieptNumber++;
-
+        this.finish();
 //        FragmentManager fragmentManager = getFragmentManager();
 //
 //        Fragment fragment = new Fragment(R.layout.fragment_gallery);
