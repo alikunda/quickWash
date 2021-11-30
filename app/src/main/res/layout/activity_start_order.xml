@@ -27,6 +27,7 @@
             android:layout_alignParentEnd="true"
             android:layout_marginEnd="0dp"
             android:text="Start a new order"
+            android:textStyle="italic"
             android:textSize="50dip"
             android:textAlignment="center"/>
     </RelativeLayout>
@@ -60,6 +61,22 @@
 
         </TableLayout>
 
+        <TableLayout
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_gravity="center">
+            <TableRow
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content">
+                <TextView
+                    android:id="@+id/cleaingMethod"
+                    android:layout_width="match_parent"
+                    android:layout_height="match_parent"
+                    android:text="Select the Cleaning method"
+                    android:textSize="30dip"
+                    android:gravity="center"/>
+            </TableRow>
+        </TableLayout>
 <TableLayout
     android:layout_width="wrap_content"
     android:layout_height="wrap_content"
@@ -67,6 +84,7 @@
     <TableRow
         android:layout_width="wrap_content"
         android:layout_height="wrap_content">
+
         <Button
             android:text="Dry Clean"
             android:id="@+id/dry_clean_button"

@@ -1,5 +1,6 @@
 package com.example.quickwash;
 
+import android.content.DialogInterface;
 import android.content.Intent;
 import android.graphics.Point;
 import android.os.Build;
@@ -19,6 +20,7 @@ import android.widget.TextView;
 import android.widget.Toast;
 
 import androidx.annotation.RequiresApi;
+import androidx.appcompat.app.AlertDialog;
 import androidx.appcompat.app.AppCompatActivity;
 
 import java.text.DecimalFormat;
@@ -125,11 +127,22 @@ public class adminPage extends AppCompatActivity {
                 double total  = D1+tax;
 
              //   emails[i].setText(+(i+1)+" Garment:  "+myOrder.getGARMENT_TYPE()+"\n Cleaning Method: "+myOrder.getCLEANING_METHOD()+"\n Price: "+rate_prec.format(D1)+" ("+rate_prec.format(D1/D2)+" EA)"+"\n Tax:"+rate_prec.format(tax)+"\n Total: "+rate_prec.format(total)+"\n QTY: "+myOrder.getQUANTITY()+"\n Status: "+myOrder.getSTATUS()+"\n Recieved on "+myOrder.getRECEIVED()+"\n Customer email: "+myOrder.getCUSTOMER_EMAIL()+"\n Reciept number: "+myOrder.getRECIEPTNUMBER());
-                emails[i].setText(+(i+1)+" Garment: "+myOrder.getGARMENT_TYPE()+"\nCleaning Method: "+
-                        myOrder.getCLEANING_METHOD()+"\nPrice: "+rate_prec.format(D1)+"\nTax: "+rate_prec.format(tax)+"\nTotal: "+rate_prec.format(total)+"\nQTY: "+
-                        myOrder.getQUANTITY()+"\nStatus: "+myOrder.getSTATUS()+"\nRecieved on "+
-                        myOrder.getRECEIVED()+"\nCustomer email: "+myOrder.getCUSTOMER_EMAIL()+
-                        "\nReciept number: "+myOrder.getID());
+                if(myOrder.getCLEANING_METHOD().equals("Light")) {
+                    emails[i].setText("Garment: " + myOrder.getGARMENT_TYPE() + "\nCleaning Method: " + myOrder.getCLEANING_METHOD() + "\nPrice: " +myOrder.getPRICE() + " (" + rate_prec.format((D1 / D2)-0.10) + " EA + 0.10)" +"\nExtra Charge for light starch: $0.10"+"\nTAX: " + rate_prec.format(tax) + "\nTotal: " + rate_prec.format(total) + "\nQTY: " + myOrder.getQUANTITY() + "\nStatus: " + myOrder.getSTATUS() + "\nRecieved on " + myOrder.getRECEIVED()+ "\nCustomer email: " + myOrder.getCUSTOMER_EMAIL() +"\nReciept number: " + myOrder.getID());
+                } else if(myOrder.getCLEANING_METHOD().equals("Medium")){
+                    emails[i].setText("Garment: " + myOrder.getGARMENT_TYPE() + "\nCleaning Method: " + myOrder.getCLEANING_METHOD() + "\nPrice: " +myOrder.getPRICE()  + " (" + rate_prec.format((D1 / D2)-0.20) + " EA + 0.20)" +"\nExtra Charge for medium starch: $0.20"+"\nTAX: " + rate_prec.format(tax) + "\nTotal: " + rate_prec.format(total) + "\nQTY: " + myOrder.getQUANTITY() + "\nRecieved on " + myOrder.getRECEIVED()+ "\nCustomer email: " + myOrder.getCUSTOMER_EMAIL() +"\nReciept number: " + myOrder.getID());
+                }
+                else if(myOrder.getCLEANING_METHOD().equals("Heavy")){
+                    emails[i].setText("Garment: " + myOrder.getGARMENT_TYPE() + "\nCleaning Method: " + myOrder.getCLEANING_METHOD() + "\nPrice: "+myOrder.getPRICE()  + " (" + rate_prec.format((D1 / D2)-0.30) + " EA + 0.30)" +"\nExtra Charge for heavy starch: $0.30"+"\nTAX: " + rate_prec.format(tax) + "\nTotal: " + rate_prec.format(total) + "\nQTY: " + myOrder.getQUANTITY() + "\nRecieved on " + myOrder.getRECEIVED()+ "\nCustomer email: " + myOrder.getCUSTOMER_EMAIL() +"\nReciept number: " + myOrder.getID());
+                }
+                else{
+                    emails[i].setText("Garment: " + myOrder.getGARMENT_TYPE() + "\nCleaning Method: " + myOrder.getCLEANING_METHOD() + "\nPrice: " +myOrder.getPRICE()  + " (" + rate_prec.format(D1 / D2) + " EA)" +"\nTAX: " + rate_prec.format(tax) + "\nTotal: " + rate_prec.format(total) + "\nQTY: " + myOrder.getQUANTITY() + "\nRecieved on " + myOrder.getRECEIVED()+ "\nCustomer email: " + myOrder.getCUSTOMER_EMAIL() +"\nReciept number: " + myOrder.getID());
+                }
+//                emails[i].setText(+(i+1)+" Garment: "+myOrder.getGARMENT_TYPE()+"\nCleaning Method: "+
+//                        myOrder.getCLEANING_METHOD()+"\nPrice: "+rate_prec.format(D1)+"\nTax: "+rate_prec.format(tax)+"\nTotal: "+rate_prec.format(total)+"\nQTY: "+
+//                        myOrder.getQUANTITY()+"\nStatus: "+myOrder.getSTATUS()+"\nRecieved on "+
+//                        myOrder.getRECEIVED()+"\nCustomer email: "+myOrder.getCUSTOMER_EMAIL()+
+//                        "\nReciept number: "+myOrder.getID());
                 Log.w("AdminUpdate","****"+myOrder.getCUSTOMER_EMAIL()+myOrder.getCLEANING_METHOD());
 
                 IDS[i] = new TextView(this);
@@ -139,8 +152,6 @@ public class adminPage extends AppCompatActivity {
                 updateStatus[i].setHint("Update Status");
                 updateStatus[i].setTextSize(12);
 
-
-
                 updateStatusBtn[i] = new Button(this);
                 updateStatusBtn[i].setBackground(getResources().getDrawable(R.drawable.ic_updating_foreground));
                 int finalI = i;
@@ -148,23 +159,47 @@ public class adminPage extends AppCompatActivity {
                     @RequiresApi(api = Build.VERSION_CODES.O)
                     @Override
                     public void onClick(View view) {
-                        ETUpdateSatus = updateStatus[finalI].getText().toString();
-                      if(ETUpdateSatus.isEmpty()){
+                        AlertDialog.Builder builder1 = new AlertDialog.Builder(adminPage.this);
+                        builder1.setMessage("Are you sure you want update status to "+updateStatus[finalI].getText().toString()+"?");
+                        builder1.setCancelable(true);
 
-                          Toast.makeText(adminPage.this,"Field is empty",Toast.LENGTH_SHORT).show();
-                      }
-                      else if(myOrders.isEmpty()){
-                          Intent myIntent = new Intent(adminPage.this, adminPage.class);
-                          startActivity(myIntent);
-                          finish();
-                      }
-                      else{
-                          dbManager1.updateStatus(myOrder.getCUSTOMER_EMAIL(),ETUpdateSatus,myOrder.getRECEIVED(),myOrder.getGARMENT_TYPE());
-                          Toast.makeText(adminPage.this,"Updated",Toast.LENGTH_SHORT).show();
-                      }
-                        updateView();
+                        builder1.setPositiveButton(
+                                "Yes",
+                                new DialogInterface.OnClickListener() {
+                                    public void onClick(DialogInterface dialog, int id) {
+                                        if (updateStatus[finalI].getText().toString().isEmpty()) {
+                                            Toast.makeText(adminPage.this, "Status field empty", Toast.LENGTH_SHORT).show();
+                                        } else {
+                                            ETUpdateSatus = updateStatus[finalI].getText().toString();
+                                            if (ETUpdateSatus.isEmpty()) {
+                                                Toast.makeText(adminPage.this, "Field is empty", Toast.LENGTH_SHORT).show();
+                                            } else {
+                                                dbManager1.updateStatus(myOrder.getCUSTOMER_EMAIL(), ETUpdateSatus, myOrder.getRECEIVED(), myOrder.getGARMENT_TYPE());
+                                                Toast.makeText(adminPage.this, "Updated", Toast.LENGTH_SHORT).show();
+                                                updateView();
+                                                if (myOrders.isEmpty()) {
+                                                    Intent myIntent = new Intent(adminPage.this, adminPage.class);
+                                                    startActivity(myIntent);
+                                                }
+
+                                            }
+
+                                        }
+                                    }
+                                });
+                        builder1.setNegativeButton(
+                                "No",
+                                new DialogInterface.OnClickListener() {
+                                    public void onClick(DialogInterface dialog, int id) {
+                                        dialog.cancel();
+                                    }
+                                });
+                        AlertDialog alert11 = builder1.create();
+                        alert11.show();
+
                     }
                 });
+
                 // add the elements to grid
                 grid.addView(emails[i], (int) (width * 0.49),
                         ViewGroup.LayoutParams.WRAP_CONTENT);
