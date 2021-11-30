@@ -4,26 +4,18 @@ import android.app.AlertDialog;
 import android.app.ProgressDialog;
 import android.content.DialogInterface;
 import android.content.Intent;
-import android.content.SharedPreferences;
 import android.os.Build;
 import android.os.Bundle;
 import android.os.Handler;
 import android.os.Message;
 import android.util.Log;
-import android.view.LayoutInflater;
 import android.view.View;
-import android.view.ViewGroup;
 import android.widget.Button;
 import android.widget.EditText;
 import android.widget.Toast;
 
-import androidx.annotation.NonNull;
 import androidx.annotation.RequiresApi;
 import androidx.appcompat.app.AppCompatActivity;
-import androidx.lifecycle.ViewModelProvider;
-
-import com.example.quickwash.databinding.FragmentGalleryBinding;
-import com.example.quickwash.ui.gallery.GalleryViewModel;
 
 import java.util.ArrayList;
 
@@ -34,7 +26,7 @@ public class PayementOrder extends AppCompatActivity {
     private DatabaseManager2 dbManager2;
     ArrayList<Order> orders;
     private int tracker = 0;
-    public int count= 1;
+    public int count= 100000;
 
 
     @Override
@@ -135,7 +127,7 @@ public class PayementOrder extends AppCompatActivity {
                         double qty = Double.parseDouble(myOrder.getQUANTITY());
                         dbManager2.insertGarmentInOrder(myOrder.getGARMENT_TYPE(),myOrder.getCLEANING_METHOD(),price, qty,"recieved",count,myOrder.getCUSTOMER_EMAIL());
                         Log.w("Payment print ","*****"+myOrder.getGARMENT_TYPE()+" "+myOrder.getCLEANING_METHOD()+" "+price+" "+qty+" "+count+" "+myOrder.getCUSTOMER_EMAIL());
-                        count++;
+                        //count++;
                         dbManager2.deleteItem(myOrder.getCLEANING_METHOD(),myOrder.getGARMENT_TYPE(),myOrder.getQUANTITY(),myOrder.getRECEIVED(), myOrder.getRECIEPTNUMBER());
                     }
 
@@ -187,9 +179,10 @@ public class PayementOrder extends AppCompatActivity {
                         double price = Double.parseDouble(myOrder.getPRICE());
                         double qty = Double.parseDouble(myOrder.getQUANTITY());
                         dbManager2.insertGarmentInOrder(myOrder.getGARMENT_TYPE(),myOrder.getCLEANING_METHOD(),price, qty,"recieved",count,myOrder.getCUSTOMER_EMAIL());
-                        count++;
+                        //count++;
                         dbManager2.deleteItem(myOrder.getCLEANING_METHOD(),myOrder.getGARMENT_TYPE(),myOrder.getQUANTITY(),myOrder.getRECEIVED(), myOrder.getRECIEPTNUMBER());
                     }
+                    count++;
 
                     Intent myIntent = new Intent(PayementOrder.this, OrderPlacedActivty.class);
                     startActivity(myIntent);

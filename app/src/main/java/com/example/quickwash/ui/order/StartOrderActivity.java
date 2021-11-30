@@ -18,7 +18,6 @@ import android.widget.Toast;
 
 import androidx.annotation.RequiresApi;
 import androidx.appcompat.app.AppCompatActivity;
-import androidx.fragment.app.Fragment;
 
 import com.example.quickwash.Cart;
 import com.example.quickwash.DatabaseManager2;
@@ -27,8 +26,6 @@ import com.example.quickwash.Garment.GarmentFactory;
 import com.example.quickwash.MainActivity;
 import com.example.quickwash.Order;
 import com.example.quickwash.R;
-import com.example.quickwash.ui.gallery.GalleryFragment;
-import com.example.quickwash.ui.gallery.GalleryViewModel;
 import com.example.quickwash.userProfileActivity;
 import com.google.android.material.textfield.TextInputLayout;
 
@@ -46,7 +43,7 @@ public class StartOrderActivity extends AppCompatActivity  {
     NumberFormat nf = NumberFormat.getCurrencyInstance();
     public final DecimalFormat rate_prec = new DecimalFormat("$0.00");
     double runningTotal;
-    private int recieptNumber = 1;
+    private int recieptNumber = 100001;
     ArrayList<Order> orders;
     public int react= 0;
 
@@ -84,6 +81,7 @@ public class StartOrderActivity extends AppCompatActivity  {
 
         String [] garmentTypesDC = getResources().getStringArray(R.array.garment_type_DC);
         String [] garmentTypesLaundry = getResources().getStringArray(R.array.garment_type_Laundry);
+        updateView();
 
 
 
@@ -158,8 +156,8 @@ public class StartOrderActivity extends AppCompatActivity  {
 
 
     public void updateView() {
-        TextView totalView = findViewById(R.id.total_tv);
-        totalView.setText(nf.format(runningTotal));
+//        TextView totalView = findViewById(R.id.total_tv);
+//        totalView.setText(nf.format(runningTotal));
 
         AutoCompleteTextView garmentTV = findViewById(R.id.garment_type_items);
         garmentTV.clearListSelection();
@@ -176,6 +174,13 @@ public class StartOrderActivity extends AppCompatActivity  {
 
         paymentView.setVisibility(View.GONE);
         garmentSelectView.setVisibility(View.GONE);
+
+        TextView totalView = findViewById(R.id.total_tv);
+        totalView.setText(nf.format(runningTotal));
+
+
+
+
     }
 
     @RequiresApi(api = Build.VERSION_CODES.O)
@@ -201,7 +206,7 @@ public class StartOrderActivity extends AppCompatActivity  {
             RadioButton cleaningMethodRB = findViewById(radioID);
             String garmentTVString = garmentTV.getText().toString();
 
-            if (react ==1) {
+            if (radioID == -1) {
                 cleaningMethodString = "dry clean";
 
                 Garment newGarment = gf.getGarment(garmentTypeString, cleaningMethodString, garmentPrice);//cleaning method
@@ -217,23 +222,48 @@ public class StartOrderActivity extends AppCompatActivity  {
             else {
 
                 cleaningMethodString = cleaningMethodRB.getText().toString().split(" ")[0];
-                Garment newGarment = gf.getGarment(garmentTypeString, cleaningMethodString, garmentPrice);//cleaning method
 
-                runningTotal += newGarment.getPrice() * quantity;
 
-                dbManager2.insertGarment(newGarment, quantity, "in cart", recieptNumber, MainActivity.myUser.getEmail());//cleaning method
+                if(cleaningMethodString.equalsIgnoreCase("light")){
+
+
+                    Garment newGarment = gf.getGarment(garmentTypeString, cleaningMethodString, garmentPrice);//cleaning method
+                    garmentPrice = newGarment.getPrice()+.10;//light starch price
+                    newGarment.setPrice(garmentPrice);
+                    runningTotal += garmentPrice *quantity;
+                    dbManager2.insertGarment(newGarment, quantity, "in cart", recieptNumber, MainActivity.myUser.getEmail());//cleaning method
+                }
+                else if(cleaningMethodString.equalsIgnoreCase("medium")){
+                    Garment newGarment = gf.getGarment(garmentTypeString, cleaningMethodString, garmentPrice);//cleaning method
+                    garmentPrice = newGarment.getPrice()+.20;//med starch price
+                    newGarment.setPrice(garmentPrice);
+                    runningTotal += garmentPrice *quantity;
+                    dbManager2.insertGarment(newGarment, quantity, "in cart", recieptNumber, MainActivity.myUser.getEmail());//cleaning method
+                }
+                else if(cleaningMethodString.equalsIgnoreCase("heavy")){
+                    Garment newGarment = gf.getGarment(garmentTypeString, cleaningMethodString, garmentPrice);//cleaning method
+                    garmentPrice = newGarment.getPrice()+.30;//heavy starch price
+                    newGarment.setPrice(garmentPrice);
+                    runningTotal += garmentPrice *quantity;
+                    dbManager2.insertGarment(newGarment, quantity, "in cart", recieptNumber, MainActivity.myUser.getEmail());//cleaning method
+                }
+
+                //runningTotal += newGarment.getPrice() * quantity;
+
+                //dbManager2.insertGarment(newGarment, quantity, "in cart", recieptNumber, MainActivity.myUser.getEmail());//cleaning method
 
                 Toast.makeText(StartOrderActivity.this, quantity + " " + cleaningMethodString +
                         " " + garmentTypeString + ":  $" + garmentPrice + " added to Cart", Toast.LENGTH_LONG).show();
 
             }
-            recieptNumber++;
+
             updateView();
         }
     }
     public void Checkout(View v ) {
         Intent myIntent = new Intent(this, Cart.class);
         startActivity(myIntent);
+        recieptNumber++;
         this.finish();
 //        FragmentManager fragmentManager = getFragmentManager();
 //

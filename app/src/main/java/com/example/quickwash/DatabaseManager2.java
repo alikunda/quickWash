@@ -31,7 +31,7 @@ public class DatabaseManager2 extends SQLiteOpenHelper {
     private static final String PRICE = "price";
     private static final String RECEIVED = "received";
     private static final String STATUS = " order_status"; // recieved, processing , ready for pick up, delivered
-    private static final String RECIEPTNUMBER = "OrderNumber";
+    private static final String RECIEPT_NUMBER = "OrderNumber";
     private static final String CUSTOMER_EMAIL = "Cus_Email";
     private static final String DELIVERED = "delivered";
     private static final String SUBTOTAL = "price";
@@ -52,7 +52,7 @@ public class DatabaseManager2 extends SQLiteOpenHelper {
     private static final String CART_RECIEPTNUMBER = "OrderNumber";
     private static final String CART_CUSTOMER_EMAIL = "Cus_Email";
     private  static int CART_REC_NUM = 1;
-    private  static  int ORDER_REC_NUM = 1;
+    private  static  int ORDER_REC_NUM = 10000000;
 
 
 
@@ -65,7 +65,7 @@ public class DatabaseManager2 extends SQLiteOpenHelper {
         String sqlCreate = "create table " + TABLE_ORDER + " ( " + ID;
         sqlCreate += " integer primary key autoincrement, " + GARMENT_TYPE + " text, ";
         sqlCreate += CLEANING_METHOD + " text, " + QUANTITY + " integer, " + PRICE + " real, ";
-        sqlCreate += RECEIVED + " datetime, "+DELIVERED+" datetime, "+STATUS+" text, "+RECIEPTNUMBER+" text, "+CUSTOMER_EMAIL+" text )";
+        sqlCreate += RECEIVED + " datetime, "+DELIVERED+" datetime, "+STATUS+" text, "+ RECIEPT_NUMBER +" numeric(7,0), "+CUSTOMER_EMAIL+" text )";
 
         String sqlCart = "create table " + TABLE_CART + " ( " + CART_ID;
         sqlCart += " integer primary key autoincrement, " + CART_GARMENT_TYPE + " text, ";
@@ -88,7 +88,7 @@ public class DatabaseManager2 extends SQLiteOpenHelper {
                 + ", '" + now +"', null, '"+status+"', '"+ORDER_REC_NUM+"', '"+email+"' )";
         db.execSQL(sqlInsert);
         db.close();
-        ORDER_REC_NUM = ORDER_REC_NUM+1;
+        //ORDER_REC_NUM = ORDER_REC_NUM+1;
     }
 
     @RequiresApi(api = Build.VERSION_CODES.O)
@@ -106,6 +106,9 @@ public class DatabaseManager2 extends SQLiteOpenHelper {
         CART_REC_NUM = CART_REC_NUM+1;
         Log.w("rec num","******"+CART_REC_NUM );
     }
+
+
+
     //admin
     public ArrayList<Order> selectAllNewOrders(){
         SQLiteDatabase db = this.getWritableDatabase();
@@ -192,6 +195,10 @@ public class DatabaseManager2 extends SQLiteOpenHelper {
         db.close();
         return currentArray;
     }
+//
+//    public void incrementReceiptNumber(){
+//        RECIEPT_NUMBER = String.valueOf(Integer.parseInt(RECIEPT_NUMBER + 1 ) );
+//    }
 
 //    public ArrayList<Order> selectCurrentOrders(String email){
 //        String sqlQuery = "select * from "+TABLE_CART +" WHERE "+STATUS+" = 'in cart' and "+CART_CUSTOMER_EMAIL+" = '"+email+"'";
