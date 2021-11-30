@@ -3,6 +3,7 @@ package com.example.quickwash.ui.order;
 import android.content.Intent;
 import android.os.Build;
 import android.os.Bundle;
+import android.util.Log;
 import android.view.Menu;
 import android.view.MenuItem;
 import android.view.View;
@@ -46,6 +47,7 @@ public class StartOrderActivity extends AppCompatActivity  {
     private int recieptNumber = 100001;
     ArrayList<Order> orders;
     public int react= 0;
+    double total = 0;
 
 
 
@@ -137,21 +139,6 @@ public class StartOrderActivity extends AppCompatActivity  {
                 Toast.makeText(StartOrderActivity.this, "SELECT CLEANING METHOD ABOVE", Toast.LENGTH_LONG).show();
             }
         });
-
-
-
-
-        /*
-        List<String> garmentTypes = Arrays.asList(getResources().getStringArray(R.array.garment_type));
-        ArrayAdapter<String> arrayAdapter = new ArrayAdapter<String>(StartOrderActivity.this,
-                R.layout.dropdown_item, garmentTypes);
-        arrayAdapter.setDropDownViewResource(R.layout);*/
-
-        //radio buttons dynamically rendered
-
-        //String garmentTypeString = garmentTV.getText().toString();
-
-
     }
 
 
@@ -175,11 +162,21 @@ public class StartOrderActivity extends AppCompatActivity  {
         paymentView.setVisibility(View.GONE);
         garmentSelectView.setVisibility(View.GONE);
 
+        try{
+            orders = dbManager2.selectAllPendingOrders(MainActivity.myUser.getEmail());
+            for(Order myOrder: orders){
+                double d1 = Double.parseDouble(myOrder.getPRICE());
+                double d2 = Double.parseDouble(myOrder.getQUANTITY());
+                total=+(d1*d2);
+            }
+        }
+        catch (NullPointerException e){
+            Toast.makeText(this, "Empty", Toast.LENGTH_SHORT).show();
+        }
         TextView totalView = findViewById(R.id.total_tv);
-        totalView.setText(nf.format(runningTotal));
+        Log.w("Testing total in orders","*****"+runningTotal);
 
-
-
+        totalView.setText(nf.format(total));
 
     }
 
@@ -219,6 +216,7 @@ public class StartOrderActivity extends AppCompatActivity  {
 
                 Toast.makeText(StartOrderActivity.this, quantity + " " + cleaningMethodString +
                         " " + garmentTypeString + ":  $" + rate_prec.format(garmentPrice) + " added to Cart", Toast.LENGTH_LONG).show();
+
                 react=0;
             }
             else {
@@ -256,9 +254,9 @@ public class StartOrderActivity extends AppCompatActivity  {
                         " " + garmentTypeString + ":  $" + rate_prec.format(garmentPrice) + " added to Cart", Toast.LENGTH_LONG).show();
 
             }
-
             updateView();
         }
+
     }
     public void Checkout(View v ) {
         Intent myIntent = new Intent(this, Cart.class);
