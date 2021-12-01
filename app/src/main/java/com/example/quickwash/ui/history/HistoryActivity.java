@@ -1,5 +1,6 @@
 package com.example.quickwash.ui.history;
 
+import android.graphics.Color;
 import android.graphics.Point;
 import android.os.Bundle;
 import android.util.Log;
@@ -110,6 +111,11 @@ public class HistoryActivity extends AppCompatActivity {
                         ViewGroup.LayoutParams.WRAP_CONTENT);
                 grid.setPadding(1, 30, 1, 90);
                 grid.setUseDefaultMargins(true);
+
+                if(myOrder.getSTATUS().equalsIgnoreCase("delivered")){
+                    grid.setBackgroundColor(Color.GREEN);
+                }
+
 
 
                 i++;

@@ -1,5 +1,6 @@
 package com.example.quickwash.ui.checkOrder;
 
+import android.graphics.Color;
 import android.graphics.Point;
 import android.os.Bundle;
 import android.util.Log;
@@ -104,12 +105,18 @@ public class CheckOrderActivity extends AppCompatActivity {
                 Log.w("AdminUpdate", "****" + myOrder.getCUSTOMER_EMAIL() + myOrder.getCLEANING_METHOD());
 
 
+
+
                 // add the elements to grid
                 grid.addView(ids[i], width / 15, ViewGroup.LayoutParams.WRAP_CONTENT);
                 grid.addView(emails[i], (int) (width * 0.65),
                         ViewGroup.LayoutParams.WRAP_CONTENT);
                 grid.setPadding(1, 30, 1, 90);
                 grid.setUseDefaultMargins(true);
+
+                if(myOrder.getSTATUS().equalsIgnoreCase("recieved")){
+                    grid.setBackgroundColor(Color.YELLOW);
+                }
 
 
                 i++;
